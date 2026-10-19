@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carrito | Crocant's</title>
+
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- =====================================================
+         BOOTSTRAP ICONS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- =====================================================
+         FUENTE
+    ====================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =====================================================
+         CSS GENERAL
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <style>
+
+        :root {
+            --negro: #111111;
+            --blanco: #ffffff;
+            --gris: #6b7280;
+            --naranja: #f58220;
+            --naranja-hover: #ff9638;
+            --verde: #17845b;
+            --rojo: #c0392b;
+            --fondo: #f7f7f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--fondo);
+            color: var(--negro);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        .navbar-crocants {
+            position: relative;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 0;
+            background: #1c1713;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.20);
+        }
+
+        .navbar-crocants::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: var(--naranja);
+            box-shadow: 0 0 8px rgba(245, 130, 32, 0.35);
+        }
+
+        .nav-contenedor {
+            width: min(1180px, 92%);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ====================================================== */
+
+        .marca-crocants {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 230px;
+        }
+
+        .logo-navbar {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .marca-crocants strong {
+            display: block;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .marca-crocants span {
+            display: block;
+            margin-top: 2px;
+            color: rgba(255,255,255,0.58);
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           NAVBAR USUARIO
+        ====================================================== */
+
+        .navbar-usuario {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 38px;
+        }
+
+        .navbar-usuario > a {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: rgba(255,255,255,0.78);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 10px 0;
+            transition: 0.25s ease;
+        }
+
+        .navbar-usuario > a:hover {
+            color: var(--naranja);
+            transform: translateY(-1px);
+        }
+
+        .navbar-usuario > a.activo {
+            color: #ffffff;
+        }
+
+        .navbar-usuario > a.activo::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 3px;
+            background: var(--naranja);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(245,130,32,0.55);
+        }
+
+
+        /* =====================================================
+           CARRITO NAVBAR
+        ====================================================== */
+
+        .navbar-carrito {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 8px !important;
+            margin-left: 8px;
+        }
+
+        .navbar-carrito i {
+            font-size: 17px;
+        }
+
+        .contador-carrito {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 23px;
+            height: 23px;
+            padding: 0 6px;
+            border-radius: 50px;
+            background: var(--naranja);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           MI CUENTA
+        ====================================================== */
+
+        .cuenta-dropdown {
+            position: relative;
+            margin-left: 8px;
+        }
+
+        .btn-cuenta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 17px !important;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.13);
+            border-radius: 10px;
+            color: #ffffff !important;
+        }
+
+        .btn-cuenta:hover {
+            background: rgba(245,130,32,0.10);
+            transform: none !important;
+        }
+
+        .icono-cuenta {
+            color: var(--naranja);
+            font-size: 19px;
+        }
+
+        .flecha-cuenta {
+            font-size: 11px;
+            margin-left: 3px;
+        }
+
+
+        /* =====================================================
+           DROPDOWN
+        ====================================================== */
+
+        .menu-cuenta {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 235px;
+            padding: 9px;
+            background: #ffffff;
+            border: 1px solid #e7e7e3;
+            border-radius: 13px;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease,
+                visibility 0.2s ease;
+        }
+
+        .cuenta-dropdown:hover .menu-cuenta,
+        .cuenta-dropdown:focus-within .menu-cuenta {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .menu-cuenta a {
+            width: 100%;
+            display: flex !important;
+            align-items: center;
+            gap: 11px;
+            padding: 11px 12px !important;
+            color: #333333 !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            text-transform: none !important;
+            letter-spacing: 0 !important;
+            border-radius: 8px;
+            transform: none !important;
+        }
+
+        .menu-cuenta a:hover {
+            color: var(--naranja) !important;
+            background: #fff6ed;
+        }
+
+        .menu-cuenta a i {
+            width: 18px;
+            color: var(--naranja);
+            font-size: 15px;
+        }
+
+        .menu-cuenta .separador {
+            height: 1px;
+            background: #eeeeea;
+            margin: 7px 5px;
+        }
+
+        .menu-cuenta .cerrar-sesion {
+            color: var(--rojo) !important;
+        }
+
+        .menu-cuenta .cerrar-sesion i {
+            color: var(--rojo);
+        }
+
+
+        /* =====================================================
+           CONTENIDO CARRITO
+        ====================================================== */
+
+        .carrito-wrapper {
+            width: min(1180px, 92%);
+            margin: 0 auto;
+            padding: 70px 0 90px;
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ====================================================== */
+
+        .carrito-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 45px;
+        }
+
+        .carrito-etiqueta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--naranja);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 13px;
+        }
+
+        .carrito-header h1 {
+            color: var(--negro);
+            font-size: clamp(36px, 5vw, 54px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .carrito-header p {
+            margin: 18px auto 0;
+            color: #777777;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           TARJETA PRINCIPAL
+        ====================================================== */
+
+        .carrito-card {
+            background: #ffffff;
+            border: 1px solid #e6e6e1;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+        }
+
+
+        /* =====================================================
+           TABLA
+        ====================================================== */
+
+        .tabla-carrito {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tabla-carrito thead {
+            background: #1c1713;
+        }
+
+        .tabla-carrito th {
+            padding: 17px 22px;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border: none;
+        }
+
+        .tabla-carrito td {
+            padding: 22px;
+            color: #333333;
+            font-size: 13px;
+            font-weight: 500;
+            border-bottom: 1px solid #eeeeea;
+            vertical-align: middle;
+        }
+
+        .tabla-carrito tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .tabla-carrito tbody tr:hover {
+            background: #fffaf5;
+        }
+
+        .tabla-carrito tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+
+        /* =====================================================
+           PRODUCTO
+        ====================================================== */
+
+        .producto-carrito {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .producto-icono {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff4e9;
+            border-radius: 10px;
+            color: var(--naranja);
+            font-size: 20px;
+        }
+
+        .producto-nombre {
+            color: var(--negro);
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           PRECIO
+        ====================================================== */
+
+        .precio-producto {
+            color: var(--negro);
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           CONTROL DE CANTIDAD
+        ====================================================== */
+
+        .control-cantidad {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #deded9;
+            border-radius: 9px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        .form-cantidad {
+            margin: 0;
+            padding: 0;
+        }
+
+        .btn-cantidad {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: #f7f7f5;
+            color: #333333;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .btn-cantidad:hover {
+            background: var(--naranja);
+            color: #ffffff;
+        }
+
+        .cantidad-numero {
+            min-width: 38px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--negro);
+            font-size: 13px;
+            font-weight: 800;
+            background: #ffffff;
+        }
+
+
+        /* =====================================================
+           BOTÓN ELIMINAR
+        ====================================================== */
+
+        .btn-eliminar {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 9px;
+            background: #fff0ee;
+            color: var(--rojo);
+            font-size: 15px;
+            transition: 0.2s ease;
+        }
+
+        .btn-eliminar:hover {
+            background: var(--rojo);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           RESUMEN
+        ====================================================== */
+
+        .carrito-resumen {
+            padding: 25px;
+            border-top: 1px solid #eeeeea;
+            background: #fafaf8;
+        }
+
+        .resumen-contenido {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .resumen-label {
+            color: #777777;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .resumen-total {
+            color: var(--negro);
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .resumen-total span {
+            color: var(--naranja);
+        }
+
+
+        /* =====================================================
+           BOTONES
+        ====================================================== */
+
+        .acciones-carrito {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn-seguir {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 46px;
+            padding: 0 20px;
+            background: #ffffff;
+            border: 1px solid #deded9;
+            border-radius: 9px;
+            color: #333333;
+            font-size: 12px;
+            font-weight: 800;
+            transition: 0.2s ease;
+        }
+
+        .btn-seguir:hover {
+            border-color: var(--naranja);
+            color: var(--naranja);
+            transform: translateY(-1px);
+        }
+
+        .btn-pagar {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 46px;
+            padding: 0 24px;
+            background: var(--naranja);
+            border: none;
+            border-radius: 9px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            box-shadow: 0 7px 20px rgba(245,130,32,0.22);
+            transition: 0.2s ease;
+        }
+
+        .btn-pagar:hover {
+            background: var(--naranja-hover);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(245,130,32,0.30);
+        }
+
+
+        /* =====================================================
+           CARRITO VACÍO
+        ====================================================== */
+
+        .carrito-vacio {
+            background: #ffffff;
+            border: 1px solid #e5e5e0;
+            border-radius: 18px;
+            text-align: center;
+            padding: 80px 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+        }
+
+        .carrito-vacio-icono {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff4e9;
+            border-radius: 50%;
+            color: var(--naranja);
+            font-size: 32px;
+        }
+
+        .carrito-vacio h3 {
+            color: var(--negro);
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .carrito-vacio p {
+            color: #777777;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .btn-ir-carta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 45px;
+            padding: 0 22px;
+            background: var(--negro);
+            color: #ffffff;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 800;
+            transition: 0.2s ease;
+        }
+
+        .btn-ir-carta:hover {
+            background: var(--naranja);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1000px) {
+
+            .navbar-usuario {
+                gap: 20px;
+            }
+
+            .nav-contenedor {
+                gap: 20px;
+            }
+
+        }
+
+
+        @media (max-width: 850px) {
+
+            .nav-contenedor {
+                flex-wrap: wrap;
+            }
+
+            .navbar-usuario {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                padding-top: 8px;
+            }
+
+            .carrito-wrapper {
+                padding-top: 50px;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .navbar-crocants {
+                padding: 15px 0;
+            }
+
+            .marca-crocants span {
+                display: none;
+            }
+
+            .navbar-usuario {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                gap: 22px;
+            }
+
+            .navbar-usuario > a,
+            .btn-cuenta {
+                white-space: nowrap;
+            }
+
+            .carrito-wrapper {
+                width: 94%;
+                padding-top: 45px;
+            }
+
+            .carrito-header h1 {
+                font-size: 38px;
+            }
+
+            .carrito-card {
+                overflow-x: auto;
+            }
+
+            .tabla-carrito {
+                min-width: 750px;
+            }
+
+            .resumen-contenido {
+                align-items: flex-end;
+                flex-direction: column;
+            }
+
+            .acciones-carrito {
+                flex-direction: column-reverse;
+                align-items: stretch;
+            }
+
+            .btn-seguir,
+            .btn-pagar {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================== -->
+
+<header class="navbar-crocants">
+
+    <div class="nav-contenedor">
+
+        <!-- LOGO -->
+
+        <a href="/carta" class="marca-crocants">
+
+            <img
+                src="{{ url_for('static', filename='img/logo-crocants.png') }}"
+                alt="Crocant's"
+                class="logo-navbar"
+            >
+
+            <div>
+
+                <strong>
+                    Crocant's
+                </strong>
+
+                <span>
+                    POLLERÍA & RESTAURANTE
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- =================================================
+             NAVBAR USUARIO
+        ================================================== -->
+
+        <nav class="navbar-usuario">
+
+            <!-- CARTA -->
+
+            <a href="/carta">
+
+                <i class="bi bi-journal-text"></i>
+
+                CARTA
+
+            </a>
+
+
+            <!-- RESERVAR MESA -->
+
+            <a href="/reserva">
+
+                <i class="bi bi-calendar-check"></i>
+
+                RESERVAR MESA
+
+            </a>
+
+
+            <!-- CARRITO -->
+
+            <a
+                href="/carrito"
+                class="navbar-carrito activo"
+            >
+
+                <i class="bi bi-bag"></i>
+
+                CARRITO
+
+                <span class="contador-carrito">
+
+                    {{ session.get('carrito', [])|length }}
+
+                </span>
+
+            </a>
+
+
+            <!-- MI CUENTA -->
+
+            <div class="cuenta-dropdown">
+
+                <a
+                    href="#"
+                    class="btn-cuenta"
+                    onclick="return false;"
+                >
+
+                    <i class="bi bi-person-circle icono-cuenta"></i>
+
+                    MI CUENTA
+
+                    <i class="bi bi-chevron-down flecha-cuenta"></i>
+
+                </a>
+
+
+                <!-- DROPDOWN -->
+
+                <div class="menu-cuenta">
+
+                    <a href="/perfil">
+
+                        <i class="bi bi-person-gear"></i>
+
+                        Configuración de perfil
+
+                    </a>
+
+
+                    <a href="/cambiar_contrasena">
+
+                        <i class="bi bi-key"></i>
+
+                        Cambiar contraseña
+
+                    </a>
+
+
+                    <a href="/mis_pedidos">
+
+                        <i class="bi bi-receipt"></i>
+
+                        Mis pedidos
+
+                    </a>
+
+
+                    <a href="/mis_reservas">
+
+                        <i class="bi bi-calendar2-check"></i>
+
+                        Mis reservas
+
+                    </a>
+
+
+                    <div class="separador"></div>
+
+
+                    <a
+                        href="/logout"
+                        class="cerrar-sesion"
+                    >
+
+                        <i class="bi bi-box-arrow-right"></i>
+
+                        Cerrar sesión
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     CONTENIDO
+========================================================== -->
+
+<main class="carrito-wrapper">
+
+
+    <!-- ENCABEZADO -->
+
+    <section class="carrito-header">
+
+        <div class="carrito-etiqueta">
+
+            <i class="bi bi-bag-check"></i>
+
+            TU PEDIDO
+
+        </div>
+
+
+        <h1>
+            Mi carrito
+        </h1>
+
+
+        <p>
+
+            Revisa tus productos antes de continuar
+            con tu pedido.
+
+        </p>
+
+    </section>
+
+
+    {% if carrito %}
+
+
+        <!-- =================================================
+             CARRITO
+        ================================================== -->
+
+        <section class="carrito-card">
+
+
+            <table class="tabla-carrito">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            #
+                        </th>
+
+                        <th>
+                            Producto
+                        </th>
+
+                        <th>
+                            Precio
+                        </th>
+
+                        <th>
+                            Cantidad
+                        </th>
+
+                        <th>
+                            Acción
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for p in carrito %}
+
+                    <tr>
+
+
+                        <td>
+                            {{ loop.index }}
+                        </td>
+
+
+                        <td>
+
+                            <div class="producto-carrito">
+
+                                <div class="producto-icono">
+
+                                    <i class="bi bi-egg-fried"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <div class="producto-nombre">
+
+                                        {{ p.nombre }}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="precio-producto">
+
+                                S/ {{ "%.2f"|format(p.precio|float) }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- =================================================
+                             CANTIDAD
+                        ================================================== -->
+
+                        <td>
+
+                            <div class="control-cantidad">
+
+
+                                <!-- DISMINUIR -->
+
+                                <form
+                                    action="/disminuir_carrito/{{ loop.index0 }}"
+                                    method="POST"
+                                    class="form-cantidad"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn-cantidad"
+                                        title="Disminuir cantidad"
+                                    >
+
+                                        <i class="bi bi-dash"></i>
+
+                                    </button>
+
+                                </form>
+
+
+                                <!-- CANTIDAD -->
+
+                                <span class="cantidad-numero">
+
+                                    {{ p.cantidad }}
+
+                                </span>
+
+
+                                <!-- AUMENTAR -->
+
+                                <form
+                                    action="/aumentar_carrito/{{ loop.index0 }}"
+                                    method="POST"
+                                    class="form-cantidad"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn-cantidad"
+                                        title="Aumentar cantidad"
+                                    >
+
+                                        <i class="bi bi-plus"></i>
+
+                                    </button>
+
+                                </form>
+
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- =================================================
+                             ELIMINAR
+                        ================================================== -->
+
+                        <td>
+
+                            <a
+                                href="/eliminar_carrito/{{ loop.index0 }}"
+                                class="btn-eliminar"
+                                title="Eliminar producto"
+                            >
+
+                                <i class="bi bi-trash3"></i>
+
+                            </a>
+
+                        </td>
+
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+
+            <!-- =================================================
+                 RESUMEN
+            ================================================== -->
+
+            <div class="carrito-resumen">
+
+
+                <div class="resumen-contenido">
+
+
+                    <span class="resumen-label">
+
+                        Total del pedido
+
+                    </span>
+
+
+                    <span class="resumen-total">
+
+                        S/
+
+                        <span>
+
+                            {{ "%.2f"|format(total|float) }}
+
+                        </span>
+
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             BOTONES
+        ================================================== -->
+
+        <div class="acciones-carrito">
+
+
+            <a
+                href="/carta"
+                class="btn-seguir"
+            >
+
+                <i class="bi bi-arrow-left"></i>
+
+                SEGUIR COMPRANDO
+
+            </a>
+
+
+            <a
+                href="/checkout"
+                class="btn-pagar"
+            >
+
+                <i class="bi bi-credit-card"></i>
+
+                CONTINUAR AL PAGO
+
+            </a>
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <!-- =================================================
+             CARRITO VACÍO
+        ================================================== -->
+
+        <section class="carrito-vacio">
+
+
+            <div class="carrito-vacio-icono">
+
+                <i class="bi bi-bag-x"></i>
+
+            </div>
+
+
+            <h3>
+
+                Tu carrito está vacío
+
+            </h3>
+
+
+            <p>
+
+                Todavía no has agregado productos a tu pedido.
+
+            </p>
+
+
+            <a
+                href="/carta"
+                class="btn-ir-carta"
+            >
+
+                <i class="bi bi-journal-text"></i>
+
+                VER NUESTRA CARTA
+
+            </a>
+
+
+        </section>
+
+
+    {% endif %}
+
+
+</main>
+
+
+<!-- =========================================================
+     BOOTSTRAP JS
+========================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

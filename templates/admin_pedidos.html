@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pedidos | Crocant's</title>
+
+    <!-- BOOTSTRAP -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- BOOTSTRAP ICONS -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- MONTSERRAT -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           VARIABLES CROCANT'S
+        ====================================================== */
+
+        :root {
+
+            --negro: #111111;
+            --negro-navbar: #1c1713;
+
+            --blanco: #ffffff;
+
+            --gris: #6b7280;
+            --gris-claro: #f7f7f5;
+
+            --naranja: #f58220;
+            --naranja-hover: #ff9638;
+
+            --verde: #17845b;
+            --rojo: #c0392b;
+
+            --azul: #1976d2;
+            --amarillo: #e6a700;
+
+            --borde: #e6e6e1;
+        }
+
+
+        /* =====================================================
+           GENERAL
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background: var(--gris-claro);
+
+            color: var(--negro);
+
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           ESTRUCTURA
+        ====================================================== */
+
+        .admin-layout {
+
+            display: flex;
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .admin-sidebar {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            width: 265px;
+
+            background: var(--negro-navbar);
+
+            box-shadow:
+                8px 0 30px rgba(0,0,0,0.12);
+
+            z-index: 1000;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ====================================================== */
+
+        .admin-logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 24px 22px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
+
+            color: white;
+        }
+
+        .admin-logo:hover {
+            color: white;
+        }
+
+        .admin-logo img {
+
+            width: 48px;
+
+            height: 48px;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+        }
+
+        .admin-logo strong {
+
+            display: block;
+
+            color: white;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+        }
+
+        .admin-logo span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: rgba(255,255,255,0.50);
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           PERFIL
+        ====================================================== */
+
+        .admin-perfil {
+
+            margin: 22px 17px;
+
+            padding: 15px;
+
+            background: rgba(255,255,255,0.05);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius: 12px;
+        }
+
+        .admin-perfil-icono {
+
+            width: 40px;
+
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 10px;
+
+            background: rgba(245,130,32,0.12);
+
+            color: var(--naranja);
+
+            border-radius: 10px;
+
+            font-size: 19px;
+        }
+
+        .admin-perfil small {
+
+            display: block;
+
+            color: rgba(255,255,255,0.45);
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .admin-perfil strong {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           MENU
+        ====================================================== */
+
+        .admin-menu {
+
+            padding: 0 15px;
+
+            flex: 1;
+        }
+
+        .admin-menu-titulo {
+
+            padding: 5px 10px 12px;
+
+            color: rgba(255,255,255,0.35);
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+        }
+
+        .admin-menu a {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            width: 100%;
+
+            padding: 13px;
+
+            margin-bottom: 5px;
+
+            border-radius: 9px;
+
+            color: rgba(255,255,255,0.65);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .admin-menu a i {
+
+            width: 20px;
+
+            color: rgba(255,255,255,0.45);
+
+            font-size: 17px;
+
+            text-align: center;
+
+            transition: 0.2s ease;
+        }
+
+        .admin-menu a:hover {
+
+            background: rgba(245,130,32,0.08);
+
+            color: white;
+
+            transform: translateX(2px);
+        }
+
+        .admin-menu a:hover i {
+
+            color: var(--naranja);
+        }
+
+        .admin-menu a.activo {
+
+            background: rgba(245,130,32,0.13);
+
+            color: white;
+        }
+
+        .admin-menu a.activo::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            top: 8px;
+
+            bottom: 8px;
+
+            width: 3px;
+
+            background: var(--naranja);
+
+            border-radius: 5px;
+        }
+
+        .admin-menu a.activo i {
+
+            color: var(--naranja);
+        }
+
+
+        /* =====================================================
+           SALIR
+        ====================================================== */
+
+        .admin-salir {
+
+            padding: 15px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        .admin-salir a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 13px;
+
+            border-radius: 9px;
+
+            color: rgba(255,255,255,0.60);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .admin-salir a:hover {
+
+            background: rgba(192,57,43,0.12);
+
+            color: white;
+        }
+
+        .admin-salir i {
+
+            color: var(--rojo);
+
+            font-size: 17px;
+        }
+
+
+        /* =====================================================
+           CONTENIDO
+        ====================================================== */
+
+        .admin-content {
+
+            width: calc(100% - 265px);
+
+            margin-left: 265px;
+
+            padding: 45px 50px 70px;
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ====================================================== */
+
+        .admin-header {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            margin-bottom: 30px;
+        }
+
+        .admin-etiqueta {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: var(--naranja);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.8px;
+
+            margin-bottom: 10px;
+        }
+
+        .admin-header h1 {
+
+            margin: 0;
+
+            color: var(--negro);
+
+            font-size: clamp(30px, 4vw, 43px);
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+        }
+
+        .admin-header p {
+
+            margin: 9px 0 0;
+
+            color: var(--gris);
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           TARJETA RESUMEN
+        ====================================================== */
+
+        .resumen {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+        }
+
+        .resumen-card {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 20px;
+
+            background: white;
+
+            border: 1px solid var(--borde);
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.04);
+        }
+
+        .resumen-icono {
+
+            width: 48px;
+
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #fff4e9;
+
+            color: var(--naranja);
+
+            border-radius: 11px;
+
+            font-size: 21px;
+        }
+
+        .resumen-card small {
+
+            display: block;
+
+            color: var(--gris);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .7px;
+        }
+
+        .resumen-card strong {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--negro);
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           CONTENEDOR PEDIDOS
+        ====================================================== */
+
+        .pedidos-box {
+
+            background: white;
+
+            border: 1px solid var(--borde);
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.05);
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
+           CABECERA TABLA
+        ====================================================== */
+
+        .pedidos-box-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 20px 22px;
+
+            border-bottom: 1px solid var(--borde);
+        }
+
+        .pedidos-box-header h2 {
+
+            margin: 0;
+
+            color: var(--negro);
+
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+        .pedidos-box-header span {
+
+            color: var(--gris);
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           TABLA
+        ====================================================== */
+
+        .tabla-contenedor {
+
+            overflow-x: auto;
+        }
+
+        .table {
+
+            margin: 0;
+
+            min-width: 1100px;
+
+            vertical-align: middle;
+        }
+
+        .table thead th {
+
+            padding: 15px 14px;
+
+            background: #fafaf8;
+
+            border-bottom: 1px solid var(--borde);
+
+            color: #6b6b6b;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .8px;
+
+            white-space: nowrap;
+        }
+
+        .table tbody td {
+
+            padding: 16px 14px;
+
+            border-bottom: 1px solid #eeeeeb;
+
+            color: #333;
+
+            font-size: 11px;
+
+            font-weight: 500;
+        }
+
+        .table tbody tr {
+
+            transition: .2s ease;
+        }
+
+        .table tbody tr:hover {
+
+            background: #fffaf5;
+        }
+
+        .table tbody tr:last-child td {
+
+            border-bottom: none;
+        }
+
+
+        /* =====================================================
+           ID
+        ====================================================== */
+
+        .pedido-id {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 35px;
+
+            height: 28px;
+
+            padding: 0 8px;
+
+            background: #f5f5f3;
+
+            border-radius: 7px;
+
+            color: #444;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           CLIENTE
+        ====================================================== */
+
+        .cliente {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            min-width: 150px;
+        }
+
+        .cliente-icono {
+
+            width: 34px;
+
+            height: 34px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #fff4e9;
+
+            color: var(--naranja);
+
+            border-radius: 9px;
+
+            font-size: 15px;
+        }
+
+        .cliente strong {
+
+            display: block;
+
+            color: #222;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           DIRECCIÓN
+        ====================================================== */
+
+        .direccion {
+
+            max-width: 180px;
+
+            color: #666;
+
+            line-height: 1.5;
+        }
+
+        .referencia {
+
+            max-width: 150px;
+
+            color: #888;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           TOTAL
+        ====================================================== */
+
+        .total {
+
+            color: var(--naranja);
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           MÉTODO PAGO
+        ====================================================== */
+
+        .metodo {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            padding: 6px 9px;
+
+            background: #f5f5f3;
+
+            border-radius: 7px;
+
+            color: #555;
+
+            font-size: 9px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           ESTADOS
+        ====================================================== */
+
+        .estado {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            padding: 7px 10px;
+
+            border-radius: 20px;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .estado-recibido {
+
+            background: #eeeeee;
+
+            color: #555;
+        }
+
+        .estado-preparando {
+
+            background: #fff4d6;
+
+            color: #9a6b00;
+        }
+
+        .estado-listo {
+
+            background: #e1f2ff;
+
+            color: #1464a0;
+        }
+
+        .estado-delivery {
+
+            background: #e7edff;
+
+            color: #3f55a5;
+        }
+
+        .estado-entregado {
+
+            background: #e1f5ec;
+
+            color: #14734f;
+        }
+
+        .estado-rechazado {
+
+            background: #fde8e6;
+
+            color: #b52d20;
+        }
+
+        .estado-default {
+
+            background: #f0f0ee;
+
+            color: #666;
+        }
+
+
+        /* =====================================================
+           ACCIONES
+        ====================================================== */
+
+        .acciones {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 5px;
+
+            min-width: 250px;
+        }
+
+        .btn-accion {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+            min-height: 30px;
+
+            padding: 5px 8px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            transition: .2s ease;
+        }
+
+        .btn-accion:hover {
+
+            transform: translateY(-1px);
+        }
+
+        .btn-recibido {
+
+            background: #eeeeee;
+
+            color: #444;
+        }
+
+        .btn-recibido:hover {
+
+            background: #dddddd;
+
+            color: #222;
+        }
+
+        .btn-preparando {
+
+            background: #fff0c2;
+
+            color: #8a6100;
+        }
+
+        .btn-preparando:hover {
+
+            background: #ffe39a;
+
+            color: #704e00;
+        }
+
+        .btn-listo {
+
+            background: #dff1ff;
+
+            color: #12699f;
+        }
+
+        .btn-listo:hover {
+
+            background: #c7e6fa;
+
+            color: #0d5683;
+        }
+
+        .btn-delivery {
+
+            background: #e3e9ff;
+
+            color: #3d52a0;
+        }
+
+        .btn-delivery:hover {
+
+            background: #d1dcff;
+
+            color: #2d408a;
+        }
+
+        .btn-entregado {
+
+            background: #def3e9;
+
+            color: #13734e;
+        }
+
+        .btn-entregado:hover {
+
+            background: #c8eadb;
+
+            color: #0d5b3d;
+        }
+
+        .btn-pago {
+
+            background: var(--negro-navbar);
+
+            color: white;
+        }
+
+        .btn-pago:hover {
+
+            background: var(--naranja);
+
+            color: white;
+        }
+
+
+        /* =====================================================
+           SIN PEDIDOS
+        ====================================================== */
+
+        .sin-pedidos {
+
+            padding: 70px 20px;
+
+            text-align: center;
+        }
+
+        .sin-pedidos i {
+
+            display: block;
+
+            margin-bottom: 15px;
+
+            color: #d4d4cf;
+
+            font-size: 48px;
+        }
+
+        .sin-pedidos h3 {
+
+            margin-bottom: 7px;
+
+            color: #444;
+
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+        .sin-pedidos p {
+
+            margin: 0;
+
+            color: var(--gris);
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           COMPROBANTE
+        ====================================================== */
+
+        .sin-pago {
+
+            color: #aaa;
+
+            font-size: 9px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1100px) {
+
+            .admin-sidebar {
+                width: 220px;
+            }
+
+            .admin-content {
+
+                width: calc(100% - 220px);
+
+                margin-left: 220px;
+
+                padding: 35px 25px 60px;
+            }
+
+            .resumen {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 700px) {
+
+            .admin-layout {
+
+                display: block;
+            }
+
+            .admin-sidebar {
+
+                position: relative;
+
+                width: 100%;
+
+                height: auto;
+
+                min-height: auto;
+            }
+
+            .admin-menu {
+
+                padding-bottom: 10px;
+            }
+
+            .admin-menu a {
+
+                display: inline-flex;
+
+                width: auto;
+
+                margin-right: 4px;
+            }
+
+            .admin-menu-titulo {
+
+                display: none;
+            }
+
+            .admin-salir {
+
+                display: none;
+            }
+
+            .admin-content {
+
+                width: 100%;
+
+                margin-left: 0;
+
+                padding: 30px 15px 50px;
+            }
+
+            .admin-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .resumen {
+
+                grid-template-columns: 1fr;
+            }
+
+            .pedidos-box-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 5px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+        <!-- LOGO -->
+
+        <a href="{{ url_for('panel_admin') }}" class="admin-logo">
+
+            <img
+                src="{{ url_for('static', filename='img/logo-crocants.png') }}"
+                alt="Crocant's"
+            >
+
+            <div>
+
+                <strong>Crocant's</strong>
+
+                <span>
+                    POLLERÍA & RESTAURANTE
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- PERFIL -->
+
+        <div class="admin-perfil">
+
+            <div class="admin-perfil-icono">
+
+                <i class="bi bi-shield-lock"></i>
+
+            </div>
+
+            <small>
+                Sesión actual
+            </small>
+
+            <strong>
+                Administrador
+            </strong>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="admin-menu">
+
+            <div class="admin-menu-titulo">
+                Administración
+            </div>
+
+
+            <!-- DASHBOARD -->
+
+            <a href="{{ url_for('panel_admin') }}">
+
+                <i class="bi bi-grid-1x2-fill"></i>
+
+                Dashboard
+
+            </a>
+
+
+            <!-- INVENTARIO -->
+
+            <a href="/inventario">
+
+                <i class="bi bi-box-seam"></i>
+
+                Inventario
+
+            </a>
+
+            <!-- USUARIOS -->
+
+            <a
+                 href="{{ url_for('admin_usuarios') }}"
+                 class="{% if request.path == '/admin_usuarios' %}activo{% endif %}"
+            >
+
+                <i class="bi bi-people-fill"></i>
+
+                Usuarios
+             
+
+            </a>
+
+
+            <!-- PEDIDOS -->
+
+            <a href="/admin_pedidos" class="activo">
+
+                <i class="bi bi-bag-check"></i>
+
+                Pedidos
+
+            </a>
+
+
+            <!-- TRABAJADORES -->
+
+            <a href="/admin_trabajadores">
+
+                <i class="bi bi-people"></i>
+
+                Trabajadores
+
+            </a>
+
+
+            <!-- RESERVAS -->
+
+            <a href="/admin_reservas">
+
+                <i class="bi bi-calendar-check"></i>
+
+                Reservas
+
+            </a>
+
+        </nav>
+
+
+        <!-- SALIR -->
+
+        <div class="admin-salir">
+
+            <a href="/logout">
+
+                <i class="bi bi-box-arrow-left"></i>
+
+                Cerrar sesión
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         CONTENIDO
+    ====================================================== -->
+
+    <main class="admin-content">
+
+
+        <!-- ENCABEZADO -->
+
+        <header class="admin-header">
+
+            <div>
+
+                <div class="admin-etiqueta">
+
+                    <i class="bi bi-bag-check"></i>
+
+                    GESTIÓN DE PEDIDOS
+
+                </div>
+
+                <h1>
+                    Pedidos
+                </h1>
+
+                <p>
+                    Consulta y administra los pedidos realizados en Crocant's.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             RESUMEN
+        ================================================== -->
+
+        <section class="resumen">
+
+            <div class="resumen-card">
+
+                <div class="resumen-icono">
+
+                    <i class="bi bi-receipt"></i>
+
+                </div>
+
+                <div>
+
+                    <small>
+                        Pedidos registrados
+                    </small>
+
+                    <strong>
+                        {{ pedidos|length }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="resumen-card">
+
+                <div class="resumen-icono">
+
+                    <i class="bi bi-clock-history"></i>
+
+                </div>
+
+                <div>
+
+                    <small>
+                        Gestión
+                    </small>
+
+                    <strong>
+                        Activa
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="resumen-card">
+
+                <div class="resumen-icono">
+
+                    <i class="bi bi-shop"></i>
+
+                </div>
+
+                <div>
+
+                    <small>
+                        Restaurante
+                    </small>
+
+                    <strong>
+                        Crocant's
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TABLA DE PEDIDOS
+        ================================================== -->
+
+        <section class="pedidos-box">
+
+
+            <!-- CABECERA -->
+
+            <div class="pedidos-box-header">
+
+                <div>
+
+                    <h2>
+                        <i class="bi bi-list-check me-2"></i>
+                        Lista de pedidos
+                    </h2>
+
+                </div>
+
+                <span>
+                    Administra el estado de cada pedido
+                </span>
+
+            </div>
+
+
+            <!-- TABLA -->
+
+            <div class="tabla-contenedor">
+
+                <table class="table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Cliente</th>
+
+                            <th>Teléfono</th>
+
+                            <th>Dirección</th>
+
+                            <th>Referencia</th>
+
+                            <th>Método</th>
+
+                            <th>Total</th>
+
+                            <th>Estado</th>
+
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for p in pedidos %}
+
+                        <tr>
+
+
+                            <!-- ID -->
+
+                            <td>
+
+                                <span class="pedido-id">
+
+                                    #{{ p.id }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- CLIENTE -->
+
+                            <td>
+
+                                <div class="cliente">
+
+                                    <div class="cliente-icono">
+
+                                        <i class="bi bi-person-fill"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            {{ p.cliente }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- TELÉFONO -->
+
+                            <td>
+
+                                <span>
+
+                                    <i class="bi bi-telephone me-1"></i>
+
+                                    {{ p.telefono }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- DIRECCIÓN -->
+
+                            <td>
+
+                                <div class="direccion">
+
+                                    <i class="bi bi-geo-alt me-1"></i>
+
+                                    {{ p.direccion }}
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- REFERENCIA -->
+
+                            <td>
+
+                                <div class="referencia">
+
+                                    {{ p.referencia }}
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- MÉTODO -->
+
+                            <td>
+
+                                <span class="metodo">
+
+                                    <i class="bi bi-credit-card"></i>
+
+                                    {{ p.metodo_pago }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- TOTAL -->
+
+                            <td>
+
+                                <span class="total">
+
+                                    S/ {{ p.total }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- ESTADO -->
+
+                            <td>
+
+                                {% if p.estado == "Recibido" %}
+
+                                    <span class="estado estado-recibido">
+
+                                        <i class="bi bi-inbox"></i>
+
+                                        Recibido
+
+                                    </span>
+
+                                {% elif p.estado == "Preparando" %}
+
+                                    <span class="estado estado-preparando">
+
+                                        <i class="bi bi-fire"></i>
+
+                                        Preparando
+
+                                    </span>
+
+                                {% elif p.estado == "Listo" %}
+
+                                    <span class="estado estado-listo">
+
+                                        <i class="bi bi-box-seam"></i>
+
+                                        Listo
+
+                                    </span>
+
+                                {% elif p.estado == "En delivery" %}
+
+                                    <span class="estado estado-delivery">
+
+                                        <i class="bi bi-bicycle"></i>
+
+                                        En delivery
+
+                                    </span>
+
+                                {% elif p.estado == "Entregado" %}
+
+                                    <span class="estado estado-entregado">
+
+                                        <i class="bi bi-check-circle-fill"></i>
+
+                                        Entregado
+
+                                    </span>
+
+                                {% elif p.estado == "Rechazado" %}
+
+                                    <span class="estado estado-rechazado">
+
+                                        <i class="bi bi-x-circle-fill"></i>
+
+                                        Rechazado
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="estado estado-default">
+
+                                        {{ p.estado }}
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- ACCIONES -->
+
+                            <td>
+
+                                {% if p.estado != "Rechazado" %}
+
+                                <div class="acciones">
+
+
+                                    <a
+                                        href="/cambiar_estado/{{ p.id }}/Recibido"
+                                        class="btn-accion btn-recibido"
+                                    >
+
+                                        <i class="bi bi-inbox"></i>
+
+                                        Recibido
+
+                                    </a>
+
+
+                                    <a
+                                        href="/cambiar_estado/{{ p.id }}/Preparando"
+                                        class="btn-accion btn-preparando"
+                                    >
+
+                                        <i class="bi bi-fire"></i>
+
+                                        Preparando
+
+                                    </a>
+
+
+                                    <a
+                                        href="/cambiar_estado/{{ p.id }}/Listo"
+                                        class="btn-accion btn-listo"
+                                    >
+
+                                        <i class="bi bi-box-seam"></i>
+
+                                        Listo
+
+                                    </a>
+
+
+                                    <a
+                                        href="/cambiar_estado/{{ p.id }}/En delivery"
+                                        class="btn-accion btn-delivery"
+                                    >
+
+                                        <i class="bi bi-bicycle"></i>
+
+                                        Delivery
+
+                                    </a>
+
+
+                                    <a
+                                        href="/cambiar_estado/{{ p.id }}/Entregado"
+                                        class="btn-accion btn-entregado"
+                                    >
+
+                                        <i class="bi bi-check-lg"></i>
+
+                                        Entregado
+
+                                    </a>
+
+
+                                    {% if p.comprobante %}
+
+                                        <a
+                                            href="/static/comprobantes/{{ p.comprobante }}"
+                                            target="_blank"
+                                            class="btn-accion btn-pago"
+                                        >
+
+                                            <i class="bi bi-receipt"></i>
+
+                                            Ver pago
+
+                                        </a>
+
+                                    {% else %}
+
+                                        <span class="sin-pago">
+
+                                            Sin comprobante
+
+                                        </span>
+
+                                    {% endif %}
+
+
+                                </div>
+
+                                {% else %}
+
+                                    <span class="estado estado-rechazado">
+
+                                        <i class="bi bi-x-circle"></i>
+
+                                        Pedido rechazado
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                    {% else %}
+
+                        <!-- SIN PEDIDOS -->
+
+                        <tr>
+
+                            <td colspan="9">
+
+                                <div class="sin-pedidos">
+
+                                    <i class="bi bi-bag-x"></i>
+
+                                    <h3>
+                                        No hay pedidos registrados
+                                    </h3>
+
+                                    <p>
+                                        Cuando un cliente realice un pedido,
+                                        aparecerá aquí.
+                                    </p>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- BOOTSTRAP JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

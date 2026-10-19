@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Datos de entrega - Crocant's</title>
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Leaflet -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Google Fonts -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================================================
+           VARIABLES DEL DISEÑO DEL CARRITO
+        ========================================================= */
+
+        :root {
+
+            --nav: #1c1713;
+
+            --fondo: #f7f7f5;
+
+            --naranja: #f58220;
+
+            --naranja-hover: #ff9638;
+
+            --texto: #111111;
+
+            --gris: #6b7280;
+
+            --verde: #17845b;
+
+            --rojo: #c0392b;
+
+            --blanco: #ffffff;
+
+            --borde: #e5e7eb;
+
+        }
+
+
+
+        /* =========================================================
+           BODY
+        ========================================================= */
+
+        body {
+
+            margin: 0;
+
+            background: var(--fondo);
+
+            color: var(--texto);
+
+            font-family: 'Montserrat', sans-serif;
+
+            min-height: 100vh;
+
+        }
+
+
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar-crocants {
+
+            height: 72px;
+
+            background: var(--nav);
+
+            border-bottom: 3px solid var(--naranja);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
+
+        }
+
+        .logo-crocants {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.5px;
+
+        }
+
+        .logo-crocants span {
+
+            color: var(--naranja);
+
+        }
+
+        .volver-carrito {
+
+            text-decoration: none;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            border: 1px solid rgba(255,255,255,0.2);
+
+            transition: 0.3s;
+
+        }
+
+        .volver-carrito:hover {
+
+            background: var(--naranja);
+
+            color: white;
+
+            border-color: var(--naranja);
+
+        }
+
+
+
+        /* =========================================================
+           CONTENEDOR
+        ========================================================= */
+
+        .pagina-entrega {
+
+            padding: 45px 15px 60px;
+
+        }
+
+        .form-box {
+
+            background: var(--blanco);
+
+            padding: 35px;
+
+            border-radius: 22px;
+
+            border: 1px solid var(--borde);
+
+            box-shadow: 0 10px 35px rgba(28, 23, 19, 0.08);
+
+        }
+
+
+
+        /* =========================================================
+           TITULO
+        ========================================================= */
+
+        .title {
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            color: var(--texto);
+
+            margin-bottom: 35px;
+
+        }
+
+        .title-icon {
+
+            color: var(--naranja);
+
+        }
+
+
+
+        /* =========================================================
+           LABELS
+        ========================================================= */
+
+        label {
+
+            color: var(--texto);
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+        }
+
+
+
+        /* =========================================================
+           INPUTS
+        ========================================================= */
+
+        .form-control {
+
+            background: #ffffff;
+
+            border: 1px solid #dfe1e5;
+
+            color: var(--texto);
+
+            border-radius: 11px;
+
+            min-height: 48px;
+
+            padding: 12px 15px;
+
+            font-size: 14px;
+
+            transition: 0.25s;
+
+        }
+
+        .form-control::placeholder {
+
+            color: #9ca3af;
+
+        }
+
+        .form-control:hover {
+
+            border-color: #cfd2d6;
+
+        }
+
+        .form-control:focus {
+
+            background: #ffffff;
+
+            color: var(--texto);
+
+            border-color: var(--naranja);
+
+            box-shadow: 0 0 0 3px rgba(245, 130, 32, 0.14);
+
+        }
+
+        .form-control[readonly] {
+            background: #D6D6D6;
+            color: #555555;
+            border-color: #B8B8B8;
+            cursor: not-allowed;
+        }
+
+
+
+        /* =========================================================
+           SELECT
+        ========================================================= */
+
+        select.form-control {
+
+            background-color: white !important;
+
+            color: var(--texto) !important;
+
+        }
+
+        select.form-control option {
+
+            background: white;
+
+            color: var(--texto);
+
+        }
+
+
+
+        /* =========================================================
+           TIPO DE ENTREGA
+        ========================================================= */
+
+        .tipo-entrega {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 10px;
+
+            margin-bottom: 25px;
+
+            flex-wrap: wrap;
+
+        }
+
+        .opcion-entrega {
+
+            flex: 1;
+
+            min-width: 150px;
+
+            position: relative;
+
+        }
+
+        .opcion-entrega input {
+
+            position: absolute;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+        }
+
+        .opcion-entrega label {
+
+            width: 100%;
+
+            min-height: 105px;
+
+            margin: 0;
+
+            padding: 18px 10px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            background: #ffffff;
+
+            border: 2px solid #e5e7eb;
+
+            border-radius: 15px;
+
+            cursor: pointer;
+
+            transition: all 0.25s ease;
+
+            color: var(--texto);
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+        }
+
+        .opcion-entrega label .icono-entrega {
+
+            font-size: 30px;
+
+            margin-bottom: 6px;
+
+        }
+
+        .opcion-entrega label:hover {
+
+            border-color: var(--naranja);
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 7px 18px rgba(245, 130, 32, 0.12);
+
+        }
+
+        .opcion-entrega input:checked + label {
+
+            border-color: var(--naranja);
+
+            background: #fff7ef;
+
+            box-shadow: 0 8px 22px rgba(245, 130, 32, 0.15);
+
+        }
+
+        .opcion-entrega input:checked + label .texto-entrega {
+
+            color: var(--naranja);
+
+        }
+
+
+
+        /* =========================================================
+           BUSCADOR
+        ========================================================= */
+
+        .buscador-mapa {
+
+            display: flex;
+
+            gap: 9px;
+
+            margin-bottom: 13px;
+
+        }
+
+        .buscador-mapa input {
+
+            flex: 1;
+
+        }
+
+        .btn-ubicacion {
+
+            width: 52px;
+
+            background: var(--naranja);
+
+            color: white;
+
+            border: none;
+
+            border-radius: 11px;
+
+            font-size: 19px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+        }
+
+        .btn-ubicacion:hover {
+
+            background: var(--naranja-hover);
+
+            transform: translateY(-1px);
+
+            box-shadow: 0 5px 15px rgba(245, 130, 32, 0.25);
+
+        }
+
+
+
+        /* =========================================================
+           MAPA
+        ========================================================= */
+
+        .mapa-contenedor {
+
+            margin-top: 8px;
+
+            margin-bottom: 22px;
+
+        }
+
+        #mapa {
+
+            width: 100%;
+
+            height: 300px;
+
+            border-radius: 15px;
+
+            border: 1px solid var(--borde);
+
+            overflow: hidden;
+
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+
+        }
+
+        .texto-mapa {
+
+            font-size: 12px;
+
+            color: var(--gris);
+
+            margin-top: 9px;
+
+            line-height: 1.5;
+
+        }
+
+
+
+        /* =========================================================
+           INFORMACIÓN RECOJO
+        ========================================================= */
+
+        .info-recojo {
+
+            background: #fff8f1;
+
+            border: 1px solid #f6c99f;
+
+            border-radius: 16px;
+
+            padding: 25px 20px;
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+        }
+
+        .info-recojo .icono {
+
+            font-size: 42px;
+
+            margin-bottom: 8px;
+
+        }
+
+        .info-recojo h4 {
+
+            color: var(--texto);
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            margin-bottom: 10px;
+
+        }
+
+        .tiempo-recojo {
+
+            color: var(--naranja);
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+        }
+
+        .direccion-local {
+
+            margin-top: 12px;
+
+            font-size: 13px;
+
+            color: var(--gris);
+
+            line-height: 1.5;
+
+        }
+
+
+
+        /* =========================================================
+           BOTÓN PRINCIPAL
+        ========================================================= */
+
+        .btn-continuar {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: var(--naranja);
+
+            color: white;
+
+            font-family: 'Montserrat', sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            transition: all 0.25s ease;
+
+        }
+
+        .btn-continuar:hover {
+
+            background: var(--naranja-hover);
+
+            color: white;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 8px 20px rgba(245, 130, 32, 0.25);
+
+        }
+
+
+
+        /* =========================================================
+           REFERENCIA
+        ========================================================= */
+
+        .referencia {
+
+            margin-top: 5px;
+
+        }
+
+
+
+        /* =========================================================
+           LEAFLET
+        ========================================================= */
+
+        .leaflet-popup-content-wrapper {
+
+            border-radius: 10px;
+
+        }
+
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 600px) {
+
+            .navbar-crocants {
+
+                padding: 0 20px;
+
+            }
+
+            .logo-crocants {
+
+                font-size: 20px;
+
+            }
+
+            .volver-carrito {
+
+                padding: 8px 12px;
+
+                font-size: 12px;
+
+            }
+
+            .pagina-entrega {
+
+                padding: 25px 12px 40px;
+
+            }
+
+            .form-box {
+
+                padding: 24px 18px;
+
+                border-radius: 18px;
+
+            }
+
+            .title {
+
+                font-size: 25px;
+
+            }
+
+            .tipo-entrega {
+
+                gap: 10px;
+
+            }
+
+            .opcion-entrega {
+
+                min-width: 100%;
+
+            }
+
+            .opcion-entrega label {
+
+                min-height: 95px;
+
+                font-size: 13px;
+
+            }
+
+            #mapa {
+
+                height: 260px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar-crocants">
+
+    <a href="/carrito" class="logo-crocants">
+
+        CROCANT<span>'S</span>
+
+    </a>
+
+    <a href="/carrito" class="volver-carrito">
+
+        🛒 Volver al carrito
+
+    </a>
+
+</nav>
+
+
+
+<!-- =========================================================
+     CONTENIDO
+========================================================= -->
+
+<div class="container pagina-entrega">
+
+    <div
+        class="form-box mx-auto"
+        style="max-width: 560px;"
+    >
+
+        <!-- =====================================================
+             TITULO
+        ===================================================== -->
+
+        <h2 class="text-center title">
+
+            <span class="title-icon">📍</span>
+
+            Datos de entrega
+
+        </h2>
+
+
+
+        <!-- =====================================================
+             FORMULARIO
+        ===================================================== -->
+
+        <form action="/guardar_pedido" method="POST">
+
+
+
+            <!-- =================================================
+                 TIPO DE DOCUMENTO
+            ================================================= -->
+
+            <label for="tipo">
+
+                Tipo de documento
+
+            </label>
+
+            <select
+                id="tipo"
+                name="tipo"
+                class="form-control mb-3"
+                required
+            >
+
+                <option value="">
+
+                    Seleccionar
+
+                </option>
+
+                {% for tipo_documento in tipos_documento %}
+
+                    {% set nombre_documento = tipo_documento.nombre|lower|trim %}
+
+                    <option value="{{ nombre_documento }}">
+
+                        {{ tipo_documento.nombre }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+
+
+            <!-- =================================================
+                 DNI / RUC
+            ================================================= -->
+
+            <label for="documento">
+
+                DNI o RUC
+
+            </label>
+
+            <input
+                type="text"
+                id="documento"
+                name="documento"
+                class="form-control mb-3"
+                placeholder="Ingrese DNI o RUC"
+                maxlength="11"
+                inputmode="numeric"
+                required
+            >
+
+
+
+            <!-- =================================================
+                 NOMBRE
+            ================================================= -->
+
+            <label for="nombre">
+
+                Nombre completo
+
+            </label>
+
+            <input
+                name="nombre"
+                id="nombre"
+                class="form-control mb-3"
+                placeholder="Nombre completo"
+                readonly
+                required
+            >
+
+
+
+            <!-- =================================================
+                 TELÉFONO
+            ================================================= -->
+
+            <label for="telefono">
+
+                Teléfono
+
+            </label>
+
+            <input
+                name="telefono"
+                id="telefono"
+                type="text"
+                class="form-control mb-4"
+                placeholder="Ingrese su teléfono"
+                maxlength="9"
+                inputmode="numeric"
+                required
+            >
+
+
+
+            <!-- =================================================
+                 TIPO DE ENTREGA
+            ================================================= -->
+
+            <label>
+
+                ¿Cómo deseas recibir tu pedido?
+
+            </label>
+
+            <div class="tipo-entrega">
+
+                {% for tipo_entrega in tipos_entrega %}
+
+                    {% set nombre_entrega = tipo_entrega.nombre|lower|trim %}
+
+                    <div class="opcion-entrega">
+
+                        <input
+                            type="radio"
+                            id="tipo_entrega_{{ tipo_entrega.id }}"
+                            name="tipo_pedido"
+                            value="{{ nombre_entrega }}"
+                            {% if nombre_entrega == 'delivery' %}checked{% endif %}
+                        >
+
+                        <label for="tipo_entrega_{{ tipo_entrega.id }}">
+
+                            <span class="icono-entrega">
+
+                                {% if nombre_entrega == 'delivery' %}
+
+                                    🛵
+
+                                {% elif 'recojo' in nombre_entrega %}
+
+                                    🏪
+
+                                {% else %}
+
+                                    📦
+
+                                {% endif %}
+
+                            </span>
+
+                            <span class="texto-entrega">
+
+                                {{ tipo_entrega.nombre }}
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DELIVERY
+            ================================================= -->
+
+            <div id="contenidoDelivery">
+
+                <!-- =================================================
+                     UBICACIÓN DE DELIVERY
+                ================================================== -->
+
+                <label for="ubicacion_id">
+
+                    Zona de entrega
+
+                </label>
+
+                <select
+                    id="ubicacion_id"
+                    name="ubicacion_id"
+                    class="form-control mb-4"
+                    required
+                >
+
+                    <option value="">
+
+                        Seleccionar zona
+
+                    </option>
+
+                    {% for ubicacion in ubicaciones %}
+
+                        <option value="{{ ubicacion.id }}">
+
+                            {{ ubicacion.distrito }}
+
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+
+                <!-- DIRECCIÓN -->
+
+                <label for="direccion">
+
+                    Dirección
+
+                </label>
+
+                <div class="buscador-mapa">
+
+                    <input
+                        type="text"
+                        id="direccion"
+                        name="direccion"
+                        class="form-control"
+                        placeholder="Escribe tu dirección..."
+                        autocomplete="street-address"
+                        required
+                    >
+
+                    <input
+                        type="hidden"
+                        id="latitud"
+                        name="latitud"
+                        value=""
+                    >
+
+                    <input
+                        type="hidden"
+                        id="longitud"
+                        name="longitud"
+                        value=""
+                    >
+
+                    <button
+                        type="button"
+                        class="btn-ubicacion"
+                        onclick="buscarEnMapa()"
+                        title="Buscar dirección"
+                    >
+
+                        🔍
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- MAPA -->
+
+                <div class="mapa-contenedor">
+
+                    <div id="mapa"></div>
+
+                    <div class="texto-mapa">
+
+                        📍 Escribe tu dirección y pulsa 🔍,
+
+                        o toca el mapa para seleccionar exactamente
+
+                        dónde quieres recibir tu pedido.
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REFERENCIA -->
+
+                <label
+                    for="referencia"
+                    class="referencia"
+                >
+
+                    Referencia
+
+                </label>
+
+                <input
+                    name="referencia"
+                    id="referencia"
+                    class="form-control mb-4"
+                    placeholder="Ejemplo: casa de 2 pisos, puerta negra"
+                >
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RECOJO
+            ================================================= -->
+
+            <div
+                id="contenidoRecojo"
+                style="display:none;"
+            >
+
+                <div class="info-recojo">
+
+                    <div class="icono">
+
+                        🏪
+
+                    </div>
+
+                    <h4>
+
+                        Recojo en local
+
+                    </h4>
+
+                    <div class="tiempo-recojo">
+
+                        🕒 Tu pedido estará listo en 29 minutos
+
+                    </div>
+
+                    <div class="direccion-local">
+
+                        📍 Puedes recoger tu pedido directamente
+
+                        en nuestro local.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BOTÓN
+            ================================================= -->
+
+            <button
+                type="submit"
+                class="btn-continuar"
+            >
+
+                Continuar a pago 💰
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     LEAFLET
+========================================================= -->
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+
+<script>
+
+    /* ==========================================================
+       CREAR MAPA
+    ========================================================== */
+
+    let mapa = L.map('mapa').setView(
+
+        [-12.0651, -75.2049],
+
+        14
+
+    );
+
+
+
+    /* ==========================================================
+       OPENSTREETMAP
+    ========================================================== */
+
+    L.tileLayer(
+
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+
+        {
+
+            maxZoom: 19,
+
+            attribution:
+
+                '&copy; OpenStreetMap contributors'
+
+        }
+
+    ).addTo(mapa);
+
+
+
+    /* ==========================================================
+       MARCADOR
+    ========================================================== */
+
+    let marcador = L.marker(
+
+        [-12.0651, -75.2049],
+
+        {
+
+            draggable: true
+
+        }
+
+    ).addTo(mapa);
+
+
+
+    marcador.bindPopup(
+
+        "📍 Mueve el marcador o toca el mapa para elegir tu ubicación."
+
+    );
+
+
+
+    function guardarCoordenadas(lat, lon) {
+
+        document.getElementById("latitud").value =
+
+            Number(lat).toFixed(7);
+
+        document.getElementById("longitud").value =
+
+            Number(lon).toFixed(7);
+
+    }
+
+
+
+    /* ==========================================================
+       VARIABLE DE VALIDACIÓN DE ZONA
+       AGREGADO
+    ========================================================== */
+
+    let ubicacionValida = false;
+
+
+
+    /* ==========================================================
+       NORMALIZAR TEXTO
+       AGREGADO
+    ========================================================== */
+
+    function normalizarTexto(texto) {
+
+        return (texto || "")
+
+            .toLowerCase()
+
+            .normalize("NFD")
+
+            .replace(/[\u0300-\u036f]/g, "")
+
+            .trim();
+
+    }
+
+
+
+    /* ==========================================================
+       VALIDAR ZONA SEGÚN RESPUESTA DEL MAPA
+       AGREGADO
+    ========================================================== */
+
+    function validarZonaDireccion(datos) {
+
+        if (!datos || !datos.address) {
+
+            ubicacionValida = false;
+
+            return false;
+
+        }
+
+
+
+        const zonaSeleccionada =
+
+            normalizarTexto(
+
+                ubicacion.options[
+
+                    ubicacion.selectedIndex
+
+                ]?.text
+
+            );
+
+
+
+        if (!zonaSeleccionada) {
+
+            ubicacionValida = false;
+
+            return false;
+
+        }
+
+
+
+        const address = datos.address;
+
+
+
+        const posiblesZonas = [
+
+            address.district,
+
+            address.city_district,
+
+            address.town,
+
+            address.city,
+
+            address.municipality,
+
+            address.village,
+
+            address.county
+
+        ]
+
+            .filter(Boolean)
+
+            .map(normalizarTexto);
+
+
+
+        let zonaEncontrada = "";
+
+
+
+        if (
+
+            posiblesZonas.includes("el tambo")
+
+        ) {
+
+            zonaEncontrada = "el tambo";
+
+        }
+
+        else if (
+
+            posiblesZonas.includes("pilcomayo")
+
+        ) {
+
+            zonaEncontrada = "pilcomayo";
+
+        }
+
+        else if (
+
+            posiblesZonas.includes("huancayo")
+
+        ) {
+
+            zonaEncontrada = "huancayo";
+
+        }
+
+
+
+        if (
+
+            zonaEncontrada &&
+
+            zonaEncontrada === zonaSeleccionada
+
+        ) {
+
+            ubicacionValida = true;
+
+            return true;
+
+        }
+
+
+
+        ubicacionValida = false;
+
+
+
+        alert(
+
+            "⚠️ La ubicación seleccionada no pertenece a la zona de entrega elegida."
+
+        );
+
+
+
+        return false;
+
+    }
+
+
+
+    /* ==========================================================
+       MOVER MARCADOR
+    ========================================================== */
+
+    marcador.on(
+
+        'dragend',
+
+        function() {
+
+            let posicion =
+
+                marcador.getLatLng();
+
+
+
+            guardarCoordenadas(
+
+                posicion.lat,
+
+                posicion.lng
+
+            );
+
+
+
+            obtenerDireccion(
+
+                posicion.lat,
+
+                posicion.lng
+
+            );
+
+        }
+
+    );
+
+
+
+    /* ==========================================================
+       TOCAR MAPA
+    ========================================================== */
+
+    mapa.on(
+
+        'click',
+
+        function(e) {
+
+            marcador.setLatLng(
+
+                e.latlng
+
+            );
+
+
+
+            guardarCoordenadas(
+
+                e.latlng.lat,
+
+                e.latlng.lng
+
+            );
+
+
+
+            obtenerDireccion(
+
+                e.latlng.lat,
+
+                e.latlng.lng
+
+            );
+
+        }
+
+    );
+
+
+
+    /* ==========================================================
+       OBTENER DIRECCIÓN
+    ========================================================== */
+
+    async function obtenerDireccion(lat, lon) {
+
+        try {
+
+            let respuesta = await fetch(
+
+                "https://nominatim.openstreetmap.org/reverse" +
+
+                "?format=json" +
+
+                "&lat=" + lat +
+
+                "&lon=" + lon +
+
+                "&zoom=18" +
+
+                "&addressdetails=1",
+
+                {
+
+                    headers: {
+
+                        "Accept-Language": "es"
+
+                    }
+
+                }
+
+            );
+
+
+
+            let datos =
+
+                await respuesta.json();
+
+
+
+            if (datos.display_name) {
+
+                document.getElementById(
+
+                    "direccion"
+
+                ).value =
+
+                    datos.display_name;
+
+
+
+                /* ==================================================
+                   VALIDAR ZONA
+                   AGREGADO
+                ================================================== */
+
+                validarZonaDireccion(datos);
+
+
+
+                marcador
+
+                    .bindPopup(
+
+                        "📍 Ubicación seleccionada"
+
+                    )
+
+                    .openPopup();
+
+            }
+
+        } catch (error) {
+
+            console.log(
+
+                "Error obteniendo dirección:",
+
+                error
+
+            );
+
+        }
+
+    }
+
+
+
+    /* ==========================================================
+       BUSCAR DIRECCIÓN
+    ========================================================== */
+
+    async function buscarEnMapa() {
+
+        let texto =
+
+            document.getElementById(
+
+                "direccion"
+
+            ).value.trim();
+
+
+
+        if (!texto) {
+
+            alert(
+
+                "Escribe una dirección para buscar."
+
+            );
+
+            return;
+
+        }
+
+
+
+        try {
+
+            let respuesta = await fetch(
+
+                "https://nominatim.openstreetmap.org/search" +
+
+                "?format=json" +
+
+                "&q=" +
+
+                encodeURIComponent(
+
+                    texto + ", Huancayo, Junín, Perú"
+
+                ) +
+
+                "&limit=1" +
+
+                "&addressdetails=1",
+
+                {
+
+                    headers: {
+
+                        "Accept-Language": "es"
+
+                    }
+
+                }
+
+            );
+
+
+
+            let datos =
+
+                await respuesta.json();
+
+
+
+            if (
+
+                !datos ||
+
+                datos.length === 0
+
+            ) {
+
+                alert(
+
+                    "No se encontró esa dirección. " +
+
+                    "Intenta escribir una dirección más específica."
+
+                );
+
+                return;
+
+            }
+
+
+
+            let lat =
+
+                parseFloat(
+
+                    datos[0].lat
+
+                );
+
+
+
+            let lon =
+
+                parseFloat(
+
+                    datos[0].lon
+
+                );
+
+
+
+            mapa.setView(
+
+                [lat, lon],
+
+                18
+
+            );
+
+
+
+            marcador.setLatLng(
+
+                [lat, lon]
+
+            );
+
+
+
+            guardarCoordenadas(
+
+                lat,
+
+                lon
+
+            );
+
+
+
+            document.getElementById(
+
+                "direccion"
+
+            ).value =
+
+                datos[0].display_name;
+
+
+
+            /* ==================================================
+               VALIDAR ZONA
+               AGREGADO
+            ================================================== */
+
+            validarZonaDireccion(datos[0]);
+
+
+
+            marcador
+
+                .bindPopup(
+
+                    "📍 Dirección encontrada"
+
+                )
+
+                .openPopup();
+
+
+
+        } catch (error) {
+
+            console.log(
+
+                "Error buscando dirección:",
+
+                error
+
+            );
+
+
+
+            alert(
+
+                "No se pudo buscar la dirección."
+
+            );
+
+        }
+
+    }
+
+
+
+    /* ==========================================================
+       ENTER PARA BUSCAR
+    ========================================================== */
+
+    document
+
+        .getElementById("direccion")
+
+        .addEventListener(
+
+            "keypress",
+
+            function(e) {
+
+                if (e.key === "Enter") {
+
+                    e.preventDefault();
+
+                    buscarEnMapa();
+
+                }
+
+            }
+
+        );
+
+
+
+    /* ==========================================================
+       CAMBIAR TIPO DE ENTREGA
+    ========================================================== */
+
+    const opcionesEntrega =
+
+        document.querySelectorAll(
+
+            'input[name="tipo_pedido"]'
+
+        );
+
+
+
+    const contenidoDelivery =
+
+        document.getElementById(
+
+            "contenidoDelivery"
+
+        );
+
+
+
+    const contenidoRecojo =
+
+        document.getElementById(
+
+            "contenidoRecojo"
+
+        );
+
+
+
+    const direccion =
+
+        document.getElementById(
+
+            "direccion"
+
+        );
+
+
+
+    const ubicacion =
+
+        document.getElementById(
+
+            "ubicacion_id"
+
+        );
+
+
+
+    function actualizarTipoEntrega() {
+
+        const seleccionada =
+
+            document.querySelector(
+
+                'input[name="tipo_pedido"]:checked'
+
+            );
+
+
+
+        if (!seleccionada) {
+
+            return;
+
+        }
+
+
+
+        if (seleccionada.value === "delivery") {
+
+            contenidoDelivery.style.display =
+
+                "block";
+
+
+
+            contenidoRecojo.style.display =
+
+                "none";
+
+
+
+            direccion.required = true;
+
+
+
+            if (ubicacion) {
+
+                ubicacion.required = true;
+
+            }
+
+        }
+
+        else {
+
+            contenidoDelivery.style.display =
+
+                "none";
+
+
+
+            contenidoRecojo.style.display =
+
+                "block";
+
+
+
+            direccion.required = false;
+
+
+
+            if (ubicacion) {
+
+                ubicacion.required = false;
+
+            }
+
+        }
+
+    }
+
+
+
+    opcionesEntrega.forEach(
+
+        function(opcion) {
+
+            opcion.addEventListener(
+
+                "change",
+
+                actualizarTipoEntrega
+
+            );
+
+        }
+
+    );
+
+
+
+    actualizarTipoEntrega();
+
+
+
+    /* ==========================================================
+       CAMBIAR ZONA
+       AGREGADO
+    ========================================================== */
+
+    ubicacion.addEventListener(
+
+        "change",
+
+        function() {
+
+            ubicacionValida = false;
+
+        }
+
+    );
+
+
+
+    /* ==========================================================
+       BUSCAR DNI / RUC
+    ========================================================== */
+
+    async function buscarDocumento() {
+
+        let tipo =
+
+            document.getElementById("tipo").value;
+
+
+
+        let doc =
+
+            document.getElementById(
+
+                "documento"
+
+            ).value.trim();
+
+
+
+        let campoNombre =
+
+            document.getElementById(
+
+                "nombre"
+
+            );
+
+
+
+        /* ======================================================
+
+           SI NO HAY TIPO
+
+        ====================================================== */
+
+        if (!tipo) {
+
+            return;
+
+        }
+
+
+
+        /* ======================================================
+
+           VALIDAR DNI
+
+        ====================================================== */
+
+        if (tipo === "dni") {
+
+            if (doc.length !== 8) {
+
+                return;
+
+            }
+
+        }
+
+
+
+        /* ======================================================
+
+           VALIDAR RUC
+
+        ====================================================== */
+
+        if (tipo === "ruc") {
+
+            if (doc.length !== 11) {
+
+                return;
+
+            }
+
+        }
+
+
+
+        /* ======================================================
+
+           SOLO DNI Y RUC USAN LA API
+
+        ====================================================== */
+
+        if (
+
+            tipo !== "dni" &&
+
+            tipo !== "ruc"
+
+        ) {
+
+            return;
+
+        }
+
+
+
+        /* ======================================================
+
+           TOKEN
+
+        ====================================================== */
+
+        const token =
+
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVyaWNr aHVpY2hvMTBAZ21haWwuY29tIn0.ePcBv41WPjaQlPLAAQSrFxPcyja5Ivq0H15n4HcBzfc".replace(" ", "");
+
+
+
+        let url = "";
+
+
+
+        /* ======================================================
+
+           API DNI
+
+        ====================================================== */
+
+        if (tipo === "dni") {
+
+            url =
+
+                "https://dniruc.apisperu.com/api/v1/dni/" +
+
+                doc +
+
+                "?token=" +
+
+                token;
+
+        }
+
+
+
+        /* ======================================================
+
+           API RUC
+
+        ====================================================== */
+
+        if (tipo === "ruc") {
+
+            url =
+
+                "https://dniruc.apisperu.com/api/v1/ruc/" +
+
+                doc +
+
+                "?token=" +
+
+                token;
+
+        }
+
+
+
+        /* ======================================================
+
+           CONSULTAR API
+
+        ====================================================== */
+
+        try {
+
+            let respuesta =
+
+                await fetch(url);
+
+
+
+            let data =
+
+                await respuesta.json();
+
+
+
+            console.log(
+
+                "Respuesta API:",
+
+                data
+
+            );
+
+
+
+            /* ==================================================
+
+               DNI
+
+            ================================================== */
+
+            if (tipo === "dni") {
+
+                if (data.nombres) {
+
+                    campoNombre.value =
+
+                        data.nombres +
+
+                        " " +
+
+                        (data.apellidoPaterno || "") +
+
+                        " " +
+
+                        (data.apellidoMaterno || "");
+
+                }
+
+            }
+
+
+
+            /* ==================================================
+
+               RUC
+
+            ================================================== */
+
+            if (tipo === "ruc") {
+
+                if (data.razonSocial) {
+
+                    campoNombre.value =
+
+                        data.razonSocial;
+
+                }
+
+            }
+
+        } catch (error) {
+
+            console.log(
+
+                "Error API:",
+
+                error
+
+            );
+
+        }
+
+    }
+
+
+
+    /* ==========================================================
+       CAMBIO DE DOCUMENTO
+    ========================================================== */
+
+    document
+
+        .getElementById("tipo")
+
+        .addEventListener(
+
+            "change",
+
+            function() {
+
+                document.getElementById(
+
+                    "documento"
+
+                ).value = "";
+
+
+
+                document.getElementById(
+
+                    "nombre"
+
+                ).value = "";
+
+            }
+
+        );
+
+
+
+    /* ==========================================================
+       BUSCAR DNI / RUC
+    ========================================================== */
+
+    document
+
+        .getElementById("documento")
+
+        .addEventListener(
+
+            "keyup",
+
+            buscarDocumento
+
+        );
+
+
+
+    /* ==========================================================
+       VALIDAR ANTES DE CONTINUAR AL PAGO
+       AGREGADO
+    ========================================================== */
+
+    document
+
+        .querySelector('form[action="/guardar_pedido"]')
+
+        .addEventListener(
+
+            "submit",
+
+            function(e) {
+
+                const seleccionada =
+
+                    document.querySelector(
+
+                        'input[name="tipo_pedido"]:checked'
+
+                    );
+
+
+
+                if (
+
+                    seleccionada &&
+
+                    seleccionada.value === "delivery"
+
+                ) {
+
+                    if (!ubicacion.value) {
+
+                        e.preventDefault();
+
+
+
+                        alert(
+
+                            "⚠️ Selecciona una zona de entrega."
+
+                        );
+
+
+
+                        ubicacion.focus();
+
+
+
+                        return;
+
+                    }
+
+
+
+                    if (!ubicacionValida) {
+
+                        e.preventDefault();
+
+
+
+                        alert(
+
+                            "⚠️ Selecciona en el mapa una ubicación que pertenezca a la zona de entrega elegida."
+
+                        );
+
+
+
+                        return;
+
+                    }
+
+                }
+
+            }
+
+        );
+
+</script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mis pedidos | Crocant's</title>
+
+    <!-- BOOTSTRAP -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- BOOTSTRAP ICONS -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- FUENTE -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS GENERAL -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <style>
+
+        :root {
+            --negro: #111111;
+            --blanco: #ffffff;
+            --gris: #6b7280;
+            --naranja: #f58220;
+            --naranja-hover: #ff9638;
+            --verde: #17845b;
+            --rojo: #c0392b;
+            --fondo: #f7f7f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--fondo);
+            color: var(--negro);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        .navbar-crocants {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            padding: 18px 0;
+
+            background: #1c1713;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar-crocants::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 2px;
+
+            background: var(--naranja);
+
+            box-shadow:
+                0 0 8px rgba(245, 130, 32, 0.35);
+        }
+
+
+        /* =====================================================
+           CONTENEDOR NAVBAR
+        ====================================================== */
+
+        .nav-contenedor {
+            width: min(1380px, 94%);
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: 1fr auto 1fr;
+
+            align-items: center;
+
+            gap: 25px;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ====================================================== */
+
+        .marca-crocants {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            justify-self: start;
+
+            min-width: 230px;
+        }
+
+        .logo-navbar {
+            width: 48px;
+            height: 48px;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+        }
+
+        .marca-crocants strong {
+            display: block;
+
+            color: #ffffff;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+        }
+
+        .marca-crocants span {
+            display: block;
+
+            margin-top: 2px;
+
+            color: rgba(255, 255, 255, 0.58);
+
+            font-size: 10px;
+
+            font-weight: 500;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           NAVBAR USUARIO
+        ====================================================== */
+
+        .navbar-usuario {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 28px;
+
+            white-space: nowrap;
+
+            justify-self: center;
+        }
+
+        .navbar-usuario > a {
+            position: relative;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: rgba(255, 255, 255, 0.78);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+
+            padding: 12px 3px;
+
+            transition: 0.25s ease;
+        }
+
+        .navbar-usuario > a:hover {
+            color: var(--naranja);
+
+            transform: translateY(-1px);
+        }
+
+        .navbar-usuario > a.activo {
+            color: #ffffff;
+        }
+
+        .navbar-usuario > a.activo::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            bottom: 0;
+
+            height: 3px;
+
+            background: var(--naranja);
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 0 10px rgba(245, 130, 32, 0.55);
+        }
+
+
+        /* =====================================================
+           ZONA DERECHA
+        ====================================================== */
+
+        .zona-derecha {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 22px;
+
+            justify-self: end;
+        }
+
+
+        /* =====================================================
+           CARRITO
+        ====================================================== */
+
+        .navbar-carrito {
+            position: relative;
+
+            display: inline-flex !important;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 44px;
+            height: 44px;
+
+            color: #ffffff !important;
+
+            border-radius: 10px;
+
+            padding: 0 !important;
+
+            transition: 0.25s ease;
+        }
+
+        .navbar-carrito:hover {
+            background: rgba(245, 130, 32, 0.12);
+
+            color: var(--naranja) !important;
+
+            transform: translateY(-1px);
+        }
+
+        .navbar-carrito .icono-bolsa {
+            font-size: 20px;
+        }
+
+        .contador-carrito {
+            position: absolute;
+
+            top: 0;
+            right: -2px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-width: 19px;
+            height: 19px;
+
+            padding: 0 5px;
+
+            border-radius: 50%;
+
+            background: var(--naranja);
+
+            color: #ffffff;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            border: 2px solid #1c1713;
+        }
+
+
+        /* =====================================================
+           MI CUENTA
+        ====================================================== */
+
+        .cuenta-dropdown {
+            position: relative;
+        }
+
+        .btn-cuenta {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 12px 17px !important;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            border: 1px solid rgba(255, 255, 255, 0.13);
+
+            border-radius: 10px;
+
+            color: #ffffff !important;
+
+            font-size: 12px !important;
+
+            font-weight: 700 !important;
+
+            white-space: nowrap;
+        }
+
+        .btn-cuenta:hover {
+            background: rgba(245, 130, 32, 0.10);
+
+            transform: none !important;
+        }
+
+        .icono-cuenta {
+            color: var(--naranja);
+
+            font-size: 19px;
+        }
+
+        .flecha-cuenta {
+            font-size: 10px;
+
+            margin-left: 2px;
+        }
+
+
+        /* =====================================================
+           DROPDOWN
+        ====================================================== */
+
+        .menu-cuenta {
+            position: absolute;
+
+            top: calc(100% + 12px);
+
+            right: 0;
+
+            width: 235px;
+
+            padding: 9px;
+
+            background: #ffffff;
+
+            border: 1px solid #e7e7e3;
+
+            border-radius: 13px;
+
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.18);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform: translateY(-8px);
+
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease,
+                visibility 0.2s ease;
+        }
+
+        .cuenta-dropdown:hover .menu-cuenta,
+        .cuenta-dropdown:focus-within .menu-cuenta {
+            opacity: 1;
+
+            visibility: visible;
+
+            transform: translateY(0);
+        }
+
+        .menu-cuenta a {
+            width: 100%;
+
+            display: flex !important;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 11px 12px !important;
+
+            color: #333333 !important;
+
+            font-size: 12px !important;
+
+            font-weight: 600 !important;
+
+            text-transform: none !important;
+
+            letter-spacing: 0 !important;
+
+            border-radius: 8px;
+
+            transform: none !important;
+
+            transition: 0.2s ease;
+        }
+
+        .menu-cuenta a:hover {
+            color: var(--naranja) !important;
+
+            background: #fff6ed;
+        }
+
+        .menu-cuenta a i {
+            width: 18px;
+
+            color: var(--naranja);
+
+            font-size: 15px;
+        }
+
+        .menu-cuenta .separador {
+            height: 1px;
+
+            background: #eeeeea;
+
+            margin: 7px 5px;
+        }
+
+        .menu-cuenta .cerrar-sesion {
+            color: var(--rojo) !important;
+        }
+
+        .menu-cuenta .cerrar-sesion i {
+            color: var(--rojo);
+        }
+
+
+        /* =====================================================
+           CONTENIDO
+        ====================================================== */
+
+        .pedidos-wrapper {
+            width: min(1200px, 94%);
+
+            margin: 0 auto;
+
+            padding: 145px 0 90px;
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ====================================================== */
+
+        .pedidos-header {
+            text-align: center;
+
+            max-width: 760px;
+
+            margin: 0 auto 45px;
+        }
+
+        .pedidos-etiqueta {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--naranja);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 13px;
+        }
+
+        .pedidos-header h1 {
+            margin: 0;
+
+            color: var(--negro);
+
+            font-size: clamp(36px, 5vw, 58px);
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+
+            line-height: 1;
+        }
+
+        .pedidos-header p {
+            margin: 18px auto 0;
+
+            max-width: 620px;
+
+            color: #777777;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           TARJETA PRINCIPAL
+        ====================================================== */
+
+        .pedidos-card {
+            background: #ffffff;
+
+            border: 1px solid #e5e5e0;
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.07);
+        }
+
+        .pedidos-card-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 24px;
+        }
+
+        .pedidos-titulo {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--negro);
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+        .pedidos-titulo i {
+            color: var(--naranja);
+
+            font-size: 22px;
+        }
+
+
+        /* =====================================================
+           TABLA
+        ====================================================== */
+
+        .tabla-pedidos {
+            width: 100%;
+
+            border-collapse: separate;
+
+            border-spacing: 0;
+
+            overflow: hidden;
+
+            border: 1px solid #e8e8e4;
+
+            border-radius: 12px;
+
+            background: #ffffff;
+        }
+
+        .tabla-pedidos thead th {
+            padding: 15px 14px;
+
+            background: #f8f8f5;
+
+            color: #555555;
+
+            border-bottom: 1px solid #e5e5e0;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            white-space: nowrap;
+        }
+
+        .tabla-pedidos tbody td {
+            padding: 18px 14px;
+
+            color: #333333;
+
+            border-bottom: 1px solid #eeeeea;
+
+            font-size: 12px;
+
+            vertical-align: middle;
+        }
+
+        .tabla-pedidos tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tabla-pedidos tbody tr {
+            transition: 0.2s ease;
+        }
+
+        .tabla-pedidos tbody tr:hover {
+            background: #fffaf5;
+        }
+
+
+        /* =====================================================
+           ID PEDIDO
+        ====================================================== */
+
+        .pedido-id {
+            color: var(--negro);
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .pedido-id span {
+            color: var(--naranja);
+        }
+
+
+        /* =====================================================
+           PRECIO
+        ====================================================== */
+
+        .pedido-total {
+            color: var(--negro);
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           ESTADOS
+        ====================================================== */
+
+        .estado-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            padding: 7px 10px;
+
+            border-radius: 8px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .estado-recibido {
+            background: #f0f0ee;
+
+            color: #555555;
+        }
+
+        .estado-pagado {
+            background: #e8f6ef;
+
+            color: var(--verde);
+        }
+
+        .estado-rechazado {
+            background: #fdecea;
+
+            color: var(--rojo);
+        }
+
+        .estado-preparando {
+            background: #fff2df;
+
+            color: #a85a00;
+        }
+
+        .estado-listo {
+            background: #e7f4f8;
+
+            color: #17718a;
+        }
+
+        .estado-delivery {
+            background: #e9f0fb;
+
+            color: #245fa5;
+        }
+
+        .estado-entregado {
+            background: #e8f6ef;
+
+            color: var(--verde);
+        }
+
+        .estado-default {
+            background: #f0f0ee;
+
+            color: #555555;
+        }
+
+
+        /* =====================================================
+           MENSAJES DE ESTADO
+        ====================================================== */
+
+        .mensaje-estado {
+            margin-top: 7px;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+        .mensaje-estado.error {
+            color: var(--rojo);
+        }
+
+        .mensaje-estado.exito {
+            color: var(--verde);
+        }
+
+
+        /* =====================================================
+           BOTÓN REINTENTAR
+        ====================================================== */
+
+        .btn-reintentar {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            margin-top: 8px;
+
+            padding: 7px 10px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: var(--naranja);
+
+            color: #ffffff;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            transition: 0.2s ease;
+        }
+
+        .btn-reintentar:hover {
+            background: var(--naranja-hover);
+
+            color: #ffffff;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           ACCIONES
+        ====================================================== */
+
+        .acciones-pedido {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+
+            min-width: 145px;
+        }
+
+        .btn-seguimiento {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            min-height: 38px;
+
+            padding: 0 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: var(--negro);
+
+            color: #ffffff;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            transition: 0.2s ease;
+        }
+
+        .btn-seguimiento:hover {
+            background: var(--naranja);
+
+            color: #ffffff;
+
+            transform: translateY(-1px);
+        }
+
+        .btn-detalle {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            min-height: 38px;
+
+            padding: 0 13px;
+
+            border: 1px solid #deded9;
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            color: #333333;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            transition: 0.2s ease;
+        }
+
+        .btn-detalle:hover {
+            border-color: var(--naranja);
+
+            color: var(--naranja);
+
+            background: #fffaf5;
+        }
+
+
+        /* =====================================================
+           SIN PEDIDOS
+        ====================================================== */
+
+        .sin-pedidos {
+            text-align: center;
+
+            padding: 65px 25px;
+        }
+
+        .sin-pedidos-icono {
+            width: 76px;
+            height: 76px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #fff3e8;
+
+            color: var(--naranja);
+
+            font-size: 32px;
+        }
+
+        .sin-pedidos h3 {
+            margin-bottom: 10px;
+
+            color: var(--negro);
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+        .sin-pedidos p {
+            max-width: 500px;
+
+            margin: 0 auto 24px;
+
+            color: #777777;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           BOTÓN CARTA
+        ====================================================== */
+
+        .btn-carta {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            min-height: 45px;
+
+            padding: 0 20px;
+
+            border-radius: 9px;
+
+            background: var(--negro);
+
+            color: #ffffff;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+            transition: 0.2s ease;
+        }
+
+        .btn-carta:hover {
+            background: var(--naranja);
+
+            color: #ffffff;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           BOTÓN INFERIOR
+        ====================================================== */
+
+        .volver-carta {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 22px;
+
+            min-height: 46px;
+
+            border: 1px solid #deded9;
+
+            border-radius: 9px;
+
+            background: #ffffff;
+
+            color: #333333;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+            transition: 0.2s ease;
+        }
+
+        .volver-carta:hover {
+            border-color: var(--naranja);
+
+            color: var(--naranja);
+
+            background: #fffaf5;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1200px) {
+
+            .navbar-usuario {
+                gap: 18px;
+            }
+
+            .navbar-usuario > a {
+                font-size: 10px;
+            }
+
+            .zona-derecha {
+                gap: 15px;
+            }
+
+            .tabla-pedidos thead th,
+            .tabla-pedidos tbody td {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+
+
+        @media (max-width: 1000px) {
+
+            .nav-contenedor {
+                grid-template-columns: auto 1fr auto;
+
+                gap: 15px;
+            }
+
+            .marca-crocants {
+                min-width: auto;
+            }
+
+            .marca-crocants span {
+                display: none;
+            }
+
+            .navbar-usuario {
+                gap: 15px;
+            }
+
+            .pedidos-wrapper {
+                width: min(96%, 1000px);
+            }
+        }
+
+
+        @media (max-width: 800px) {
+
+            .nav-contenedor {
+                display: flex;
+
+                flex-wrap: wrap;
+
+                justify-content: space-between;
+            }
+
+            .navbar-usuario {
+                order: 3;
+
+                width: 100%;
+
+                justify-content: center;
+
+                padding-top: 8px;
+
+                gap: 25px;
+
+                overflow-x: auto;
+            }
+
+            .zona-derecha {
+                margin-left: auto;
+            }
+
+            .pedidos-wrapper {
+                padding-top: 175px;
+            }
+
+            .pedidos-card {
+                padding: 20px;
+            }
+
+            .tabla-contenedor {
+                overflow-x: auto;
+            }
+
+            .tabla-pedidos {
+                min-width: 760px;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar-crocants {
+                padding: 15px 0;
+            }
+
+            .logo-navbar {
+                width: 42px;
+                height: 42px;
+            }
+
+            .marca-crocants strong {
+                font-size: 18px;
+            }
+
+            .btn-cuenta {
+                padding: 10px 12px !important;
+
+                font-size: 0 !important;
+            }
+
+            .btn-cuenta .icono-cuenta {
+                font-size: 19px;
+            }
+
+            .flecha-cuenta {
+                font-size: 10px;
+            }
+
+            .navbar-usuario {
+                overflow-x: auto;
+
+                justify-content: flex-start;
+
+                gap: 22px;
+
+                padding-bottom: 3px;
+            }
+
+            .navbar-usuario > a {
+                white-space: nowrap;
+            }
+
+            .zona-derecha {
+                gap: 8px;
+            }
+
+            .pedidos-wrapper {
+                padding-top: 175px;
+
+                padding-bottom: 50px;
+            }
+
+            .pedidos-header {
+                margin-bottom: 30px;
+            }
+
+            .pedidos-header h1 {
+                letter-spacing: -1px;
+            }
+
+            .pedidos-card {
+                padding: 15px;
+
+                border-radius: 15px;
+            }
+
+            .pedidos-card-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .tabla-contenedor {
+                margin: 0 -2px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================== -->
+
+<header class="navbar-crocants">
+
+    <div class="nav-contenedor">
+
+
+        <!-- LOGO -->
+
+        <a href="/carta" class="marca-crocants">
+
+            <img
+                src="{{ url_for('static', filename='img/logo-crocants.png') }}"
+                alt="Crocant's"
+                class="logo-navbar"
+            >
+
+            <div>
+
+                <strong>Crocant's</strong>
+
+                <span>
+                    POLLERÍA & RESTAURANTE
+                </span>
+
+            </div>
+
+        </a>
+
+
+        {% if session.get('usuario') %}
+
+
+        <!-- =================================================
+             OPCIONES DEL USUARIO
+        ================================================== -->
+
+        <nav class="navbar-usuario">
+
+
+            <!-- CARTA -->
+
+            <a href="/carta">
+
+                <i class="bi bi-journal-text"></i>
+
+                CARTA
+
+            </a>
+
+
+            <!-- RESERVAR MESA -->
+
+            <a href="/reserva">
+
+                <i class="bi bi-calendar-check"></i>
+
+                RESERVAR MESA
+
+            </a>
+
+
+            <!-- MIS PEDIDOS -->
+
+            <a
+                href="/mis_pedidos"
+                class="activo"
+            >
+
+                <i class="bi bi-receipt"></i>
+
+                MIS PEDIDOS
+
+            </a>
+
+
+            <!-- MIS RESERVAS -->
+
+            <a href="/mis_reservas">
+
+                <i class="bi bi-calendar2-check"></i>
+
+                MIS RESERVAS
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- =================================================
+             DERECHA
+        ================================================== -->
+
+        <div class="zona-derecha">
+
+
+            <!-- CARRITO -->
+
+            <a
+                href="/carrito"
+                class="navbar-carrito"
+                title="Mi carrito"
+            >
+
+                <i class="bi bi-bag icono-bolsa"></i>
+
+                <span class="contador-carrito">
+
+                    {{ session.get('carrito', [])|length }}
+
+                </span>
+
+            </a>
+
+
+            <!-- =================================================
+                 MI CUENTA
+            ================================================== -->
+
+            <div class="cuenta-dropdown">
+
+                <a
+                    href="#"
+                    class="btn-cuenta"
+                    onclick="return false;"
+                >
+
+                    <i class="bi bi-person-circle icono-cuenta"></i>
+
+                    MI CUENTA
+
+                    <i class="bi bi-chevron-down flecha-cuenta"></i>
+
+                </a>
+
+
+                <!-- DROPDOWN -->
+
+                <div class="menu-cuenta">
+
+
+                    <!-- PERFIL -->
+
+                    <a href="/perfil">
+
+                        <i class="bi bi-person-gear"></i>
+
+                        Configuración de perfil
+
+                    </a>
+
+
+                    <!-- CONTRASEÑA -->
+
+                    <a href="/cambiar_contrasena">
+
+                        <i class="bi bi-key"></i>
+
+                        Cambiar contraseña
+
+                    </a>
+
+
+                    <!-- MIS PEDIDOS -->
+
+                    <a href="/mis_pedidos">
+
+                        <i class="bi bi-receipt"></i>
+
+                        Mis pedidos
+
+                    </a>
+
+
+                    <!-- MIS RESERVAS -->
+
+                    <a href="/mis_reservas">
+
+                        <i class="bi bi-calendar2-check"></i>
+
+                        Mis reservas
+
+                    </a>
+
+
+                    <div class="separador"></div>
+
+
+                    <!-- CERRAR SESIÓN -->
+
+                    <a
+                        href="/logout"
+                        class="cerrar-sesion"
+                    >
+
+                        <i class="bi bi-box-arrow-right"></i>
+
+                        Cerrar sesión
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        {% endif %}
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     CONTENIDO
+========================================================== -->
+
+<main class="pedidos-wrapper">
+
+
+    <!-- =====================================================
+         ENCABEZADO
+    ====================================================== -->
+
+    <section class="pedidos-header">
+
+        <div class="pedidos-etiqueta">
+
+            <i class="bi bi-receipt"></i>
+
+            HISTORIAL DE COMPRA
+
+        </div>
+
+
+        <h1>
+            Mis pedidos
+        </h1>
+
+
+        <p>
+
+            Consulta tus pedidos, revisa su estado
+            y realiza el seguimiento de cada compra
+            realizada en Crocant's.
+
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         TARJETA PEDIDOS
+    ====================================================== -->
+
+    <section class="pedidos-card">
+
+
+        <div class="pedidos-card-header">
+
+            <h2 class="pedidos-titulo">
+
+                <i class="bi bi-bag-check"></i>
+
+                Historial de pedidos
+
+            </h2>
+
+        </div>
+
+
+        {% if pedidos %}
+
+
+        <!-- =================================================
+             TABLA
+        ================================================== -->
+
+        <div class="tabla-contenedor">
+
+            <table class="tabla-pedidos">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Pedido
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                        <th>
+                            Estado
+                        </th>
+
+                        <th>
+                            Acciones
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for p in pedidos %}
+
+
+                    <tr>
+
+
+                        <!-- ID -->
+
+                        <td>
+
+                            <div class="pedido-id">
+
+                                Pedido
+                                <span>
+                                    #{{ p.id }}
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- TOTAL -->
+
+                        <td>
+
+                            <div class="pedido-total">
+
+                                S/ {{ "%.2f"|format(p.total|float) }}
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- ESTADO -->
+
+                        <td>
+
+
+                            {% if p.estado == "Recibido" %}
+
+                                <span class="estado-badge estado-recibido">
+
+                                    <i class="bi bi-receipt"></i>
+
+                                    Recibido
+
+                                </span>
+
+
+                            {% elif p.estado == "Pagado" %}
+
+                                <span class="estado-badge estado-pagado">
+
+                                    <i class="bi bi-check-circle"></i>
+
+                                    Pagado
+
+                                </span>
+
+                                <div class="mensaje-estado exito">
+
+                                    Pago verificado. Tu pedido será preparado.
+
+                                </div>
+
+
+                            {% elif p.estado == "Rechazado" %}
+
+                                <span class="estado-badge estado-rechazado">
+
+                                    <i class="bi bi-x-circle"></i>
+
+                                    Pago rechazado
+
+                                </span>
+
+                                <div class="mensaje-estado error">
+
+                                    Tu pago fue rechazado. Intenta nuevamente.
+
+                                </div>
+
+
+                                <a
+                                    href="/reintentar_pago/{{ p.id }}"
+                                    class="btn-reintentar"
+                                >
+
+                                    <i class="bi bi-arrow-repeat"></i>
+
+                                    Volver a pagar
+
+                                </a>
+
+
+                            {% elif p.estado == "Preparando" %}
+
+                                <span class="estado-badge estado-preparando">
+
+                                    <i class="bi bi-fire"></i>
+
+                                    Preparando
+
+                                </span>
+
+
+                            {% elif p.estado == "Listo" %}
+
+                                <span class="estado-badge estado-listo">
+
+                                    <i class="bi bi-box-seam"></i>
+
+                                    Listo
+
+                                </span>
+
+
+                            {% elif p.estado == "En delivery" %}
+
+                                <span class="estado-badge estado-delivery">
+
+                                    <i class="bi bi-truck"></i>
+
+                                    En delivery
+
+                                </span>
+
+
+                            {% elif p.estado == "Entregado" %}
+
+                                <span class="estado-badge estado-entregado">
+
+                                    <i class="bi bi-check-circle-fill"></i>
+
+                                    Entregado
+
+                                </span>
+
+
+                            {% else %}
+
+                                <span class="estado-badge estado-default">
+
+                                    {{ p.estado }}
+
+                                </span>
+
+                            {% endif %}
+
+
+                        </td>
+
+
+                        <!-- ACCIONES -->
+
+                        <td>
+
+                            <div class="acciones-pedido">
+
+
+                                <a
+                                    href="/seguimiento/{{ p.id }}"
+                                    class="btn-seguimiento"
+                                >
+
+                                    <i class="bi bi-eye"></i>
+
+                                    Ver seguimiento
+
+                                </a>
+
+
+                                <a
+                                    href="/detalle_pedido/{{ p.id }}"
+                                    class="btn-detalle"
+                                >
+
+                                    <i class="bi bi-list-ul"></i>
+
+                                    Ver pedido
+
+                                </a>
+
+
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- =================================================
+             SIN PEDIDOS
+        ================================================== -->
+
+        <div class="sin-pedidos">
+
+
+            <div class="sin-pedidos-icono">
+
+                <i class="bi bi-bag-x"></i>
+
+            </div>
+
+
+            <h3>
+                Aún no tienes pedidos
+            </h3>
+
+
+            <p>
+
+                Cuando realices una compra en Crocant's,
+                tus pedidos aparecerán aquí para que puedas
+                consultar su estado y realizar el seguimiento.
+
+            </p>
+
+
+            <a
+                href="/carta"
+                class="btn-carta"
+            >
+
+                <i class="bi bi-journal-text"></i>
+
+                Ver nuestra carta
+
+            </a>
+
+
+        </div>
+
+
+        {% endif %}
+
+
+        <!-- =================================================
+             VOLVER
+        ================================================== -->
+
+        <a
+            href="/carta"
+            class="volver-carta"
+        >
+
+            <i class="bi bi-arrow-left"></i>
+
+            Volver a la carta
+
+        </a>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- BOOTSTRAP JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

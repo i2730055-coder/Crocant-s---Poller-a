@@ -1,0 +1,1103 @@
+/* =====================================================
+   CROCANT'S — ESTILO PRINCIPAL
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+
+/* =====================================================
+   RESET
+   ===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    background: #111111;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =====================================================
+   FONDO GENERAL — INICIO
+   ===================================================== */
+
+body.inicio {
+    background: #111111;
+}
+
+
+/* =====================================================
+   NAVBAR CROCANT'S
+   ===================================================== */
+
+.navbar-crocants {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    z-index: 1000;
+
+    padding: 18px 0;
+
+    /*
+       Color propio del navbar.
+       Marrón carbón para diferenciarlo
+       del fondo negro del Inicio.
+    */
+    background: #1c1713;
+
+    /*
+       Línea inferior muy sutil
+       con el color naranja de la marca.
+    */
+    border-bottom: 1px solid rgba(245, 130, 32, 0.18);
+
+    /*
+       Sombra ligera para separar
+       el navbar del hero.
+    */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* CONTENEDOR */
+
+.nav-contenedor {
+    width: min(1180px, 92%);
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* =====================================================
+   MARCA / LOGO
+   ===================================================== */
+
+.marca-crocants {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 230px;
+}
+
+
+/* LOGO */
+
+.logo-navbar {
+    width: 48px;
+    height: 48px;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+}
+
+
+/* NOMBRE */
+
+.marca-crocants strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* SUBTÍTULO */
+
+.marca-crocants span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: rgba(255, 255, 255, 0.58);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   MENÚ PRINCIPAL
+   ===================================================== */
+
+.menu-crocants {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 34px;
+}
+
+
+/* LINKS */
+
+.menu-crocants a {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+
+    padding: 10px 0;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* HOVER */
+
+.menu-crocants a:hover {
+    color: #f58220;
+
+    transform: translateY(-1px);
+}
+
+
+/* PÁGINA ACTIVA */
+
+.menu-crocants a.activo {
+    color: #ffffff;
+}
+
+
+/* LÍNEA ACTIVA */
+
+.menu-crocants a.activo::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    height: 3px;
+
+    background: #f58220;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 10px rgba(245, 130, 32, 0.55);
+}
+
+
+/* =====================================================
+   BOTONES DEL NAVBAR
+   ===================================================== */
+
+.acciones-navbar {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    min-width: 230px;
+}
+
+
+/* =====================================================
+   BOTÓN INICIAR SESIÓN
+   ===================================================== */
+
+.btn-login-navbar {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 11px 15px;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    border-radius: 7px;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease;
+}
+
+
+/* HOVER LOGIN */
+
+.btn-login-navbar:hover {
+    color: #f58220;
+
+    background: rgba(245, 130, 32, 0.08);
+}
+
+
+/* =====================================================
+   BOTÓN REGISTRO
+   ===================================================== */
+
+.btn-registro-navbar {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 11px 20px;
+
+    color: #ffffff;
+
+    background: #f58220;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+
+    box-shadow:
+        0 7px 20px rgba(245, 130, 32, 0.25);
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* HOVER REGISTRO */
+
+.btn-registro-navbar:hover {
+    color: #ffffff;
+
+    background: #ff9638;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(245, 130, 32, 0.35);
+}
+
+
+/* =====================================================
+   HERO — INICIO
+   ===================================================== */
+
+.hero-crocants {
+    position: relative;
+
+    min-height: 720px;
+
+    display: flex;
+
+    align-items: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.88) 0%,
+            rgba(0, 0, 0, 0.66) 42%,
+            rgba(0, 0, 0, 0.30) 75%,
+            rgba(0, 0, 0, 0.58) 100%
+        ),
+        url("/static/img/fondo.jpg")
+        center center / cover no-repeat;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   BRILLO CÁLIDO
+   ===================================================== */
+
+.hero-crocants::after {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    right: -160px;
+
+    bottom: -220px;
+
+    background: rgba(245, 130, 32, 0.20);
+
+    filter: blur(100px);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   CONTENIDO HERO
+   ===================================================== */
+
+.hero-contenido {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1180px, 92%);
+
+    margin: 0 auto;
+
+    padding-top: 80px;
+}
+
+
+/* ETIQUETA */
+
+.hero-etiqueta {
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    color: #f58220;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2.5px;
+}
+
+
+/* TÍTULO */
+
+.hero-contenido h1 {
+    max-width: 720px;
+
+    color: #ffffff;
+
+    font-size: clamp(48px, 6vw, 82px);
+
+    line-height: 0.98;
+
+    font-weight: 800;
+
+    letter-spacing: -3px;
+
+    text-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+
+/* DESCRIPCIÓN */
+
+.hero-contenido p {
+    max-width: 650px;
+
+    margin-top: 25px;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   BOTONES HERO
+   ===================================================== */
+
+.hero-botones {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 32px;
+}
+
+
+/* BOTÓN PRINCIPAL */
+
+.btn-hero-principal {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 15px 24px;
+
+    color: #ffffff;
+
+    background: #f58220;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 30px rgba(245, 130, 32, 0.28);
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* HOVER */
+
+.btn-hero-principal:hover {
+    color: #ffffff;
+
+    background: #ff9638;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 35px rgba(245, 130, 32, 0.38);
+}
+
+
+/* =====================================================
+   BOTÓN SECUNDARIO
+   ===================================================== */
+
+.btn-hero-secundario {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 14px 23px;
+
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.30);
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    transition:
+        color 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* HOVER */
+
+.btn-hero-secundario:hover {
+    color: #ffffff;
+
+    border-color: #f58220;
+
+    background: rgba(245, 130, 32, 0.12);
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   FRANJA
+   ===================================================== */
+
+.franja-crocants {
+    position: relative;
+
+    z-index: 5;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    width: min(1050px, 90%);
+
+    margin: -55px auto 0;
+
+    padding: 25px 30px;
+
+    background: rgba(28, 23, 19, 0.96);
+
+    border: 1px solid rgba(245, 130, 32, 0.15);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ITEMS */
+
+.franja-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 13px;
+
+    border-right:
+        1px solid rgba(255, 255, 255, 0.10);
+}
+
+
+/* ÚLTIMO ITEM */
+
+.franja-item:last-child {
+    border-right: none;
+}
+
+
+/* ICONOS */
+
+.franja-item i {
+    color: #f58220;
+
+    font-size: 25px;
+}
+
+
+/* TÍTULO */
+
+.franja-item strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* DESCRIPCIÓN */
+
+.franja-item span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: rgba(255, 255, 255, 0.48);
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   SECCIONES
+   ===================================================== */
+
+.seccion-crocants,
+.especialidades-crocants,
+.contacto-crocants {
+    padding: 110px 5%;
+}
+
+
+/* =====================================================
+   NOSOTROS
+   ===================================================== */
+
+.seccion-crocants {
+    background: #151515;
+}
+
+.seccion-contenido {
+    width: min(850px, 100%);
+
+    margin: auto;
+
+    text-align: center;
+}
+
+
+/* ETIQUETAS */
+
+.seccion-etiqueta,
+.seccion-titulo > span {
+    color: #f58220;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+/* TÍTULOS */
+
+.seccion-crocants h2,
+.seccion-titulo h2,
+.contacto-crocants h2 {
+    margin-top: 15px;
+
+    color: #ffffff;
+
+    font-size: clamp(34px, 5vw, 56px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+
+/* TEXTO */
+
+.seccion-crocants p {
+    max-width: 700px;
+
+    margin: 25px auto 0;
+
+    color: rgba(255, 255, 255, 0.58);
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   ESPECIALIDADES
+   ===================================================== */
+
+.especialidades-crocants {
+    background: #101010;
+}
+
+.seccion-titulo {
+    width: min(1180px, 100%);
+
+    margin: auto;
+
+    text-align: center;
+}
+
+
+/* GRID */
+
+.especialidades-grid {
+    width: min(1180px, 100%);
+
+    margin: 50px auto 0;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+
+/* CARD */
+
+.especialidad-card {
+    padding: 35px 30px;
+
+    background: #181818;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    border-radius: 14px;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* HOVER CARD */
+
+.especialidad-card:hover {
+    transform: translateY(-7px);
+
+    border-color:
+        rgba(245, 130, 32, 0.35);
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ICONO */
+
+.especialidad-icono {
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 22px;
+
+    color: #f58220;
+
+    background:
+        rgba(245, 130, 32, 0.10);
+
+    border-radius: 12px;
+
+    font-size: 23px;
+}
+
+
+/* TÍTULO CARD */
+
+.especialidad-card h3 {
+    color: #ffffff;
+
+    font-size: 19px;
+
+    font-weight: 700;
+}
+
+
+/* TEXTO CARD */
+
+.especialidad-card p {
+    margin-top: 12px;
+
+    color: rgba(255, 255, 255, 0.50);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   CONTACTO
+   ===================================================== */
+
+.contacto-crocants {
+    position: relative;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.72),
+            rgba(0, 0, 0, 0.82)
+        ),
+        url("/static/img/fondo.jpg")
+        center / cover no-repeat;
+
+    text-align: center;
+}
+
+
+.contacto-crocants > div {
+    width: min(800px, 100%);
+
+    margin: auto;
+}
+
+
+.contacto-crocants p {
+    margin-top: 20px;
+
+    color: rgba(255, 255, 255, 0.60);
+}
+
+
+/* BOTÓN */
+
+.btn-contacto {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+    padding: 14px 23px;
+
+    color: #ffffff;
+
+    background: #f58220;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.btn-contacto:hover {
+    color: #ffffff;
+
+    background: #ff9638;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.footer-crocants {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 35px 5%;
+
+    background: #090909;
+
+    border-top:
+        1px solid rgba(245, 130, 32, 0.12);
+}
+
+
+.footer-crocants strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 17px;
+}
+
+
+.footer-crocants span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: rgba(255, 255, 255, 0.40);
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+.footer-crocants p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.35);
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   RESPONSIVE — TABLET
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .nav-contenedor {
+        flex-wrap: wrap;
+    }
+
+
+    .menu-crocants {
+        order: 3;
+
+        width: 100%;
+
+        padding-top: 8px;
+
+        gap: 20px;
+    }
+
+
+    .acciones-navbar {
+        min-width: auto;
+    }
+
+
+    .hero-crocants {
+        min-height: 680px;
+    }
+
+
+    .franja-crocants {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+
+    .franja-item {
+        border-right: none;
+
+        padding-bottom: 15px;
+
+        border-bottom:
+            1px solid rgba(255, 255, 255, 0.08);
+    }
+
+
+    .franja-item:last-child {
+        padding-bottom: 0;
+
+        border-bottom: none;
+    }
+
+
+    .especialidades-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE — MÓVIL
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    .navbar-crocants {
+        padding: 15px 0;
+    }
+
+
+    .marca-crocants span {
+        display: none;
+    }
+
+
+    .menu-crocants {
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        gap: 22px;
+
+        padding-bottom: 3px;
+    }
+
+
+    .menu-crocants a {
+        white-space: nowrap;
+    }
+
+
+    .acciones-navbar {
+        width: 100%;
+
+        justify-content: flex-start;
+    }
+
+
+    .hero-contenido {
+        padding-top: 150px;
+    }
+
+
+    .hero-contenido h1 {
+        font-size: 48px;
+
+        letter-spacing: -2px;
+    }
+
+
+    .hero-contenido p {
+        font-size: 14px;
+    }
+
+
+    .hero-botones {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .footer-crocants {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+}

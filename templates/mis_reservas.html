@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mis reservas | Crocant's</title>
+
+    <!-- BOOTSTRAP -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- BOOTSTRAP ICONS -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- FUENTE -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        :root {
+            --negro: #111111;
+            --blanco: #ffffff;
+            --gris: #6b7280;
+            --gris-claro: #f7f7f5;
+            --borde: #e5e5e0;
+
+            --naranja: #f58220;
+            --naranja-hover: #ff9638;
+
+            --verde: #17845b;
+            --rojo: #c0392b;
+            --amarillo: #d68910;
+        }
+
+        /* =====================================================
+           GENERAL
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--gris-claro);
+            color: var(--negro);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar-crocants {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            padding: 18px 0;
+
+            background: #1c1713;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar-crocants::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 2px;
+
+            background: var(--naranja);
+
+            box-shadow:
+                0 0 8px rgba(245, 130, 32, 0.35);
+        }
+
+        /* =====================================================
+           CONTENEDOR NAVBAR
+        ===================================================== */
+
+        .nav-contenedor {
+            width: min(1380px, 94%);
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: 1fr auto 1fr;
+
+            align-items: center;
+
+            gap: 25px;
+        }
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .marca-crocants {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            justify-self: start;
+
+            min-width: 230px;
+        }
+
+        .logo-navbar {
+            width: 48px;
+            height: 48px;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+        }
+
+        .marca-crocants strong {
+            display: block;
+
+            color: #ffffff;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+        }
+
+        .marca-crocants span {
+            display: block;
+
+            margin-top: 2px;
+
+            color: rgba(255, 255, 255, 0.58);
+
+            font-size: 10px;
+
+            font-weight: 500;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        /* =====================================================
+           NAVEGACIÓN
+        ===================================================== */
+
+        .navbar-usuario {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 28px;
+
+            white-space: nowrap;
+
+            justify-self: center;
+        }
+
+        .navbar-usuario > a {
+            position: relative;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: rgba(255, 255, 255, 0.78);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+
+            padding: 12px 3px;
+
+            transition: 0.25s ease;
+        }
+
+        .navbar-usuario > a:hover {
+            color: var(--naranja);
+
+            transform: translateY(-1px);
+        }
+
+        .navbar-usuario > a.activo {
+            color: #ffffff;
+        }
+
+        .navbar-usuario > a.activo::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            bottom: 0;
+
+            height: 3px;
+
+            background: var(--naranja);
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 0 10px rgba(245, 130, 32, 0.55);
+        }
+
+        /* =====================================================
+           ZONA DERECHA
+        ===================================================== */
+
+        .zona-derecha {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 22px;
+
+            justify-self: end;
+        }
+
+        /* =====================================================
+           CARRITO
+        ===================================================== */
+
+        .navbar-carrito {
+            position: relative;
+
+            display: inline-flex !important;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 44px;
+            height: 44px;
+
+            color: #ffffff !important;
+
+            border-radius: 10px;
+
+            padding: 0 !important;
+
+            transition: 0.25s ease;
+        }
+
+        .navbar-carrito:hover {
+            background: rgba(245, 130, 32, 0.12);
+
+            color: var(--naranja) !important;
+
+            transform: translateY(-1px);
+        }
+
+        .navbar-carrito .icono-bolsa {
+            font-size: 20px;
+        }
+
+        .contador-carrito {
+            position: absolute;
+
+            top: 0;
+            right: -2px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 19px;
+            height: 19px;
+
+            padding: 0 5px;
+
+            border-radius: 50%;
+
+            background: var(--naranja);
+
+            color: #ffffff;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            border: 2px solid #1c1713;
+        }
+
+        /* =====================================================
+           MI CUENTA
+        ===================================================== */
+
+        .cuenta-dropdown {
+            position: relative;
+        }
+
+        .btn-cuenta {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 12px 17px;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            border: 1px solid rgba(255, 255, 255, 0.13);
+
+            border-radius: 10px;
+
+            color: #ffffff !important;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            transition: 0.25s ease;
+        }
+
+        .btn-cuenta:hover {
+            background: rgba(245, 130, 32, 0.10);
+        }
+
+        .icono-cuenta {
+            color: var(--naranja);
+
+            font-size: 19px;
+        }
+
+        .flecha-cuenta {
+            font-size: 10px;
+
+            margin-left: 2px;
+        }
+
+        /* =====================================================
+           DROPDOWN
+        ===================================================== */
+
+        .menu-cuenta {
+            position: absolute;
+
+            top: calc(100% + 12px);
+
+            right: 0;
+
+            width: 235px;
+
+            padding: 9px;
+
+            background: #ffffff;
+
+            border: 1px solid #e7e7e3;
+
+            border-radius: 13px;
+
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.18);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform: translateY(-8px);
+
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease,
+                visibility 0.2s ease;
+        }
+
+        .cuenta-dropdown:hover .menu-cuenta,
+        .cuenta-dropdown:focus-within .menu-cuenta {
+            opacity: 1;
+
+            visibility: visible;
+
+            transform: translateY(0);
+        }
+
+        .menu-cuenta a {
+            width: 100%;
+
+            display: flex !important;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 11px 12px !important;
+
+            color: #333333 !important;
+
+            font-size: 12px !important;
+
+            font-weight: 600 !important;
+
+            text-transform: none !important;
+
+            letter-spacing: 0 !important;
+
+            border-radius: 8px;
+
+            transition: 0.2s ease;
+        }
+
+        .menu-cuenta a:hover {
+            color: var(--naranja) !important;
+
+            background: #fff6ed;
+        }
+
+        .menu-cuenta a i {
+            width: 18px;
+
+            color: var(--naranja);
+
+            font-size: 15px;
+        }
+
+        .menu-cuenta .separador {
+            height: 1px;
+
+            background: #eeeeea;
+
+            margin: 7px 5px;
+        }
+
+        .menu-cuenta .cerrar-sesion {
+            color: var(--rojo) !important;
+        }
+
+        .menu-cuenta .cerrar-sesion i {
+            color: var(--rojo);
+        }
+
+        /* =====================================================
+           CONTENIDO
+        ===================================================== */
+
+        .reservas-wrapper {
+            width: min(1100px, 92%);
+
+            margin: 0 auto;
+
+            padding: 145px 0 90px;
+        }
+
+        /* =====================================================
+           ENCABEZADO
+        ===================================================== */
+
+        .reservas-header {
+            text-align: center;
+
+            max-width: 720px;
+
+            margin: 0 auto 38px;
+        }
+
+        .reservas-etiqueta {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--naranja);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 13px;
+        }
+
+        .reservas-header h1 {
+            margin: 0;
+
+            color: var(--negro);
+
+            font-size: clamp(36px, 5vw, 54px);
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+
+            line-height: 1;
+        }
+
+        .reservas-header p {
+            margin: 18px auto 0;
+
+            max-width: 600px;
+
+            color: #777777;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           TARJETA
+        ===================================================== */
+
+        .reservas-card {
+            background: #ffffff;
+
+            border: 1px solid var(--borde);
+
+            border-radius: 18px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.07);
+        }
+
+        .reservas-card-titulo {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 25px;
+
+            color: var(--negro);
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+        .reservas-card-titulo i {
+            color: var(--naranja);
+
+            font-size: 22px;
+        }
+
+        /* =====================================================
+           TABLA
+        ===================================================== */
+
+        .tabla-reservas-wrapper {
+            overflow-x: auto;
+
+            border: 1px solid #e8e8e3;
+
+            border-radius: 12px;
+        }
+
+        .tabla-reservas {
+            width: 100%;
+
+            margin: 0;
+
+            border-collapse: separate;
+
+            border-spacing: 0;
+
+            background: #ffffff;
+
+            color: #333333;
+        }
+
+        .tabla-reservas thead th {
+            padding: 15px 14px;
+
+            background: #faf9f6;
+
+            color: #555555;
+
+            border-bottom: 1px solid #e5e5e0;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+
+            white-space: nowrap;
+        }
+
+        .tabla-reservas tbody td {
+            padding: 17px 14px;
+
+            color: #444444;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #eeeeea;
+
+            font-size: 12px;
+
+            font-weight: 500;
+
+            vertical-align: middle;
+        }
+
+        .tabla-reservas tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tabla-reservas tbody tr {
+            transition: 0.2s ease;
+        }
+
+        .tabla-reservas tbody tr:hover td {
+            background: #fffaf5;
+        }
+
+        /* =====================================================
+           FECHA
+        ===================================================== */
+
+        .dato-fecha {
+            color: #222222;
+
+            font-weight: 700;
+        }
+
+        .dato-fecha i {
+            color: var(--naranja);
+
+            margin-right: 5px;
+        }
+
+        /* =====================================================
+           HORA
+        ===================================================== */
+
+        .dato-hora {
+            color: var(--naranja);
+
+            font-weight: 800;
+        }
+
+        .dato-hora i {
+            margin-right: 5px;
+        }
+
+        /* =====================================================
+           PERSONAS
+        ===================================================== */
+
+        .dato-personas {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            color: #444444;
+
+            font-weight: 700;
+        }
+
+        .dato-personas i {
+            color: var(--naranja);
+        }
+
+        /* =====================================================
+           ESTADOS
+        ===================================================== */
+
+        .estado {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            padding: 7px 11px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .estado-pendiente {
+            background: #fff4d6;
+
+            color: #9a6700;
+
+            border: 1px solid #f2d48a;
+        }
+
+        .estado-confirmada {
+            background: #e8f7f0;
+
+            color: var(--verde);
+
+            border: 1px solid #bce5d2;
+        }
+
+        .estado-rechazada {
+            background: #fdebea;
+
+            color: var(--rojo);
+
+            border: 1px solid #efc1bd;
+        }
+
+        .estado-default {
+            background: #f1f1ee;
+
+            color: #666666;
+
+            border: 1px solid #ddddda;
+        }
+
+        /* =====================================================
+           MENSAJE
+        ===================================================== */
+
+        .mensaje-reserva {
+            max-width: 280px;
+
+            color: #777777;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        .sin-mensaje {
+            color: #aaaaaa;
+
+            font-style: italic;
+        }
+
+        /* =====================================================
+           SIN RESERVAS
+        ===================================================== */
+
+        .sin-reservas {
+            padding: 45px 20px !important;
+
+            text-align: center;
+
+            color: #777777 !important;
+        }
+
+        .sin-reservas i {
+            display: block;
+
+            margin-bottom: 12px;
+
+            color: #d6d6d0;
+
+            font-size: 42px;
+        }
+
+        .sin-reservas strong {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #333333;
+
+            font-size: 15px;
+        }
+
+        /* =====================================================
+           BOTÓN
+        ===================================================== */
+
+        .acciones-reserva {
+            margin-top: 25px;
+        }
+
+        .btn-reservar {
+            min-height: 48px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            width: 100%;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: var(--negro);
+
+            color: #ffffff;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.5px;
+
+            transition: 0.2s ease;
+        }
+
+        .btn-reservar:hover {
+            background: var(--naranja);
+
+            color: #ffffff;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 20px rgba(245, 130, 32, 0.25);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1200px) {
+
+            .navbar-usuario {
+                gap: 18px;
+            }
+
+            .navbar-usuario > a {
+                font-size: 10px;
+            }
+
+            .zona-derecha {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+
+            .nav-contenedor {
+                grid-template-columns: auto 1fr auto;
+
+                gap: 15px;
+            }
+
+            .marca-crocants {
+                min-width: auto;
+            }
+
+            .marca-crocants span {
+                display: none;
+            }
+
+            .navbar-usuario {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .nav-contenedor {
+                display: flex;
+
+                flex-wrap: wrap;
+
+                justify-content: space-between;
+            }
+
+            .navbar-usuario {
+                order: 3;
+
+                width: 100%;
+
+                justify-content: center;
+
+                padding-top: 8px;
+
+                gap: 25px;
+
+                overflow-x: auto;
+            }
+
+            .zona-derecha {
+                margin-left: auto;
+            }
+
+            .reservas-wrapper {
+                padding-top: 175px;
+            }
+
+            .reservas-card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar-crocants {
+                padding: 15px 0;
+            }
+
+            .logo-navbar {
+                width: 42px;
+                height: 42px;
+            }
+
+            .marca-crocants strong {
+                font-size: 18px;
+            }
+
+            .btn-cuenta {
+                padding: 10px 12px;
+            }
+
+            .btn-cuenta-texto {
+                display: none;
+            }
+
+            .navbar-usuario {
+                overflow-x: auto;
+
+                justify-content: flex-start;
+
+                gap: 22px;
+
+                padding-bottom: 3px;
+            }
+
+            .navbar-usuario > a {
+                white-space: nowrap;
+            }
+
+            .reservas-wrapper {
+                padding-top: 175px;
+            }
+
+            .reservas-card {
+                padding: 18px;
+
+                border-radius: 15px;
+            }
+
+            .reservas-header h1 {
+                font-size: 38px;
+            }
+
+            .reservas-header p {
+                font-size: 13px;
+            }
+
+            .zona-derecha {
+                gap: 8px;
+            }
+
+            .tabla-reservas thead th,
+            .tabla-reservas tbody td {
+                padding: 13px 10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <header class="navbar-crocants">
+
+        <div class="nav-contenedor">
+
+            <!-- LOGO -->
+
+            <a href="/carta" class="marca-crocants">
+
+                <img
+                    src="{{ url_for('static', filename='img/logo-crocants.png') }}"
+                    alt="Crocant's"
+                    class="logo-navbar"
+                >
+
+                <div>
+
+                    <strong>Crocant's</strong>
+
+                    <span>POLLERÍA & RESTAURANTE</span>
+
+                </div>
+
+            </a>
+
+            {% if session.get('usuario') %}
+
+            <!-- NAVEGACIÓN -->
+
+            <nav class="navbar-usuario">
+
+                <a href="/carta">
+
+                    <i class="bi bi-journal-text"></i>
+
+                    CARTA
+
+                </a>
+
+                <a href="/reserva">
+
+                    <i class="bi bi-calendar-check"></i>
+
+                    RESERVAR MESA
+
+                </a>
+
+                <a href="/mis_pedidos">
+
+                    <i class="bi bi-receipt"></i>
+
+                    MIS PEDIDOS
+
+                </a>
+
+                <a
+                    href="/mis_reservas"
+                    class="activo"
+                >
+
+                    <i class="bi bi-calendar2-check"></i>
+
+                    MIS RESERVAS
+
+                </a>
+
+            </nav>
+
+            <!-- ZONA DERECHA -->
+
+            <div class="zona-derecha">
+
+                <!-- CARRITO -->
+
+                <a
+                    href="/carrito"
+                    class="navbar-carrito"
+                    title="Mi carrito"
+                >
+
+                    <i class="bi bi-bag icono-bolsa"></i>
+
+                    <span class="contador-carrito">
+
+                        {{ session.get('carrito', [])|length }}
+
+                    </span>
+
+                </a>
+
+                <!-- MI CUENTA -->
+
+                <div class="cuenta-dropdown">
+
+                    <a
+                        href="#"
+                        class="btn-cuenta"
+                        onclick="return false;"
+                    >
+
+                        <i class="bi bi-person-circle icono-cuenta"></i>
+
+                        <span class="btn-cuenta-texto">
+                            MI CUENTA
+                        </span>
+
+                        <i class="bi bi-chevron-down flecha-cuenta"></i>
+
+                    </a>
+
+                    <!-- MENU DE CUENTA -->
+
+                    <div class="menu-cuenta">
+
+                        <a href="/perfil">
+
+                            <i class="bi bi-person-gear"></i>
+
+                            Configuración de perfil
+
+                        </a>
+
+                        <a href="/cambiar_contrasena">
+
+                            <i class="bi bi-key"></i>
+
+                            Cambiar contraseña
+
+                        </a>
+
+                        <a href="/mis_pedidos">
+
+                            <i class="bi bi-receipt"></i>
+
+                            Mis pedidos
+
+                        </a>
+
+                        <a href="/mis_reservas">
+
+                            <i class="bi bi-calendar2-check"></i>
+
+                            Mis reservas
+
+                        </a>
+
+                        <div class="separador"></div>
+
+                        <a
+                            href="/logout"
+                            class="cerrar-sesion"
+                        >
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                            Cerrar sesión
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </header>
+
+    <!-- =====================================================
+         CONTENIDO
+    ===================================================== -->
+
+    <main class="reservas-wrapper">
+
+        <!-- ENCABEZADO -->
+
+        <section class="reservas-header">
+
+            <div class="reservas-etiqueta">
+
+                <i class="bi bi-calendar2-check"></i>
+
+                TUS RESERVAS
+
+            </div>
+
+            <h1>
+                Mis reservas
+            </h1>
+
+            <p>
+
+                Consulta el estado de tus reservas y revisa
+                la información proporcionada por Crocant's.
+
+            </p>
+
+        </section>
+
+        <!-- =====================================================
+             TARJETA DE RESERVAS
+        ===================================================== -->
+
+        <section class="reservas-card">
+
+            <h2 class="reservas-card-titulo">
+
+                <i class="bi bi-calendar-check"></i>
+
+                Historial de reservas
+
+            </h2>
+
+            <div class="tabla-reservas-wrapper">
+
+                <table class="tabla-reservas text-center align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Fecha</th>
+
+                            <th>Hora</th>
+
+                            <th>Personas</th>
+
+                            <th>Estado</th>
+
+                            <th>Mensaje</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% if reservas %}
+
+                            {% for r in reservas %}
+
+                            <tr>
+
+                                <!-- FECHA -->
+
+                                <td>
+
+                                    <span class="dato-fecha">
+
+                                        <i class="bi bi-calendar3"></i>
+
+                                        {{ r.fecha }}
+
+                                    </span>
+
+                                </td>
+
+                                <!-- HORA -->
+
+                                <td>
+
+                                    <span class="dato-hora">
+
+                                        <i class="bi bi-clock"></i>
+
+                                        {{ r.hora }}
+
+                                    </span>
+
+                                </td>
+
+                                <!-- PERSONAS -->
+
+                                <td>
+
+                                    <span class="dato-personas">
+
+                                        <i class="bi bi-people-fill"></i>
+
+                                        {{ r.personas }}
+
+                                    </span>
+
+                                </td>
+
+                                <!-- ESTADO -->
+
+                                <td>
+
+                                    {% if r.estado == 'Pendiente' %}
+
+                                        <span class="estado estado-pendiente">
+
+                                            <i class="bi bi-hourglass-split"></i>
+
+                                            Pendiente
+
+                                        </span>
+
+                                    {% elif r.estado == 'Confirmada' %}
+
+                                        <span class="estado estado-confirmada">
+
+                                            <i class="bi bi-check-circle-fill"></i>
+
+                                            Confirmada
+
+                                        </span>
+
+                                    {% elif r.estado == 'Rechazada' %}
+
+                                        <span class="estado estado-rechazada">
+
+                                            <i class="bi bi-x-circle-fill"></i>
+
+                                            Rechazada
+
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="estado estado-default">
+
+                                            <i class="bi bi-info-circle"></i>
+
+                                            {{ r.estado }}
+
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                                <!-- MENSAJE DEL ADMIN -->
+
+                                <td>
+
+                                    {% if r.mensaje %}
+
+                                        <div class="mensaje-reserva">
+
+                                            {{ r.mensaje }}
+
+                                        </div>
+
+                                    {% else %}
+
+                                        <span class="sin-mensaje">
+
+                                            Sin mensaje
+
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <!-- SIN RESERVAS -->
+
+                            <tr>
+
+                                <td
+                                    colspan="5"
+                                    class="sin-reservas"
+                                >
+
+                                    <i class="bi bi-calendar-x"></i>
+
+                                    <strong>
+                                        No tienes reservas todavía
+                                    </strong>
+
+                                    Realiza una reserva para disfrutar
+                                    de nuestro servicio.
+
+                                </td>
+
+                            </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- NUEVA RESERVA -->
+
+            <div class="acciones-reserva">
+
+                <a
+                    href="/reserva"
+                    class="btn-reservar"
+                >
+
+                    <i class="bi bi-calendar-plus"></i>
+
+                    REALIZAR NUEVA RESERVA
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- BOOTSTRAP JS -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Panel del Mozo | Crocant's</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* =====================================================
+           CUERPO
+        ===================================================== */
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: #171717;
+
+            background:
+
+                radial-gradient(
+                    circle at 75% 15%,
+                    rgba(255, 122, 0, .08),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(255, 122, 0, .06),
+                    transparent 30%
+                ),
+
+                #f7f7f6;
+        }
+
+
+        /* =====================================================
+           BARRA LATERAL
+        ===================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 305px;
+            height: 100vh;
+
+            padding: 28px 18px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #181411,
+                    #0e0d0c
+                );
+
+            border-right:
+                1px solid
+                rgba(255,255,255,.08);
+
+            box-shadow:
+                8px 0 35px
+                rgba(0,0,0,.12);
+
+            z-index: 100;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 4px 12px 28px;
+
+            margin-bottom: 24px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.08);
+        }
+
+
+        .logo-icon {
+
+            width: 56px;
+            height: 56px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,122,0,.12);
+
+            border:
+                1px solid
+                rgba(255,122,0,.28);
+
+            color: #ff7a00;
+
+            font-size: 27px;
+        }
+
+
+        .logo-text {
+
+            color: #ffffff;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            letter-spacing: -.5px;
+        }
+
+
+        .logo-text span {
+
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           SESIÓN ACTUAL
+        ===================================================== */
+
+        .sesion {
+
+            margin: 0 2px 28px;
+
+            padding: 18px;
+
+            background:
+                rgba(255,255,255,.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            border-radius: 16px;
+        }
+
+
+        .sesion-icon {
+
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 12px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,122,0,.12);
+
+            color: #ff7a00;
+
+            font-size: 19px;
+        }
+
+
+        .sesion-label {
+
+            color: #686868;
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 6px;
+        }
+
+
+        .sesion-correo {
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            word-break: break-word;
+        }
+
+
+        /* =====================================================
+           MENÚ
+        ===================================================== */
+
+        .menu-titulo {
+
+            padding: 0 12px;
+
+            margin-bottom: 10px;
+
+            color: #5d5d5d;
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .menu {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+
+        .menu a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 13px 14px;
+
+            color: #a8a8a8;
+
+            text-decoration: none;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: .25s ease;
+        }
+
+
+        .menu a:hover {
+
+            color: #ffffff;
+
+            background:
+                rgba(255,122,0,.08);
+
+            transform:
+                translateX(3px);
+        }
+
+
+        .menu a.activo {
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255,122,0,.20),
+                    rgba(255,122,0,.08)
+                );
+
+            border-left:
+                3px solid
+                #ff7a00;
+        }
+
+
+        .menu-icon {
+
+            width: 27px;
+
+            text-align: center;
+
+            font-size: 18px;
+        }
+
+
+        /* =====================================================
+           CERRAR SESIÓN
+        ===================================================== */
+
+        .cerrar {
+
+            position: absolute;
+
+            left: 18px;
+            right: 18px;
+            bottom: 25px;
+        }
+
+
+        .cerrar:hover {
+
+            color: #ff5c45 !important;
+
+            background:
+                rgba(255,60,40,.08) !important;
+        }
+
+
+        /* =====================================================
+           CONTENIDO
+        ===================================================== */
+
+        .contenido {
+
+            margin-left: 305px;
+
+            min-height: 100vh;
+
+            padding: 42px 58px;
+        }
+
+
+        /* =====================================================
+           CABECERA
+        ===================================================== */
+
+        .cabecera {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 25px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .titulo h1 {
+
+            margin: 0;
+
+            font-size: 48px;
+
+            line-height: 1.05;
+
+            letter-spacing: -2px;
+
+            font-weight: 800;
+        }
+
+
+        .titulo h1 span {
+
+            color: #f47b20;
+        }
+
+
+        .titulo p {
+
+            margin: 12px 0 0;
+
+            color: #777d8a;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           USUARIO
+        ===================================================== */
+
+        .usuario {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            min-width: 255px;
+
+            padding: 10px 17px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e8e4df;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.05);
+        }
+
+
+        .avatar {
+
+            width: 47px;
+            height: 47px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                #fff0e2;
+
+            color: #f47b20;
+
+            font-size: 21px;
+        }
+
+
+        .usuario strong {
+
+            display: block;
+
+            color: #171717;
+
+            font-size: 13px;
+
+            word-break: break-word;
+        }
+
+
+        .usuario small {
+
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777d8a;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           PANEL PRINCIPAL
+        ===================================================== */
+
+        .bienvenida {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 34px 36px;
+
+            margin-bottom: 32px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1c1713,
+                    #17120f
+                );
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 18px 45px
+                rgba(0,0,0,.14);
+        }
+
+
+        .bienvenida::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            right: -80px;
+            top: -100px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,122,0,.22),
+                    transparent 68%
+                );
+        }
+
+
+        .bienvenida h2 {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin: 0 0 12px;
+
+            color: #ffffff;
+
+            font-size: 26px;
+
+            font-weight: 800;
+        }
+
+
+        .bienvenida p {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 850px;
+
+            margin: 0;
+
+            color: #aaa49f;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+        }
+
+
+        /* =====================================================
+           INFORMACIÓN
+        ===================================================== */
+
+        .informacion {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 36px;
+        }
+
+
+        .info-card {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+
+            min-height: 110px;
+
+            padding: 20px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e8e4df;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.04);
+
+            transition: .25s ease;
+        }
+
+
+        .info-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                #ffd6b5;
+        }
+
+
+        .info-icon {
+
+            flex-shrink: 0;
+
+            width: 56px;
+            height: 56px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background:
+                #fff0e2;
+
+            color: #f47b20;
+
+            font-size: 25px;
+        }
+
+
+        .info-card h3 {
+
+            margin: 0 0 5px;
+
+            color: #171717;
+
+            font-size: 18px;
+        }
+
+
+        .info-card p {
+
+            margin: 0;
+
+            color: #777d8a;
+
+            font-size: 12px;
+
+            line-height: 1.45;
+        }
+
+
+        /* =====================================================
+           ACCIONES
+        ===================================================== */
+
+        .acciones-cabecera {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 17px;
+        }
+
+
+        .seccion-titulo {
+
+            margin: 0;
+
+            color: #171717;
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+
+        .seccion-ayuda {
+
+            color: #8a8f99;
+
+            font-size: 12px;
+        }
+
+
+        .acciones {
+
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 20px;
+        }
+
+
+        .accion {
+
+            position: relative;
+
+            min-height: 175px;
+
+            padding: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 24px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e7e2dc;
+
+            border-radius: 20px;
+
+            text-decoration: none;
+
+            color: #171717;
+
+            overflow: hidden;
+
+            transition: .3s ease;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.035);
+        }
+
+
+        .accion:hover {
+
+            transform:
+                translateY(-5px);
+
+            border-color:
+                #ffc99f;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,.08);
+
+            color: #171717;
+        }
+
+
+        .accion-icon {
+
+            flex-shrink: 0;
+
+            width: 70px;
+            height: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background:
+                #fff0e2;
+
+            color: #f47b20;
+
+            font-size: 31px;
+        }
+
+
+        .accion h3 {
+
+            margin: 0 0 8px;
+
+            color: #171717;
+
+            font-size: 21px;
+
+            font-weight: 800;
+        }
+
+
+        .accion p {
+
+            max-width: 700px;
+
+            margin: 0;
+
+            color: #777d8a;
+
+            font-size: 13px;
+
+            line-height: 1.55;
+        }
+
+
+        .flecha {
+
+            position: absolute;
+
+            right: 27px;
+
+            bottom: 23px;
+
+            color: #f47b20;
+
+            font-size: 24px;
+
+            transition: .25s;
+        }
+
+
+        .accion:hover .flecha {
+
+            transform:
+                translateX(5px);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .sidebar {
+
+                width: 250px;
+            }
+
+            .contenido {
+
+                margin-left: 250px;
+
+                padding: 32px;
+            }
+
+            .informacion {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+
+                width: 78px;
+
+                padding:
+                    22px 10px;
+            }
+
+
+            .logo {
+
+                justify-content: center;
+
+                padding:
+                    4px 0 25px;
+            }
+
+
+            .logo-text,
+            .sesion,
+            .menu-titulo,
+            .menu-text {
+
+                display: none;
+            }
+
+
+            .menu a {
+
+                justify-content: center;
+
+                padding: 14px 5px;
+            }
+
+
+            .cerrar {
+
+                left: 10px;
+                right: 10px;
+            }
+
+
+            .contenido {
+
+                margin-left: 78px;
+
+                padding: 25px;
+            }
+
+
+            .cabecera {
+
+                flex-direction: column;
+            }
+
+
+            .usuario {
+
+                width: 100%;
+            }
+
+
+            .titulo h1 {
+
+                font-size: 38px;
+            }
+        }
+
+
+        @media (max-width: 550px) {
+
+            .contenido {
+
+                padding: 20px 15px;
+            }
+
+
+            .titulo h1 {
+
+                font-size: 32px;
+            }
+
+
+            .bienvenida {
+
+                padding: 25px;
+            }
+
+
+            .accion {
+
+                padding: 22px;
+
+                align-items: flex-start;
+            }
+
+
+            .accion-icon {
+
+                width: 55px;
+                height: 55px;
+
+                font-size: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BARRA LATERAL
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🍗
+        </div>
+
+        <div class="logo-text">
+
+            Crocant's
+
+            <span>
+                Pollería & Restaurante
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- SESIÓN ACTUAL -->
+
+    <div class="sesion">
+
+        <div class="sesion-icon">
+            👤
+        </div>
+
+        <div class="sesion-label">
+            Sesión actual
+        </div>
+
+        <div class="sesion-correo">
+
+            {{ session.get('usuario') }}
+
+        </div>
+
+    </div>
+
+
+    <!-- MENÚ -->
+
+    <div class="menu-titulo">
+        Operaciones
+    </div>
+
+
+    <nav class="menu">
+
+
+        <!-- INICIO -->
+
+        <a
+            href="{{ url_for('panel_mozo') }}"
+            class="activo"
+        >
+
+            <span class="menu-icon">
+                ▦
+            </span>
+
+            <span class="menu-text">
+                Inicio
+            </span>
+
+        </a>
+
+
+        <!-- MESAS -->
+
+        <a
+            href="{{ url_for('mozo_mesas') }}"
+        >
+
+            <span class="menu-icon">
+                ▦
+            </span>
+
+            <span class="menu-text">
+                Mesas
+            </span>
+
+        </a>
+
+        <!-- PEDIDOS PARA LLEVAR -->
+
+        <a
+              href="{{ url_for('mozo_para_llevar') }}"
+              class="{% if request.endpoint == 'mozo_para_llevar' %}activo{% endif %}"
+        >
+              <span class="menu-icon">
+               🛍️
+              </span>
+
+              <span class="menu-text">
+                Pedidos para llevar
+              </span>
+        </a>
+
+
+
+    </nav>
+
+    
+
+        
+
+
+    <!-- CERRAR SESIÓN -->
+
+    <a
+        href="{{ url_for('logout') }}"
+        class="menu cerrar"
+    >
+
+        <span class="menu-icon">
+            ↪
+        </span>
+
+        <span class="menu-text">
+            Cerrar sesión
+        </span>
+
+    </a>
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+===================================================== -->
+
+<main class="contenido">
+
+
+    <!-- =================================================
+         CABECERA
+    ================================================== -->
+
+    <div class="cabecera">
+
+
+        <div class="titulo">
+
+            <h1>
+
+                Bienvenido,
+                <span>Mozo</span>
+
+            </h1>
+
+            <p>
+
+                Gestiona las mesas y registra los pedidos
+                de los clientes de Crocant's.
+
+            </p>
+
+        </div>
+
+
+        <!-- USUARIO -->
+
+        <div class="usuario">
+
+            <div class="avatar">
+                👤
+            </div>
+
+            <div>
+
+                <strong>
+                    {{ session.get('usuario') }}
+                </strong>
+
+                <small>
+                    Mozo
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         PANEL DE ATENCIÓN
+    ================================================== -->
+
+    <section class="bienvenida">
+
+        <h2>
+            Panel de atención 🍗
+        </h2>
+
+        <p>
+
+            Desde este panel puedes consultar las mesas
+            disponibles y gestionar los pedidos de los
+            clientes de manera rápida y sencilla.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================================
+         INFORMACIÓN
+         
+         SOLO INFORMACIÓN.
+         NO SON BOTONES.
+    ================================================== -->
+
+    <section class="informacion">
+
+
+        <!-- MESAS -->
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                ▦
+            </div>
+
+            <div>
+
+                <h3>
+                    Mesas
+                </h3>
+
+                <p>
+                    Consulta la disponibilidad de las mesas.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PEDIDOS -->
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                ▤
+            </div>
+
+            <div>
+
+                <h3>
+                    Pedidos
+                </h3>
+
+                <p>
+                    Los pedidos se registran desde cada mesa.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ATENCIÓN -->
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                ◷
+            </div>
+
+            <div>
+
+                <h3>
+                    Atención
+                </h3>
+
+                <p>
+                    Gestiona la atención seleccionando una mesa.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         ACCIÓN PRINCIPAL
+    ================================================== -->
+
+    <div class="acciones-cabecera">
+
+        <h2 class="seccion-titulo">
+            Acceso principal
+        </h2>
+
+        <span class="seccion-ayuda">
+            Selecciona Mesas para comenzar
+        </span>
+
+    </div>
+
+
+
+    <section class="acciones">
+
+
+        <!-- =================================================
+             ÚNICO ACCESO FUNCIONAL
+        ================================================== -->
+
+        <a
+            href="{{ url_for('mozo_mesas') }}"
+            class="accion"
+        >
+
+            <div class="accion-icon">
+                ▦
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Mesas
+                </h3>
+
+                <p>
+
+                    Consulta las mesas disponibles,
+                    ocupadas o libres. Selecciona una mesa
+                    para registrar el pedido y gestionar
+                    el consumo del cliente.
+
+                </p>
+
+            </div>
+
+
+            <span class="flecha">
+                →
+            </span>
+
+        </a>
+
+
+    </section>
+
+
+</main>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

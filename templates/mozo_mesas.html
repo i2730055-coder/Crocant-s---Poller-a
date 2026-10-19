@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mesas | Crocant's</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        :root {
+
+            --naranja: #f47b20;
+            --naranja-claro: #ff9a3c;
+            --naranja-hover: #ff7a00;
+
+            --negro: #090909;
+            --negro-2: #111111;
+            --negro-3: #171717;
+
+            --blanco: #ffffff;
+            --texto: #f5f5f5;
+
+            --gris: #b9b9b9;
+            --gris-2: #858585;
+
+            --verde: #22c878;
+            --verde-bg: rgba(34,200,120,.14);
+
+            --rojo: #ff5a4f;
+            --rojo-bg: rgba(255,90,79,.15);
+
+            --amarillo: #f4b83f;
+            --amarillo-bg: rgba(244,184,63,.15);
+        }
+
+
+        /* =====================================================
+           CUERPO
+        ===================================================== */
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: var(--texto);
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,.94) 0%,
+                    rgba(0,0,0,.80) 38%,
+                    rgba(0,0,0,.55) 70%,
+                    rgba(0,0,0,.78) 100%
+                ),
+
+                linear-gradient(
+                    180deg,
+                    rgba(0,0,0,.20),
+                    rgba(0,0,0,.88)
+                ),
+
+                url("{{ url_for('static', filename='img/fondo-polleria.jpg') }}");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-attachment: fixed;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           CAPA OSCURA
+        ===================================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(244,123,32,.18),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 10% 90%,
+                    rgba(244,123,32,.08),
+                    transparent 30%
+                );
+
+            z-index: 0;
+        }
+
+
+        /* =====================================================
+           CONTENIDO
+        ===================================================== */
+
+        .contenido {
+
+            position: relative;
+
+            z-index: 1;
+
+            min-height: 100vh;
+
+            padding:
+                42px 55px 60px;
+        }
+
+
+        /* =====================================================
+           CABECERA
+        ===================================================== */
+
+        .cabecera {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 30px;
+
+            margin-bottom: 38px;
+        }
+
+
+        /* =====================================================
+           TITULO
+        ===================================================== */
+
+        .titulo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+        }
+
+
+        .titulo-icon {
+
+            width: 62px;
+
+            height: 62px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(244,123,32,.55);
+
+            border-radius: 16px;
+
+            background:
+                rgba(10,10,10,.78);
+
+            color:
+                var(--naranja);
+
+            box-shadow:
+                0 0 30px
+                rgba(244,123,32,.10);
+
+            backdrop-filter:
+                blur(8px);
+        }
+
+
+        .titulo-icon svg {
+
+            width: 35px;
+
+            height: 35px;
+        }
+
+
+        .titulo h1 {
+
+            margin: 0;
+
+            font-size: 39px;
+
+            line-height: 1;
+
+            font-weight: 900;
+
+            letter-spacing: -1.7px;
+
+            color: #ffffff;
+        }
+
+
+        .titulo h1 span {
+
+            color:
+                var(--naranja);
+        }
+
+
+        .titulo p {
+
+            margin:
+                10px 0 0;
+
+            color:
+                #c2c2c2;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           BOTÓN VOLVER
+        ===================================================== */
+
+        .btn-volver {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            padding:
+                12px 19px;
+
+            color:
+                #ffffff;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            border:
+                1px solid
+                rgba(244,123,32,.75);
+
+            border-radius: 12px;
+
+            background:
+                rgba(0,0,0,.60);
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.30);
+
+            backdrop-filter:
+                blur(8px);
+
+            transition:
+                .25s ease;
+        }
+
+
+        .btn-volver:hover {
+
+            background:
+                var(--naranja);
+
+            border-color:
+                var(--naranja);
+
+            color:
+                #ffffff;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 30px
+                rgba(244,123,32,.30);
+        }
+
+
+        .btn-volver svg {
+
+            width: 17px;
+
+            height: 17px;
+        }
+
+
+        /* =====================================================
+           SECCIÓN
+        ===================================================== */
+
+        .resumen {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .resumen-linea {
+
+            width: 44px;
+
+            height: 3px;
+
+            border-radius: 20px;
+
+            background:
+                var(--naranja);
+
+            box-shadow:
+                0 0 12px
+                rgba(244,123,32,.50);
+        }
+
+
+        .resumen-titulo {
+
+            color:
+                #ffffff;
+
+            font-size: 17px;
+
+            font-weight: 900;
+        }
+
+
+        .resumen-info {
+
+            margin-left: auto;
+
+            color:
+                #aaaaaa;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           GRID DE MESAS
+        ===================================================== */
+
+        .mesas {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, minmax(180px, 1fr));
+
+            gap: 18px;
+        }
+
+
+        /* =====================================================
+           TARJETA DE MESA
+        ===================================================== */
+
+        .mesa {
+
+            position: relative;
+
+            min-height: 235px;
+
+            padding: 17px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            text-decoration: none;
+
+            color: #ffffff;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                rgba(255,255,255,.15);
+
+            border-radius: 17px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(37,37,37,.96),
+                    rgba(15,15,15,.96)
+                );
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,.40);
+
+            backdrop-filter:
+                blur(8px);
+
+            transition:
+                transform .28s ease,
+                border-color .28s ease,
+                box-shadow .28s ease,
+                background .28s ease;
+        }
+
+
+        /* =====================================================
+           BORDE DECORATIVO
+        ===================================================== */
+
+        .mesa::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            bottom: 0;
+
+            width: 100%;
+
+            height: 3px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(244,123,32,.75),
+                    transparent
+                );
+
+            opacity: .55;
+        }
+
+
+        /* =====================================================
+           BRILLO
+        ===================================================== */
+
+        .mesa::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 160px;
+
+            height: 160px;
+
+            right: -80px;
+
+            top: -80px;
+
+            border-radius: 50%;
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(244,123,32,.20),
+                    transparent 68%
+                );
+
+            transition:
+                .35s ease;
+        }
+
+
+        .mesa:hover {
+
+            transform:
+                translateY(-7px);
+
+            border-color:
+                rgba(244,123,32,.70);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(45,45,45,.98),
+                    rgba(18,18,18,.98)
+                );
+
+            box-shadow:
+
+                0 22px 45px
+                rgba(0,0,0,.55),
+
+                0 0 25px
+                rgba(244,123,32,.10);
+        }
+
+
+        .mesa:hover::before {
+
+            transform:
+                scale(1.35);
+        }
+
+
+        /* =====================================================
+           PARTE SUPERIOR
+        ===================================================== */
+
+        .mesa-top {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            display: flex;
+
+            justify-content: flex-end;
+        }
+
+
+        /* =====================================================
+           ESTADOS
+        ===================================================== */
+
+        .estado {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                6px 10px;
+
+            border-radius: 30px;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+        }
+
+
+        .estado-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+        }
+
+
+        .libre {
+
+            color:
+                #48dc8d;
+
+            background:
+                var(--verde-bg);
+        }
+
+
+        .libre .estado-dot {
+
+            background:
+                #27d87c;
+
+            box-shadow:
+
+                0 0 0 3px
+                rgba(39,216,124,.10),
+
+                0 0 10px
+                rgba(39,216,124,.50);
+        }
+
+
+        .ocupada {
+
+            color:
+                #ff7167;
+
+            background:
+                var(--rojo-bg);
+        }
+
+
+        .ocupada .estado-dot {
+
+            background:
+                #ff574c;
+
+            box-shadow:
+
+                0 0 0 3px
+                rgba(255,87,76,.10),
+
+                0 0 10px
+                rgba(255,87,76,.50);
+        }
+
+
+        .reservada {
+
+            color:
+                #ffc858;
+
+            background:
+                var(--amarillo-bg);
+        }
+
+
+        .reservada .estado-dot {
+
+            background:
+                #f3b52e;
+
+            box-shadow:
+
+                0 0 0 3px
+                rgba(243,181,46,.10),
+
+                0 0 10px
+                rgba(243,181,46,.50);
+        }
+
+
+        /* =====================================================
+           VISUAL DE MESA
+           AHORA USA LA IMAGEN REAL
+        ===================================================== */
+
+        .mesa-visual {
+
+            position: relative;
+
+            width: 150px;
+
+            height: 100px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-top: 2px;
+
+            z-index: 2;
+        }
+
+
+        .mesa-imagen {
+
+            width: 145px;
+
+            height: 95px;
+
+            object-fit: contain;
+
+            display: block;
+
+            user-select: none;
+
+            -webkit-user-drag: none;
+
+            filter:
+                drop-shadow(
+                    0 10px 8px
+                    rgba(0,0,0,.55)
+                );
+
+            transition:
+
+                transform .30s ease,
+
+                filter .30s ease;
+        }
+
+
+        .mesa:hover .mesa-imagen {
+
+            transform:
+                scale(1.08)
+                translateY(-3px);
+
+            filter:
+
+                drop-shadow(
+                    0 14px 12px
+                    rgba(0,0,0,.65)
+                )
+
+                drop-shadow(
+                    0 0 10px
+                    rgba(244,123,32,.18)
+                );
+        }
+
+
+        /* =====================================================
+           INFORMACIÓN
+        ===================================================== */
+
+        .mesa-info {
+
+            position: relative;
+
+            z-index: 2;
+
+            text-align: center;
+
+            margin-top: -2px;
+        }
+
+
+        .mesa h2 {
+
+            margin: 0;
+
+            color:
+                #ffffff;
+
+            font-size: 20px;
+
+            font-weight: 900;
+
+            letter-spacing: -.4px;
+        }
+
+
+        .mesa-numero {
+
+            color:
+                var(--naranja);
+        }
+
+
+        .mesa-descripcion {
+
+            margin-top: 5px;
+
+            color:
+                #a9a9a9;
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           BOTÓN SELECCIONAR
+        ===================================================== */
+
+        .seleccionar {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            padding:
+                10px 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            border:
+                1px solid
+                rgba(244,123,32,.45);
+
+            border-radius: 10px;
+
+            color:
+                #ffffff;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #f47b20,
+                    #ff8b22
+                );
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            box-shadow:
+
+                0 6px 16px
+                rgba(244,123,32,.18);
+
+            transition:
+                .25s ease;
+        }
+
+
+        .mesa:hover .seleccionar {
+
+            background:
+                var(--naranja-hover);
+
+            box-shadow:
+
+                0 8px 22px
+                rgba(244,123,32,.35);
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .seleccionar svg {
+
+            width: 15px;
+
+            height: 15px;
+
+            transition:
+                .25s ease;
+        }
+
+
+        .mesa:hover .seleccionar svg {
+
+            transform:
+                translateX(4px);
+        }
+
+
+        /* =====================================================
+           MESA OCUPADA
+        ===================================================== */
+
+        .mesa.ocupada-card {
+
+            border-color:
+                rgba(255,90,79,.35);
+        }
+
+
+        .mesa.ocupada-card::after {
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,90,79,.75),
+                    transparent
+                );
+        }
+
+
+        .mesa.ocupada-card:hover {
+
+            border-color:
+                rgba(255,90,79,.70);
+
+            box-shadow:
+
+                0 22px 45px
+                rgba(0,0,0,.55),
+
+                0 0 22px
+                rgba(255,90,79,.08);
+        }
+
+
+        /* =====================================================
+           SIN MESAS
+        ===================================================== */
+
+        .sin-mesas {
+
+            grid-column:
+                1 / -1;
+
+            padding:
+                70px 30px;
+
+            text-align:
+                center;
+
+            background:
+                rgba(15,15,15,.92);
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            border-radius:
+                18px;
+
+            box-shadow:
+
+                0 15px 40px
+                rgba(0,0,0,.40);
+        }
+
+
+        .sin-mesas-icon {
+
+            width: 75px;
+
+            height: 75px;
+
+            margin:
+                0 auto 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius:
+                18px;
+
+            background:
+                rgba(244,123,32,.12);
+
+            border:
+                1px solid
+                rgba(244,123,32,.35);
+
+            color:
+                var(--naranja);
+        }
+
+
+        .sin-mesas-icon svg {
+
+            width: 38px;
+
+            height: 38px;
+        }
+
+
+        .sin-mesas h2 {
+
+            margin:
+                0 0 8px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                22px;
+        }
+
+
+        .sin-mesas p {
+
+            margin: 0;
+
+            color:
+                #999999;
+
+            font-size:
+                14px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1250px) {
+
+            .mesas {
+
+                grid-template-columns:
+                    repeat(4, minmax(180px, 1fr));
+            }
+        }
+
+
+        @media (max-width: 1000px) {
+
+            .contenido {
+
+                padding:
+                    30px;
+            }
+
+            .mesas {
+
+                grid-template-columns:
+                    repeat(3, minmax(180px, 1fr));
+            }
+        }
+
+
+        @media (max-width: 750px) {
+
+            .contenido {
+
+                padding:
+                    25px 20px;
+            }
+
+
+            .cabecera {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+
+
+            .btn-volver {
+
+                width: 100%;
+            }
+
+
+            .mesas {
+
+                grid-template-columns:
+                    repeat(2, minmax(150px, 1fr));
+            }
+
+
+            .resumen-info {
+
+                display: none;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+
+            .titulo {
+
+                align-items:
+                    flex-start;
+            }
+
+
+            .titulo-icon {
+
+                width: 52px;
+
+                height: 52px;
+            }
+
+
+            .titulo h1 {
+
+                font-size:
+                    30px;
+            }
+
+
+            .mesas {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .mesa {
+
+                min-height:
+                    230px;
+            }
+
+
+            .mesa-imagen {
+
+                width: 140px;
+
+                height: 90px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="contenido">
+
+
+    <!-- =====================================================
+         CABECERA
+    ===================================================== -->
+
+    <div class="cabecera">
+
+
+        <div class="titulo">
+
+
+            <!-- ICONO PRINCIPAL -->
+
+            <div class="titulo-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <ellipse
+                        cx="12"
+                        cy="10"
+                        rx="8"
+                        ry="4"
+                    />
+
+                    <path d="M7 11.5v7"/>
+
+                    <path d="M17 11.5v7"/>
+
+                    <circle
+                        cx="12"
+                        cy="10"
+                        r="2.3"
+                    />
+
+                </svg>
+
+            </div>
+
+
+            <div>
+
+                <h1>
+
+                    Gestión de
+
+                    <span>
+                        Mesas
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Selecciona una mesa para consultar
+                    su estado y registrar el pedido.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             VOLVER AL PANEL
+        ================================================== -->
+
+        <a
+            href="{{ url_for('panel_mozo') }}"
+            class="btn-volver"
+        >
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+
+                <path d="M19 12H5"/>
+
+                <path d="M12 19l-7-7 7-7"/>
+
+            </svg>
+
+            Volver al panel
+
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         RESUMEN
+    ===================================================== -->
+
+    <div class="resumen">
+
+        <span class="resumen-linea"></span>
+
+        <span class="resumen-titulo">
+
+            Mesas disponibles
+
+        </span>
+
+        <span class="resumen-info">
+
+            Selecciona una mesa para continuar
+
+        </span>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MESAS
+    ===================================================== -->
+
+    <div class="mesas">
+
+
+        {% if mesas %}
+
+
+            {% for mesa in mesas %}
+
+
+                {% set estado =
+                    mesa.estado|lower
+                    if mesa.estado
+                    else 'libre'
+                %}
+
+
+                <a
+                    href="{{ url_for('mozo_mesa', mesa_id=mesa.id) }}"
+                    class="mesa
+                    {% if estado == 'ocupada' %}
+                        ocupada-card
+                    {% endif %}"
+                >
+
+
+                    <!-- =================================================
+                         ESTADO
+                    ================================================= -->
+
+                    <div class="mesa-top">
+
+
+                        {% if estado == 'ocupada' %}
+
+                            <span class="estado ocupada">
+
+                                <span class="estado-dot"></span>
+
+                                Ocupada
+
+                            </span>
+
+
+                        {% elif estado == 'reservada' %}
+
+                            <span class="estado reservada">
+
+                                <span class="estado-dot"></span>
+
+                                Reservada
+
+                            </span>
+
+
+                        {% else %}
+
+                            <span class="estado libre">
+
+                                <span class="estado-dot"></span>
+
+                                Libre
+
+                            </span>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         IMAGEN DE LA MESA
+                    ================================================= -->
+
+                    <div class="mesa-visual">
+
+                        <img
+                            src="{{ url_for('static', filename='img/mesa-icono.png') }}"
+                            alt="Mesa {{ mesa.numero }}"
+                            class="mesa-imagen"
+                        >
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         INFORMACIÓN
+                    ================================================= -->
+
+                    <div class="mesa-info">
+
+
+                        <h2>
+
+                            Mesa
+
+                            <span class="mesa-numero">
+
+                                {{ mesa.numero }}
+
+                            </span>
+
+                        </h2>
+
+
+                        <div class="mesa-descripcion">
+
+
+                            {% if estado == 'ocupada' %}
+
+                                Mesa con consumo activo
+
+
+                            {% elif estado == 'reservada' %}
+
+                                Mesa reservada
+
+
+                            {% else %}
+
+                                Disponible para atención
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         BOTÓN
+                    ================================================= -->
+
+                    <div class="seleccionar">
+
+                        Seleccionar mesa
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+
+                            <path d="M5 12h14"/>
+
+                            <path d="M13 6l6 6-6 6"/>
+
+                        </svg>
+
+                    </div>
+
+
+                </a>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <!-- =================================================
+                 SIN MESAS
+            ================================================== -->
+
+            <div class="sin-mesas">
+
+
+                <div class="sin-mesas-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+
+                        <ellipse
+                            cx="12"
+                            cy="10"
+                            rx="8"
+                            ry="4"
+                        />
+
+                        <path d="M7 11.5v7"/>
+
+                        <path d="M17 11.5v7"/>
+
+                        <circle
+                            cx="12"
+                            cy="10"
+                            r="2.3"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h2>
+
+                    No hay mesas registradas
+
+                </h2>
+
+
+                <p>
+
+                    No se encontraron mesas
+                    disponibles en la base de datos.
+
+                </p>
+
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</main>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>
