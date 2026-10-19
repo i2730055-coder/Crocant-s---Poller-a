@@ -1,0 +1,2599 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Método de pago | Crocant's</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Fuente -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS general -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <!-- =====================================================
+         CULQI CHECKOUT
+    ====================================================== -->
+    <script src="https://js.culqi.com/checkout-js"></script>
+
+    <style>
+
+        /* =====================================================
+           VARIABLES CROCANT'S
+        ====================================================== */
+
+        :root {
+            --negro: #111111;
+            --blanco: #ffffff;
+
+            --gris-texto: #666666;
+            --gris-suave: #f7f7f5;
+            --gris-input: #fafafa;
+
+            --naranja: #f58220;
+            --naranja-hover: #ff9638;
+
+            --borde: #e5e5e0;
+
+            --navbar: #1c1713;
+
+            --verde: #17845b;
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--gris-suave);
+            color: var(--negro);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        .navbar-crocants {
+            position: relative;
+            width: 100%;
+            padding: 15px 0;
+            background: var(--navbar);
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .navbar-crocants::after {
+            content: "";
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 2px;
+
+            background: var(--naranja);
+        }
+
+
+        /* =====================================================
+           CONTENEDOR NAVBAR
+        ====================================================== */
+
+        .nav-contenedor {
+            width: min(1200px, 92%);
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        /* =====================================================
+           MARCA
+        ====================================================== */
+
+        .marca-crocants {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .logo-navbar {
+            width: 45px;
+            height: 45px;
+
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .marca-crocants strong {
+            display: block;
+
+            color: #ffffff;
+
+            font-size: 19px;
+            font-weight: 800;
+
+            letter-spacing: -0.4px;
+        }
+
+        .marca-crocants span {
+            display: block;
+
+            margin-top: 2px;
+
+            color: rgba(255,255,255,0.55);
+
+            font-size: 9px;
+            font-weight: 500;
+
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           BOTÓN VOLVER
+        ====================================================== */
+
+        .btn-volver-navbar {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            min-height: 40px;
+
+            padding: 0 16px;
+
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+
+            background: rgba(255,255,255,0.05);
+
+            color: #ffffff;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            transition: all .2s ease;
+        }
+
+        .btn-volver-navbar i {
+            color: var(--naranja);
+            font-size: 15px;
+        }
+
+        .btn-volver-navbar:hover {
+            color: #ffffff;
+
+            background: rgba(245,130,32,0.10);
+            border-color: rgba(245,130,32,0.40);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           CONTENIDO
+        ====================================================== */
+
+        .pago-wrapper {
+            width: min(1050px, 92%);
+
+            margin: 0 auto;
+
+            padding: 50px 0 70px;
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ====================================================== */
+
+        .pago-header {
+            text-align: center;
+
+            max-width: 680px;
+
+            margin: 0 auto 35px;
+        }
+
+        .pago-etiqueta {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom: 10px;
+
+            color: var(--naranja);
+
+            font-size: 10px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+        }
+
+        .pago-etiqueta i {
+            font-size: 13px;
+        }
+
+        .pago-header h1 {
+            margin: 0;
+
+            color: var(--negro);
+
+            font-size: clamp(30px, 4vw, 42px);
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+
+            line-height: 1.15;
+        }
+
+        .pago-header p {
+            max-width: 590px;
+
+            margin: 12px auto 0;
+
+            color: var(--gris-texto);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           GRID
+        ====================================================== */
+
+        .pago-grid {
+            display: grid;
+
+            grid-template-columns: minmax(0, 1fr) 320px;
+
+            gap: 22px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           TARJETAS
+        ====================================================== */
+
+        .pago-card {
+            background: var(--blanco);
+
+            border: 1px solid var(--borde);
+
+            border-radius: 15px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.05);
+        }
+
+
+        /* =====================================================
+           CABECERA TARJETA
+        ====================================================== */
+
+        .pago-card-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            margin-bottom: 24px;
+        }
+
+        .icono-header {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #fff3e8;
+
+            color: var(--naranja);
+
+            font-size: 19px;
+        }
+
+        .pago-card-header h2 {
+            margin: 0;
+
+            color: var(--negro);
+
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+        .pago-card-header p {
+            margin: 3px 0 0;
+
+            color: #888888;
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           LABELS
+        ====================================================== */
+
+        .form-label-crocants {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #333333;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+        }
+
+
+        /* =====================================================
+           INPUTS
+        ====================================================== */
+
+        .form-control-crocants {
+            width: 100%;
+
+            min-height: 46px;
+
+            padding: 0 13px;
+
+            border: 1px solid #deded9;
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            color: #333333;
+
+            font-family: 'Montserrat', sans-serif;
+
+            font-size: 12px;
+
+            outline: none;
+
+            transition: all .2s ease;
+        }
+
+        .form-control-crocants::placeholder {
+            color: #aaaaaa;
+        }
+
+        .form-control-crocants:hover {
+            border-color: #cccccc;
+        }
+
+        .form-control-crocants:focus {
+            border-color: var(--naranja);
+
+            box-shadow:
+                0 0 0 3px rgba(245,130,32,0.10);
+
+            background: #ffffff;
+        }
+
+        select.form-control-crocants {
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           MÉTODO PRINCIPAL
+        ====================================================== */
+
+        .metodo-principal {
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================================
+           CAJAS DE PAGO
+        ====================================================== */
+
+        .payment-box {
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 20px;
+
+            border: 1px solid #e7e7e2;
+
+            border-radius: 11px;
+
+            background: #fafaf8;
+
+            animation: aparecer .2s ease;
+        }
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .payment-box h3 {
+            margin-bottom: 7px;
+
+            color: var(--negro);
+
+            font-size: 14px;
+
+            font-weight: 800;
+        }
+
+        .payment-box > p {
+            margin-bottom: 18px;
+
+            color: #777777;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           EFECTIVO / CONTRA ENTREGA
+        ====================================================== */
+
+        .efectivo-mensaje {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 18px;
+
+            padding: 15px;
+
+            border-radius: 9px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e5e0;
+        }
+
+        .efectivo-mensaje i {
+            color: var(--verde);
+
+            font-size: 21px;
+        }
+
+        .efectivo-mensaje span {
+            color: #555555;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           VUELTO
+        ====================================================== */
+
+        .vuelto-box {
+            display: none;
+
+            margin-top: 14px;
+
+            padding: 14px 16px;
+
+            border-radius: 9px;
+
+            background: #f0faf5;
+
+            border: 1px solid #ccebdd;
+        }
+
+        .vuelto-label {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: #555555;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+        }
+
+        .vuelto-valor {
+            color: var(--verde);
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+        .error-efectivo {
+            display: none;
+
+            margin-top: 8px;
+
+            color: #c62828;
+
+            font-size: 9px;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           CULQI
+        ====================================================== */
+
+        .culqi-info {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            margin-bottom: 18px;
+
+            border-radius: 9px;
+
+            background: #fff8f1;
+
+            border: 1px solid #f5d7bd;
+        }
+
+        .culqi-info i {
+            color: var(--naranja);
+
+            font-size: 23px;
+        }
+
+        .culqi-info strong {
+            display: block;
+
+            color: var(--negro);
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+        .culqi-info span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #777777;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+        }
+
+        .culqi-boton {
+            width: 100%;
+
+            min-height: 46px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: var(--naranja);
+
+            color: #ffffff;
+
+            font-family: 'Montserrat', sans-serif;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+            cursor: pointer;
+
+            transition: all .2s ease;
+        }
+
+        .culqi-boton:hover {
+            background: var(--naranja-hover);
+
+            transform: translateY(-1px);
+        }
+
+        .culqi-boton:disabled {
+            opacity: .65;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* =====================================================
+           MENSAJE CULQI
+        ====================================================== */
+
+        .culqi-mensaje {
+            display: none;
+
+            margin-top: 12px;
+
+            padding: 11px 13px;
+
+            border-radius: 8px;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+        }
+
+        .culqi-mensaje.error {
+            display: block;
+
+            background: #fff0f0;
+
+            border: 1px solid #f0caca;
+
+            color: #b42318;
+        }
+
+        .culqi-mensaje.exito {
+            display: block;
+
+            background: #f0faf5;
+
+            border: 1px solid #ccebdd;
+
+            color: var(--verde);
+        }
+
+
+        /* =====================================================
+           RESUMEN
+        ====================================================== */
+
+        .resumen-card {
+            position: sticky;
+
+            top: 20px;
+        }
+
+        .resumen-titulo {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 20px;
+
+            color: var(--negro);
+
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+        .resumen-titulo i {
+            color: var(--naranja);
+
+            font-size: 19px;
+        }
+
+
+        /* =====================================================
+           PRODUCTOS
+        ====================================================== */
+
+        .resumen-productos {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+            margin-bottom: 18px;
+        }
+
+        .producto-resumen {
+            display: flex;
+
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding-bottom: 12px;
+
+            border-bottom: 1px solid #eeeeea;
+        }
+
+        .producto-resumen:last-child {
+            border-bottom: none;
+
+            padding-bottom: 0;
+        }
+
+        .producto-nombre {
+            color: #444444;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            line-height: 1.5;
+        }
+
+        .producto-detalle {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #999999;
+
+            font-size: 8px;
+
+            font-weight: 500;
+        }
+
+        .producto-precio {
+            color: var(--negro);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           TOTAL
+        ====================================================== */
+
+        .resumen-total {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            margin-top: 18px;
+
+            padding-top: 16px;
+
+            border-top: 1px solid #deded9;
+        }
+
+        .resumen-total span:first-child {
+            color: #555555;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+        .resumen-total span:last-child {
+            color: var(--naranja);
+
+            font-size: 21px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           BOTÓN CONFIRMAR
+        ====================================================== */
+
+        .btn-confirmar {
+            width: 100%;
+
+            min-height: 48px;
+
+            margin-top: 22px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: var(--naranja);
+
+            color: #ffffff;
+
+            font-family: 'Montserrat', sans-serif;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .6px;
+
+            cursor: pointer;
+
+            transition: all .2s ease;
+        }
+
+        .btn-confirmar:hover {
+            background: var(--naranja-hover);
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 7px 18px rgba(245,130,32,0.22);
+        }
+
+
+        /* =====================================================
+           SEGURIDAD
+        ====================================================== */
+
+        .seguridad {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-top: 13px;
+
+            color: #888888;
+
+            font-size: 8px;
+
+            text-align: center;
+        }
+
+        .seguridad i {
+            color: var(--verde);
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           VOLVER AL CARRITO
+        ====================================================== */
+
+        .volver-carrito {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 7px;
+
+            width: 100%;
+
+            min-height: 43px;
+
+            margin-top: 11px;
+
+            border: 1px solid #deded9;
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            color: #333333;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+            transition: all .2s ease;
+        }
+
+        .volver-carrito:hover {
+            border-color: var(--naranja);
+
+            color: var(--naranja);
+
+            background: #fffaf5;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 850px) {
+
+            .pago-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .resumen-card {
+                position: static;
+
+                order: -1;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar-crocants {
+                padding: 13px 0;
+            }
+
+            .logo-navbar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .marca-crocants strong {
+                font-size: 17px;
+            }
+
+            .marca-crocants span {
+                display: none;
+            }
+
+            .btn-volver-navbar {
+                padding: 0 11px;
+
+                font-size: 0;
+            }
+
+            .btn-volver-navbar i {
+                font-size: 16px;
+            }
+
+            .pago-wrapper {
+                width: 94%;
+
+                padding: 35px 0 50px;
+            }
+
+            .pago-header {
+                margin-bottom: 25px;
+            }
+
+            .pago-header h1 {
+                letter-spacing: -1px;
+            }
+
+            .pago-header p {
+                font-size: 11px;
+            }
+
+            .pago-card {
+                padding: 19px;
+
+                border-radius: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================== -->
+
+<header class="navbar-crocants">
+
+    <div class="nav-contenedor">
+
+        <a href="/carta" class="marca-crocants">
+
+            <img
+                src="{{ url_for('static', filename='img/logo-crocants.png') }}"
+                alt="Crocant's"
+                class="logo-navbar"
+            >
+
+            <div>
+
+                <strong>Crocant's</strong>
+
+                <span>
+                    POLLERÍA & RESTAURANTE
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="/carrito"
+            class="btn-volver-navbar"
+        >
+
+            <i class="bi bi-arrow-left"></i>
+
+            Volver al carrito
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     CONTENIDO
+========================================================== -->
+
+<main class="pago-wrapper">
+
+
+    <!-- ENCABEZADO -->
+
+    <section class="pago-header">
+
+        <div class="pago-etiqueta">
+
+            <i class="bi bi-credit-card"></i>
+
+            FINALIZAR COMPRA
+
+        </div>
+
+        <h1>
+            Método de pago
+        </h1>
+
+        <p>
+            Selecciona tu método de pago y completa
+            los datos necesarios para confirmar tu pedido.
+        </p>
+
+    </section>
+
+
+    <!-- GRID -->
+
+    <div class="pago-grid">
+
+
+        <!-- =================================================
+             MÉTODO DE PAGO
+        ================================================== -->
+
+        <section class="pago-card">
+
+            <div class="pago-card-header">
+
+                <div class="icono-header">
+
+                    <i class="bi bi-wallet2"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        Selecciona tu método
+                    </h2>
+
+                    <p>
+                        Elige cómo deseas realizar el pago.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                action="/finalizar_pedido"
+                method="POST"
+                id="formPago"
+            >
+
+
+                <!-- =================================================
+                     MÉTODO
+                ================================================== -->
+
+                <div class="metodo-principal">
+
+                    <label
+                        for="metodo"
+                        class="form-label-crocants"
+                    >
+                        Método de pago
+                    </label>
+
+                    <select
+                        name="metodo"
+                        id="metodo"
+                        class="form-control-crocants"
+                        required
+                    >
+
+                        <option
+                            value=""
+                            selected
+                            disabled
+                        >
+                            Selecciona un método de pago
+                        </option>
+
+                        <option value="Contra entrega">
+                            💵 Pago contra entrega
+                        </option>
+
+                        <option value="Culqi">
+                            💳 Pasarela de pago Culqi
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- =================================================
+                     PAGO CONTRA ENTREGA
+                ================================================== -->
+
+                <div
+                    id="efectivoBox"
+                    class="payment-box"
+                >
+
+                    <h3>
+                        Pago contra entrega
+                    </h3>
+
+                    <p>
+                        Pagarás en efectivo cuando recibas tu pedido.
+                        Indica con cuánto pagarás para que podamos
+                        preparar tu vuelto.
+                    </p>
+
+
+                    <div class="efectivo-mensaje">
+
+                        <i class="bi bi-cash-stack"></i>
+
+                        <span>
+                            El repartidor llevará el vuelto correspondiente
+                            según el monto que indiques.
+                        </span>
+
+                    </div>
+
+
+                    <label
+                        for="monto_efectivo"
+                        class="form-label-crocants"
+                    >
+                        ¿Con cuánto pagarás?
+                    </label>
+
+                    <input
+                        type="number"
+                        id="monto_efectivo"
+                        name="monto_efectivo"
+                        class="form-control-crocants"
+                        placeholder="Ejemplo: 50.00"
+                        min="0"
+                        step="0.01"
+                        inputmode="decimal"
+                    >
+
+
+                    <div
+                        id="vueltoBox"
+                        class="vuelto-box"
+                    >
+
+                        <span class="vuelto-label">
+                            Vuelto a entregar
+                        </span>
+
+                        <span
+                            id="vueltoValor"
+                            class="vuelto-valor"
+                        >
+                            S/ 0.00
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="errorEfectivo"
+                        class="error-efectivo"
+                    >
+                        El monto ingresado debe ser igual o mayor
+                        al total de la compra.
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     CULQI
+                ================================================== -->
+
+                <div
+                    id="culqiBox"
+                    class="payment-box"
+                >
+
+                    <h3>
+                        Pasarela de pago Culqi
+                    </h3>
+
+                    <p>
+                        Realiza tu pago de forma segura mediante
+                        la pasarela de pago de Culqi.
+                    </p>
+
+
+                    <div class="culqi-info">
+
+                        <i class="bi bi-shield-lock"></i>
+
+                        <div>
+
+                            <strong>
+                                Pago seguro
+                            </strong>
+
+                            <span>
+                                Tus datos de pago serán procesados
+                                de forma segura por Culqi.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         CAMPOS OCULTOS CULQI
+                    ================================================== -->
+
+                    <input
+                        type="hidden"
+                        name="culqi_token"
+                        id="culqi_token"
+                        value=""
+                    >
+
+                    <input
+                        type="hidden"
+                        name="culqi_order_id"
+                        id="culqi_order_id"
+                        value=""
+                    >
+
+                    <input
+                        type="hidden"
+                        name="culqi_payment_id"
+                        id="culqi_payment_id"
+                        value=""
+                    >
+
+                    <input
+                        type="hidden"
+                        name="culqi_metodo"
+                        id="culqi_metodo"
+                        value=""
+                    >
+
+
+                    <button
+                        type="button"
+                        id="btnCulqi"
+                        class="culqi-boton"
+                    >
+
+                        <i class="bi bi-credit-card"></i>
+
+                        Pagar con Culqi
+
+                    </button>
+
+
+                    <div
+                        id="culqiMensaje"
+                        class="culqi-mensaje"
+                    ></div>
+
+                </div>
+
+
+                <!-- =================================================
+                     BOTÓN CONFIRMAR
+                ================================================== -->
+
+                <button
+                    type="submit"
+                    class="btn-confirmar"
+                    id="btnConfirmar"
+                >
+
+                    <i class="bi bi-check2-circle"></i>
+
+                    Confirmar pedido
+
+                </button>
+
+
+                <div class="seguridad">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    Información protegida y procesada de forma segura.
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- =================================================
+             RESUMEN
+        ================================================== -->
+
+        <aside class="pago-card resumen-card">
+
+            <h2 class="resumen-titulo">
+
+                <i class="bi bi-bag-check"></i>
+
+                Resumen de compra
+
+            </h2>
+
+
+            <div class="resumen-productos">
+
+                {% if carrito %}
+
+                    {% for producto in carrito %}
+
+                    <div class="producto-resumen">
+
+                        <div class="producto-nombre">
+
+                            {{ producto.nombre }}
+
+                            <span class="producto-detalle">
+
+                                Cantidad:
+                                {{ producto.cantidad|default(1) }}
+
+                                {% if producto.precio is defined %}
+
+                                    · S/
+                                    {{ "%.2f"|format(producto.precio|float) }}
+
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="producto-precio">
+
+                            S/
+
+                            {% if producto.subtotal is defined %}
+
+                                {{ "%.2f"|format(producto.subtotal|float) }}
+
+                            {% elif producto.precio is defined %}
+
+                                {% set cantidad = producto.cantidad|default(1)|int %}
+
+                                {{ "%.2f"|format(
+                                    (producto.precio|float) * cantidad
+                                ) }}
+
+                            {% else %}
+
+                                0.00
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="producto-resumen">
+
+                        <div class="producto-nombre">
+                            No hay productos en el pedido
+                        </div>
+
+                        <div class="producto-precio">
+                            S/ 0.00
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =================================================
+                 TOTAL
+            ================================================== -->
+
+            <div class="resumen-total">
+
+                <span>
+                    Total a pagar
+                </span>
+
+                <span id="totalPago">
+
+                    S/
+
+                    {% if total is defined and total is not none %}
+
+                        {{ "%.2f"|format(total|float) }}
+
+                    {% elif pedido is defined
+                          and pedido.total is defined
+                          and pedido.total is not none %}
+
+                        {{ "%.2f"|format(pedido.total|float) }}
+
+                    {% else %}
+
+                        {% set ns = namespace(total=0) %}
+
+                        {% if carrito %}
+
+                            {% for producto in carrito %}
+
+                                {% if producto.subtotal is defined %}
+
+                                    {% set ns.total =
+                                        ns.total + (producto.subtotal|float) %}
+
+                                {% elif producto.precio is defined %}
+
+                                    {% set cantidad =
+                                        producto.cantidad|default(1)|int %}
+
+                                    {% set ns.total =
+                                        ns.total +
+                                        ((producto.precio|float) * cantidad) %}
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        {% endif %}
+
+                        {{ "%.2f"|format(ns.total) }}
+
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 VOLVER
+            ================================================== -->
+
+            <a
+                href="/carrito"
+                class="volver-carrito"
+            >
+
+                <i class="bi bi-arrow-left"></i>
+
+                Volver al carrito
+
+            </a>
+
+        </aside>
+
+    </div>
+
+</main>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+<script>
+
+    /* =====================================================
+       ELEMENTOS
+    ====================================================== */
+
+    const metodo =
+        document.getElementById("metodo");
+
+    const efectivoBox =
+        document.getElementById("efectivoBox");
+
+    const culqiBox =
+        document.getElementById("culqiBox");
+
+    const montoEfectivo =
+        document.getElementById("monto_efectivo");
+
+    const vueltoBox =
+        document.getElementById("vueltoBox");
+
+    const vueltoValor =
+        document.getElementById("vueltoValor");
+
+    const errorEfectivo =
+        document.getElementById("errorEfectivo");
+
+    const formPago =
+        document.getElementById("formPago");
+
+    const btnCulqi =
+        document.getElementById("btnCulqi");
+
+    const btnConfirmar =
+        document.getElementById("btnConfirmar");
+
+    const culqiToken =
+        document.getElementById("culqi_token");
+
+    const culqiOrderId =
+        document.getElementById("culqi_order_id");
+
+    const culqiPaymentId =
+        document.getElementById("culqi_payment_id");
+
+    const culqiMetodo =
+        document.getElementById("culqi_metodo");
+
+    const culqiMensaje =
+        document.getElementById("culqiMensaje");
+
+
+    /* =====================================================
+       LLAVE PÚBLICA CULQI
+
+       IMPORTANTE:
+       Solamente se utiliza la llave pública.
+       La Secret Key permanece en Flask/.env.
+    ====================================================== */
+
+    const CULQI_PUBLIC_KEY =
+        "{{ culqi_public_key }}";
+
+
+    /* =====================================================
+       OBTENER TOTAL
+    ====================================================== */
+
+    function obtenerTotal() {
+
+        const elemento =
+            document.getElementById("totalPago");
+
+        if (!elemento) {
+            return 0;
+        }
+
+        const texto =
+            elemento.textContent
+                .replace("S/", "")
+                .replace(",", "")
+                .trim();
+
+        const total =
+            parseFloat(texto);
+
+        return isNaN(total) ? 0 : total;
+    }
+
+
+    /* =====================================================
+       MENSAJE CULQI
+    ====================================================== */
+
+    function mostrarMensajeCulqi(
+        mensaje,
+        tipo
+    ) {
+
+        culqiMensaje.textContent =
+            mensaje;
+
+        culqiMensaje.className =
+            "culqi-mensaje " + tipo;
+
+    }
+
+
+    /* =====================================================
+       CAMBIO DE MÉTODO
+    ====================================================== */
+
+    metodo.addEventListener(
+        "change",
+        function () {
+
+            efectivoBox.style.display =
+                "none";
+
+            culqiBox.style.display =
+                "none";
+
+            montoEfectivo.required =
+                false;
+
+            /*
+             * Si el usuario cambia de método, eliminamos cualquier
+             * token/método Culqi anterior para evitar reutilizar
+             * accidentalmente un pago aprobado.
+             */
+            if (this.value !== "Culqi") {
+
+                culqiToken.value = "";
+                culqiOrderId.value = "";
+                culqiPaymentId.value = "";
+                culqiMetodo.value = "";
+
+                culqiMensaje.className =
+                    "culqi-mensaje";
+
+                culqiMensaje.textContent = "";
+
+                btnConfirmar.disabled = false;
+
+            }
+
+
+            /* CONTRA ENTREGA */
+
+            if (
+                this.value ===
+                "Contra entrega"
+            ) {
+
+                efectivoBox.style.display =
+                    "block";
+
+                montoEfectivo.required =
+                    true;
+
+            }
+
+
+            /* CULQI */
+
+            else if (
+                this.value ===
+                "Culqi"
+            ) {
+
+                culqiBox.style.display =
+                    "block";
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CALCULAR VUELTO
+    ====================================================== */
+
+    montoEfectivo.addEventListener(
+        "input",
+        function () {
+
+            const total =
+                obtenerTotal();
+
+            const monto =
+                parseFloat(
+                    this.value
+                );
+
+            errorEfectivo.style.display =
+                "none";
+
+            vueltoBox.style.display =
+                "none";
+
+
+            if (
+                isNaN(monto) ||
+                monto <= 0
+            ) {
+
+                return;
+
+            }
+
+
+            const vuelto =
+                monto - total;
+
+
+            if (vuelto < 0) {
+
+                errorEfectivo.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            vueltoValor.textContent =
+                "S/ " +
+                vuelto.toFixed(2);
+
+            vueltoBox.style.display =
+                "block";
+
+        }
+    );
+
+
+    /* =====================================================
+       VARIABLE CHECKOUT CULQI
+    ====================================================== */
+
+    let culqiCheckout =
+        null;
+
+
+    /* =====================================================
+       ABRIR CULQI
+    ====================================================== */
+
+    function abrirCulqi() {
+
+        const total =
+            obtenerTotal();
+
+
+        if (total <= 0) {
+
+            mostrarMensajeCulqi(
+                "El total de la compra no es válido.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !CULQI_PUBLIC_KEY ||
+            CULQI_PUBLIC_KEY ===
+            "None"
+        ) {
+
+            mostrarMensajeCulqi(
+                "No se encontró la llave pública de Culqi.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Convertimos soles a céntimos.
+         *
+         * Ejemplo:
+         * S/ 25.50 = 2550
+         */
+
+        const montoCentimos =
+            Math.round(
+                total * 100
+            );
+
+        /*
+         * Cada intento de pago empieza limpio.
+         */
+        culqiToken.value = "";
+        culqiOrderId.value = "";
+        culqiPaymentId.value = "";
+        culqiMetodo.value = "";
+
+        btnConfirmar.disabled = false;
+
+
+        try {
+
+            const settings = {
+
+                title:
+                    "Crocant's",
+
+                currency:
+                    "PEN",
+
+                amount:
+                    montoCentimos
+
+            };
+
+
+            const client = {
+
+                email:
+                    "{{ session.get('usuario_email', '') }}"
+
+            };
+
+
+            const options = {
+
+                lang:
+                    "auto",
+
+                installments:
+                    true,
+
+                modal:
+                    true
+
+            };
+
+
+            const appearance = {
+
+                theme:
+                    "default",
+
+                buttonCardPayText:
+                    "Pagar",
+
+                defaultStyle: {
+
+                    bannerColor:
+                        "#1c1713",
+
+                    buttonBackground:
+                        "#f58220",
+
+                    menuColor:
+                        "#f58220",
+
+                    linksColor:
+                        "#f58220",
+
+                    buttonTextColor:
+                        "#ffffff",
+
+                    priceColor:
+                        "#f58220"
+
+                }
+
+            };
+
+
+            culqiCheckout =
+                new CulqiCheckout(
+                    CULQI_PUBLIC_KEY,
+                    {
+                        settings:
+                            settings,
+
+                        client:
+                            client,
+
+                        options:
+                            options,
+
+                        appearance:
+                            appearance
+                    }
+                );
+
+
+            /*
+             * CALLBACK DE CULQI
+             */
+
+            culqiCheckout.culqi =
+                function () {
+
+                    recibirRespuestaCulqi();
+
+                };
+
+
+            /*
+             * ABRIR CHECKOUT
+             */
+
+            culqiCheckout.open();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Error iniciando Culqi:",
+                error
+            );
+
+            mostrarMensajeCulqi(
+                "No se pudo abrir la pasarela de Culqi.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       RESPUESTA DE CULQI
+    ====================================================== */
+
+    function recibirRespuestaCulqi() {
+
+        console.log(
+            "Respuesta recibida de Culqi:",
+            culqiCheckout
+        );
+
+        /* =================================================
+           TOKEN
+        ================================================== */
+
+        if (
+            culqiCheckout &&
+            culqiCheckout.token
+        ) {
+
+            const token =
+                culqiCheckout.token;
+
+            console.log(
+                "Token generado:",
+                token.id
+            );
+
+            /*
+             * Culqi:
+             *
+             * ype_... = Yape
+             * tkn_... = Tarjeta
+             *
+             * No usamos token.type porque el token de Yape
+             * puede venir con type = "card".
+             */
+
+            const tokenId =
+                String(token.id || "").trim();
+
+            let metodoReal = "";
+
+            if (
+                tokenId.startsWith("ype_")
+            ) {
+
+                metodoReal = "Yape";
+
+            }
+
+            else if (
+                tokenId.startsWith("tkn_")
+            ) {
+
+                metodoReal = "Tarjeta";
+
+            }
+
+            if (!metodoReal) {
+
+                console.error(
+                    "No se pudo determinar el método Culqi:",
+                    token
+                );
+
+                mostrarMensajeCulqi(
+                    "No se pudo identificar si el pago fue realizado con Yape o Tarjeta.",
+                    "error"
+                );
+
+                return;
+            }
+
+            console.log(
+                "Método Culqi detectado:",
+                metodoReal
+            );
+
+            culqiMetodo.value =
+                metodoReal;
+
+            culqiToken.value =
+                token.id;
+
+            if (
+                culqiCheckout.close
+            ) {
+
+                culqiCheckout.close();
+
+            }
+
+            procesarPagoCulqi(
+                token.id
+            );
+
+            return;
+        }
+
+        /* =================================================
+           ORDEN
+        ================================================== */
+
+        if (
+            culqiCheckout &&
+            culqiCheckout.order
+        ) {
+
+            const order =
+                culqiCheckout.order;
+
+            console.log(
+                "Orden Culqi:",
+                order
+            );
+
+            if (
+                order.id
+            ) {
+
+                culqiOrderId.value =
+                    order.id;
+
+            }
+
+            if (
+                culqiCheckout.close
+            ) {
+
+                culqiCheckout.close();
+
+            }
+
+            mostrarMensajeCulqi(
+                "La orden de pago fue generada correctamente.",
+                "exito"
+            );
+
+            return;
+        }
+
+        /* =================================================
+           ERROR
+        ================================================== */
+
+        if (
+            culqiCheckout &&
+            culqiCheckout.error
+        ) {
+
+            console.error(
+                "Error Culqi:",
+                culqiCheckout.error
+            );
+
+            mostrarMensajeCulqi(
+                culqiCheckout.error.user_message ||
+                "No se pudo procesar el pago.",
+                "error"
+            );
+
+            return;
+        }
+
+        console.log(
+            "Culqi finalizó sin token."
+        );
+    }
+
+
+    /* =====================================================
+       ENVIAR TOKEN AL BACKEND
+    ====================================================== */
+
+    async function procesarPagoCulqi(
+        token
+    ) {
+
+        try {
+
+            btnCulqi.disabled =
+                true;
+
+            btnCulqi.innerHTML =
+                '<i class="bi bi-hourglass-split"></i> ' +
+                'PROCESANDO...';
+
+
+            mostrarMensajeCulqi(
+                "Estamos verificando tu pago...",
+                "exito"
+            );
+
+
+            const respuesta =
+                await fetch(
+                    "/culqi/procesar-pago",
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                token_id:
+                                    token,
+
+                                monto:
+                                    obtenerTotal(),
+
+                                metodo_culqi:
+                                    culqiMetodo.value
+
+                            })
+
+                    }
+                );
+
+
+            /*
+             * Intentar leer la respuesta JSON.
+             */
+
+            let datos = {};
+
+            try {
+
+                datos =
+                    await respuesta.json();
+
+            }
+
+            catch (jsonError) {
+
+                throw new Error(
+                    "El servidor no devolvió una respuesta válida."
+                );
+
+            }
+
+
+            console.log(
+                "Respuesta del servidor:",
+                datos
+            );
+
+
+            /* =================================================
+               PAGO RECHAZADO
+            ================================================== */
+
+            if (
+                !respuesta.ok ||
+                !datos.ok
+            ) {
+
+                throw new Error(
+                    datos.mensaje ||
+                    "Culqi rechazó el pago."
+                );
+
+            }
+
+
+            /* =================================================
+               GUARDAR ID DEL CARGO
+            ================================================== */
+
+            if (
+                datos.charge_id
+            ) {
+
+                culqiPaymentId.value =
+                    datos.charge_id;
+
+            }
+
+            /*
+             * Flask identifica el método real:
+             *
+             * Yape
+             * Tarjeta
+             *
+             * Usamos esa respuesta como valor definitivo.
+             */
+            if (
+                datos.metodo_pago === "Yape"
+                || datos.metodo_pago === "Tarjeta"
+            ) {
+
+                culqiMetodo.value =
+                    datos.metodo_pago;
+
+            }
+
+
+            /* =================================================
+               GUARDAR ORDEN SI EXISTE
+            ================================================== */
+
+            if (
+                datos.order_id
+            ) {
+
+                culqiOrderId.value =
+                    datos.order_id;
+
+            }
+
+
+            /* =================================================
+               TOKEN APROBADO
+            ================================================== */
+
+            culqiToken.value =
+                token;
+
+            /*
+             * El método debe quedar guardado como:
+             *
+             * Yape
+             * o
+             * Tarjeta
+             */
+            if (
+                culqiMetodo.value !== "Yape"
+                && culqiMetodo.value !== "Tarjeta"
+            ) {
+
+                throw new Error(
+                    "No se pudo identificar el método de pago Culqi."
+                );
+
+            }
+
+
+            mostrarMensajeCulqi(
+                "Pago aprobado correctamente. Confirmando pedido...",
+                "exito"
+            );
+
+
+            /*
+             * Deshabilitamos el botón de confirmar
+             * para evitar doble envío.
+             */
+
+            btnConfirmar.disabled =
+                true;
+
+
+            /*
+             * Enviamos el formulario.
+             *
+             * Esto ejecutará:
+             *
+             * /finalizar_pedido
+             */
+
+            setTimeout(
+                function () {
+
+                    formPago.submit();
+
+                },
+                500
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Error procesando pago:",
+                error
+            );
+
+
+            mostrarMensajeCulqi(
+                error.message ||
+                "No se pudo procesar el pago.",
+                "error"
+            );
+
+
+            btnCulqi.disabled =
+                false;
+
+            btnCulqi.innerHTML =
+                '<i class="bi bi-credit-card"></i> ' +
+                'Pagar con Culqi';
+
+        }
+
+    }
+
+
+    /* =====================================================
+       BOTÓN CULQI
+    ====================================================== */
+
+    btnCulqi.addEventListener(
+        "click",
+        function () {
+
+            abrirCulqi();
+
+        }
+    );
+
+
+    /* =====================================================
+       VALIDACIÓN DEL FORMULARIO
+    ====================================================== */
+
+    formPago.addEventListener(
+        "submit",
+        function (event) {
+
+            const metodoSeleccionado =
+                metodo.value;
+
+            const total =
+                obtenerTotal();
+
+
+            /* =================================================
+               CONTRA ENTREGA
+            ================================================== */
+
+            if (
+                metodoSeleccionado ===
+                "Contra entrega"
+            ) {
+
+                const monto =
+                    parseFloat(
+                        montoEfectivo.value
+                    );
+
+
+                if (
+                    isNaN(monto) ||
+                    monto <= 0
+                ) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Ingresa con cuánto pagarás."
+                    );
+
+                    montoEfectivo.focus();
+
+                    return;
+
+                }
+
+
+                if (
+                    monto < total
+                ) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "El monto que pagarás debe " +
+                        "ser igual o mayor al total."
+                    );
+
+                    montoEfectivo.focus();
+
+                    return;
+
+                }
+
+            }
+
+
+            /* =================================================
+               CULQI
+            ================================================== */
+
+            if (
+                metodoSeleccionado ===
+                "Culqi"
+            ) {
+
+                if (
+                    !culqiToken.value
+                ) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Primero debes completar " +
+                        "el pago mediante Culqi."
+                    );
+
+                    return;
+
+                }
+
+                if (
+                    culqiMetodo.value !== "Yape"
+                    && culqiMetodo.value !== "Tarjeta"
+                ) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "No se pudo identificar si pagaste con Yape o Tarjeta."
+                    );
+
+                    return;
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       ESTADO INICIAL
+    ====================================================== */
+
+    efectivoBox.style.display =
+        "none";
+
+    culqiBox.style.display =
+        "none";
+
+</script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

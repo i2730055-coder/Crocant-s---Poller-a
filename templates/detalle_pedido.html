@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalle del pedido | Crocant's</title>
+
+    <!-- BOOTSTRAP -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- BOOTSTRAP ICONS -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- FUENTE -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           VARIABLES CROCANT'S
+        ====================================================== */
+
+        :root {
+            --negro: #111111;
+            --negro-navbar: #1c1713;
+
+            --blanco: #ffffff;
+
+            --gris: #6b7280;
+            --gris-claro: #f7f7f5;
+
+            --borde: #e5e5e0;
+
+            --naranja: #f58220;
+            --naranja-hover: #ff9638;
+
+            --verde: #17845b;
+            --rojo: #c0392b;
+            --amarillo: #d68910;
+        }
+
+
+        /* =====================================================
+           GENERAL
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background: var(--gris-claro);
+
+            color: var(--negro);
+
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        .navbar-crocants {
+
+            width: 100%;
+
+            background: var(--negro-navbar);
+
+            padding: 16px 0;
+
+            border-bottom: 2px solid var(--naranja);
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.18);
+        }
+
+
+        .nav-contenedor {
+
+            width: min(1200px, 92%);
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ====================================================== */
+
+        .marca-crocants {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .logo-navbar {
+
+            width: 45px;
+
+            height: 45px;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+        }
+
+
+        .marca-crocants strong {
+
+            display: block;
+
+            color: #ffffff;
+
+            font-size: 19px;
+
+            font-weight: 800;
+        }
+
+
+        .marca-crocants span {
+
+            display: block;
+
+            color: rgba(255,255,255,0.55);
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           BOTÓN VOLVER
+        ====================================================== */
+
+        .btn-volver-nav {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 10px 17px;
+
+            border: 1px solid rgba(255,255,255,0.15);
+
+            border-radius: 9px;
+
+            background: rgba(255,255,255,0.06);
+
+            color: #ffffff;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            transition: .25s ease;
+        }
+
+
+        .btn-volver-nav:hover {
+
+            background: var(--naranja);
+
+            border-color: var(--naranja);
+
+            color: #ffffff;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           CONTENEDOR PRINCIPAL
+        ====================================================== */
+
+        .pedido-wrapper {
+
+            width: min(1050px, 92%);
+
+            margin: 0 auto;
+
+            padding: 55px 0 80px;
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ====================================================== */
+
+        .pedido-header {
+
+            margin-bottom: 30px;
+        }
+
+
+        .pedido-etiqueta {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: var(--naranja);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+
+        .pedido-header h1 {
+
+            margin: 0;
+
+            color: var(--negro);
+
+            font-size: clamp(30px, 5vw, 42px);
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+        }
+
+
+        .pedido-header p {
+
+            margin-top: 10px;
+
+            color: var(--gris);
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           TARJETA PRINCIPAL
+        ====================================================== */
+
+        .pedido-card {
+
+            background: #ffffff;
+
+            border: 1px solid var(--borde);
+
+            border-radius: 18px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.07);
+        }
+
+
+        /* =====================================================
+           RESUMEN SUPERIOR
+        ====================================================== */
+
+        .resumen-superior {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding-bottom: 25px;
+
+            margin-bottom: 28px;
+
+            border-bottom: 1px solid var(--borde);
+        }
+
+
+        .numero-pedido {
+
+            color: var(--negro);
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .numero-pedido span {
+
+            color: var(--naranja);
+        }
+
+
+        /* =====================================================
+           ESTADO
+        ====================================================== */
+
+        .estado {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 8px 13px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        .estado-recibido {
+
+            background: #f1f1ee;
+
+            color: #666666;
+
+            border: 1px solid #ddddda;
+        }
+
+
+        .estado-pagado {
+
+            background: #e8f7f0;
+
+            color: var(--verde);
+
+            border: 1px solid #bce5d2;
+        }
+
+
+        .estado-preparando {
+
+            background: #fff4d6;
+
+            color: #9a6700;
+
+            border: 1px solid #f2d48a;
+        }
+
+
+        .estado-listo {
+
+            background: #fff0e3;
+
+            color: var(--naranja);
+
+            border: 1px solid #f3c79f;
+        }
+
+
+        .estado-delivery {
+
+            background: #eaf2ff;
+
+            color: #2864b7;
+
+            border: 1px solid #c5d9f5;
+        }
+
+
+        .estado-entregado {
+
+            background: #e8f7f0;
+
+            color: var(--verde);
+
+            border: 1px solid #bce5d2;
+        }
+
+
+        .estado-default {
+
+            background: #f1f1ee;
+
+            color: #666666;
+
+            border: 1px solid #ddddda;
+        }
+
+
+        /* =====================================================
+           SECCIONES
+        ====================================================== */
+
+        .seccion {
+
+            margin-bottom: 30px;
+        }
+
+
+        .seccion-titulo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin-bottom: 17px;
+
+            color: var(--negro);
+
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+
+        .seccion-titulo i {
+
+            color: var(--naranja);
+
+            font-size: 19px;
+        }
+
+
+        /* =====================================================
+           DATOS DEL CLIENTE
+        ====================================================== */
+
+        .datos-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 12px;
+        }
+
+
+        .dato {
+
+            padding: 16px;
+
+            background: #faf9f6;
+
+            border: 1px solid #eeeeea;
+
+            border-radius: 11px;
+        }
+
+
+        .dato-label {
+
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #888888;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+        }
+
+
+        .dato-valor {
+
+            color: #333333;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            word-break: break-word;
+        }
+
+
+        .dato-valor i {
+
+            color: var(--naranja);
+
+            margin-right: 5px;
+        }
+
+
+        /* =====================================================
+           TABLA DE PRODUCTOS
+        ====================================================== */
+
+        .tabla-wrapper {
+
+            overflow-x: auto;
+
+            border: 1px solid #e8e8e3;
+
+            border-radius: 12px;
+        }
+
+
+        .tabla-productos {
+
+            width: 100%;
+
+            margin: 0;
+
+            border-collapse: separate;
+
+            border-spacing: 0;
+        }
+
+
+        .tabla-productos thead th {
+
+            padding: 15px;
+
+            background: #faf9f6;
+
+            color: #555555;
+
+            border-bottom: 1px solid #e5e5e0;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .6px;
+        }
+
+
+        .tabla-productos tbody td {
+
+            padding: 17px 15px;
+
+            background: #ffffff;
+
+            color: #444444;
+
+            border-bottom: 1px solid #eeeeea;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .tabla-productos tbody tr:last-child td {
+
+            border-bottom: none;
+        }
+
+
+        .tabla-productos tbody tr:hover td {
+
+            background: #fffaf5;
+        }
+
+
+        .producto-nombre {
+
+            color: #222222;
+
+            font-weight: 700;
+        }
+
+
+        .producto-icono {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 34px;
+
+            height: 34px;
+
+            margin-right: 8px;
+
+            border-radius: 8px;
+
+            background: #fff3e8;
+
+            color: var(--naranja);
+        }
+
+
+        .precio {
+
+            color: #333333;
+
+            font-weight: 700;
+        }
+
+
+        .cantidad {
+
+            color: var(--gris);
+
+            font-weight: 600;
+        }
+
+
+        .importe {
+
+            color: var(--naranja);
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           RESUMEN DE COMPRA
+        ====================================================== */
+
+        .resumen-compra {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            margin-left: auto;
+
+            margin-top: 25px;
+
+            padding: 22px;
+
+            background: #faf9f6;
+
+            border: 1px solid #e7e7e2;
+
+            border-radius: 13px;
+        }
+
+
+        .fila-resumen {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 8px 0;
+
+            color: #666666;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .fila-resumen strong {
+
+            color: #333333;
+        }
+
+
+        .fila-delivery strong {
+
+            color: var(--verde);
+        }
+
+
+        .linea-resumen {
+
+            height: 1px;
+
+            background: #deded9;
+
+            margin: 10px 0;
+        }
+
+
+        .fila-total {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding-top: 5px;
+        }
+
+
+        .fila-total span {
+
+            color: #222222;
+
+            font-size: 15px;
+
+            font-weight: 800;
+        }
+
+
+        .fila-total strong {
+
+            color: var(--naranja);
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           MÉTODO DE PAGO
+        ====================================================== */
+
+        .pago-box {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 17px;
+
+            background: #fffaf5;
+
+            border: 1px solid #f1dfcf;
+
+            border-radius: 12px;
+        }
+
+
+        .pago-icono {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 43px;
+
+            height: 43px;
+
+            border-radius: 10px;
+
+            background: #fff0e3;
+
+            color: var(--naranja);
+
+            font-size: 20px;
+        }
+
+
+        .pago-label {
+
+            display: block;
+
+            color: #888888;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+        }
+
+
+        .pago-valor {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: #333333;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           BOTÓN FINAL
+        ====================================================== */
+
+        .btn-mis-pedidos {
+
+            width: 100%;
+
+            min-height: 50px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-top: 10px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: var(--negro);
+
+            color: #ffffff;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing: .5px;
+
+            transition: .25s ease;
+        }
+
+
+        .btn-mis-pedidos:hover {
+
+            background: var(--naranja);
+
+            color: #ffffff;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 20px rgba(245,130,32,.25);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 700px) {
+
+            .pedido-wrapper {
+
+                width: 94%;
+
+                padding-top: 35px;
+            }
+
+
+            .pedido-card {
+
+                padding: 20px;
+            }
+
+
+            .datos-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .resumen-superior {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .resumen-compra {
+
+                max-width: 100%;
+            }
+
+
+            .marca-crocants span {
+
+                display: none;
+            }
+
+
+            .marca-crocants strong {
+
+                font-size: 17px;
+            }
+
+
+            .btn-volver-nav {
+
+                padding: 9px 11px;
+
+                font-size: 10px;
+            }
+
+
+            .btn-volver-nav span {
+
+                display: none;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================== -->
+
+<header class="navbar-crocants">
+
+    <div class="nav-contenedor">
+
+        <!-- LOGO -->
+
+        <a href="/mis_pedidos" class="marca-crocants">
+
+            <img
+                src="{{ url_for('static', filename='img/logo-crocants.png') }}"
+                alt="Crocant's"
+                class="logo-navbar"
+            >
+
+            <div>
+
+                <strong>Crocant's</strong>
+
+                <span>Pollería & Restaurante</span>
+
+            </div>
+
+        </a>
+
+
+        <!-- ÚNICA OPCIÓN DEL NAVBAR -->
+
+        <a href="/mis_pedidos" class="btn-volver-nav">
+
+            <i class="bi bi-arrow-left"></i>
+
+            <span>Volver a mis pedidos</span>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     CONTENIDO
+========================================================== -->
+
+<main class="pedido-wrapper">
+
+
+    <!-- ENCABEZADO -->
+
+    <section class="pedido-header">
+
+        <div class="pedido-etiqueta">
+
+            <i class="bi bi-receipt"></i>
+
+            RESUMEN DE COMPRA
+
+        </div>
+
+
+        <h1>
+            Detalle de tu pedido
+        </h1>
+
+
+        <p>
+            Revisa toda la información y el resumen de tu compra.
+        </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         TARJETA PRINCIPAL
+    ====================================================== -->
+
+    <section class="pedido-card">
+
+
+        <!-- RESUMEN SUPERIOR -->
+
+        <div class="resumen-superior">
+
+            <div class="numero-pedido">
+
+                Pedido
+                <span>#{{ pedido.id }}</span>
+
+            </div>
+
+
+            <!-- ESTADO -->
+
+            <div>
+
+                {% if pedido.estado == 'Recibido' %}
+
+                    <span class="estado estado-recibido">
+
+                        <i class="bi bi-receipt"></i>
+
+                        Recibido
+
+                    </span>
+
+                {% elif pedido.estado == 'Pagado' %}
+
+                    <span class="estado estado-pagado">
+
+                        <i class="bi bi-check-circle"></i>
+
+                        Pagado
+
+                    </span>
+
+                {% elif pedido.estado == 'Preparando' %}
+
+                    <span class="estado estado-preparando">
+
+                        <i class="bi bi-fire"></i>
+
+                        Preparando
+
+                    </span>
+
+                {% elif pedido.estado == 'Listo' %}
+
+                    <span class="estado estado-listo">
+
+                        <i class="bi bi-box-seam"></i>
+
+                        Listo
+
+                    </span>
+
+                {% elif pedido.estado == 'En delivery' %}
+
+                    <span class="estado estado-delivery">
+
+                        <i class="bi bi-bicycle"></i>
+
+                        En delivery
+
+                    </span>
+
+                {% elif pedido.estado == 'Entregado' %}
+
+                    <span class="estado estado-entregado">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Entregado
+
+                    </span>
+
+                {% else %}
+
+                    <span class="estado estado-default">
+
+                        <i class="bi bi-info-circle"></i>
+
+                        {{ pedido.estado }}
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DATOS DEL CLIENTE
+        ================================================== -->
+
+        <div class="seccion">
+
+            <h2 class="seccion-titulo">
+
+                <i class="bi bi-person-vcard"></i>
+
+                Información del pedido
+
+            </h2>
+
+
+            <div class="datos-grid">
+
+
+                <div class="dato">
+
+                    <span class="dato-label">
+                        Cliente
+                    </span>
+
+                    <span class="dato-valor">
+
+                        <i class="bi bi-person"></i>
+
+                        {{ pedido.cliente }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <span class="dato-label">
+                        Teléfono
+                    </span>
+
+                    <span class="dato-valor">
+
+                        <i class="bi bi-telephone"></i>
+
+                        {{ pedido.telefono }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <span class="dato-label">
+                        Dirección
+                    </span>
+
+                    <span class="dato-valor">
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        {{ pedido.direccion }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <span class="dato-label">
+                        Referencia
+                    </span>
+
+                    <span class="dato-valor">
+
+                        <i class="bi bi-pin-map"></i>
+
+                        {{ pedido.referencia or 'Sin referencia' }}
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRODUCTOS
+        ================================================== -->
+
+        <div class="seccion">
+
+            <h2 class="seccion-titulo">
+
+                <i class="bi bi-bag-check"></i>
+
+                Productos de tu compra
+
+            </h2>
+
+
+            <div class="tabla-wrapper">
+
+                <table class="tabla-productos">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Producto
+                            </th>
+
+                            <th class="text-center">
+                                Cantidad
+                            </th>
+
+                            <th class="text-end">
+                                Precio
+                            </th>
+
+                            <th class="text-end">
+                                Importe
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for d in detalles %}
+
+                        <tr>
+
+                            <td>
+
+                                <span class="producto-icono">
+
+                                    <i class="bi bi-egg-fried"></i>
+
+                                </span>
+
+                                <span class="producto-nombre">
+
+                                    {{ d.producto }}
+
+                                </span>
+
+                            </td>
+
+
+                            <td class="text-center cantidad">
+
+                                {{ d.cantidad if d.cantidad is defined else 1 }}
+
+                            </td>
+
+
+                            <td class="text-end precio">
+
+                                S/ {{ d.precio }}
+
+                            </td>
+
+
+                            <td class="text-end importe">
+
+                                S/
+                                {{
+                                    d.subtotal
+                                    if d.subtotal is defined
+                                    else d.precio
+                                }}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             RESUMEN DE COMPRA
+        ================================================== -->
+
+        <div class="seccion">
+
+            <h2 class="seccion-titulo">
+
+                <i class="bi bi-calculator"></i>
+
+                Resumen de compra
+
+            </h2>
+
+
+            <div class="resumen-compra">
+
+
+                <div class="fila-resumen">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong>
+                        S/ {{ pedido.subtotal if pedido.subtotal is defined else pedido.total }}
+                    </strong>
+
+                </div>
+
+
+                <div class="fila-resumen fila-delivery">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <strong>
+
+                        {% if pedido.delivery is defined %}
+
+                            S/ {{ pedido.delivery }}
+
+                        {% else %}
+
+                            S/ 0.00
+
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="linea-resumen"></div>
+
+
+                <div class="fila-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        S/ {{ pedido.total }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MÉTODO DE PAGO
+        ================================================== -->
+
+        <div class="seccion">
+
+            <h2 class="seccion-titulo">
+
+                <i class="bi bi-credit-card"></i>
+
+                Método de pago
+
+            </h2>
+
+
+            <div class="pago-box">
+
+                <div class="pago-icono">
+
+                    <i class="bi bi-wallet2"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span class="pago-label">
+                        Forma de pago
+                    </span>
+
+                    <span class="pago-valor">
+
+                        {{ pedido.metodo_pago }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BOTÓN
+        ================================================== -->
+
+        <a
+            href="/mis_pedidos"
+            class="btn-mis-pedidos"
+        >
+
+            <i class="bi bi-arrow-left"></i>
+
+            VOLVER A MIS PEDIDOS
+
+        </a>
+
+
+    </section>
+
+</main>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

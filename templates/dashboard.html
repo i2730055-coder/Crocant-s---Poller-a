@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Crocant's</title>
+
+    <!-- =====================================================
+         FUENTES
+    ====================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =====================================================
+         ICONOS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- =====================================================
+         CHART.JS
+    ====================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <style>
+
+        :root {
+
+            --negro: #171411;
+            --negro-2: #211b17;
+
+            --blanco: #ffffff;
+
+            --gris-texto: #68707d;
+            --gris-suave: #f5f6f8;
+            --gris-borde: #e7e9ed;
+
+            --naranja: #f58220;
+            --naranja-claro: #fff2e7;
+
+            --verde: #198754;
+            --verde-claro: #eaf7ef;
+
+            --azul: #2f80ed;
+            --azul-claro: #edf5ff;
+
+            --rojo: #c0392b;
+            --rojo-claro: #fdf0ee;
+
+            --sombra: 0 8px 30px rgba(25, 20, 15, 0.06);
+
+        }
+
+
+        * {
+
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background: #f5f6f8;
+
+            color: var(--negro);
+
+            font-family: 'Montserrat', sans-serif;
+
+        }
+
+
+        a {
+
+            text-decoration: none;
+
+        }
+
+
+        /* =====================================================
+           ESTRUCTURA GENERAL
+        ====================================================== */
+
+        .admin-layout {
+
+            display: flex;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .admin-sidebar {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            width: 260px;
+
+            background: var(--negro);
+
+            z-index: 1000;
+
+            display: flex;
+
+            flex-direction: column;
+
+            box-shadow: 8px 0 30px rgba(0,0,0,0.10);
+
+        }
+
+
+        /* =====================================================
+           LOGO
+        ====================================================== */
+
+        .admin-logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 24px 21px;
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+
+        }
+
+
+        .admin-logo img {
+
+            width: 48px;
+            height: 48px;
+
+            object-fit: contain;
+
+            border-radius: 9px;
+
+            background: #000;
+
+        }
+
+
+        .admin-logo strong {
+
+            display: block;
+
+            color: white;
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+        }
+
+
+        .admin-logo span {
+
+            display: block;
+
+            margin-top: 4px;
+
+            color: rgba(255,255,255,0.42);
+
+            font-size: 8px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        /* =====================================================
+           PERFIL
+        ====================================================== */
+
+        .admin-perfil {
+
+            margin: 20px 16px;
+
+            padding: 16px;
+
+            background: rgba(255,255,255,0.045);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            border-radius: 13px;
+
+        }
+
+
+        .admin-perfil-icono {
+
+            width: 39px;
+            height: 39px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 10px;
+
+            background: rgba(245,130,32,0.13);
+
+            color: var(--naranja);
+
+            border-radius: 10px;
+
+            font-size: 18px;
+
+        }
+
+
+        .admin-perfil small {
+
+            display: block;
+
+            color: rgba(255,255,255,0.38);
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.2px;
+
+        }
+
+
+        .admin-perfil strong {
+
+            display: block;
+
+            margin-top: 4px;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =====================================================
+           MENU
+        ====================================================== */
+
+        .admin-menu {
+
+            padding: 0 14px;
+
+            flex: 1;
+
+        }
+
+
+        .admin-menu-titulo {
+
+            padding: 4px 10px 12px;
+
+            color: rgba(255,255,255,0.30);
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+        }
+
+
+        .admin-menu a {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            margin-bottom: 5px;
+
+            border-radius: 9px;
+
+            color: rgba(255,255,255,0.58);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+
+        }
+
+
+        .admin-menu a i {
+
+            width: 20px;
+
+            color: rgba(255,255,255,0.40);
+
+            font-size: 17px;
+
+            text-align: center;
+
+        }
+
+
+        .admin-menu a:hover {
+
+            background: rgba(245,130,32,0.09);
+
+            color: white;
+
+            transform: translateX(2px);
+
+        }
+
+
+        .admin-menu a:hover i {
+
+            color: var(--naranja);
+
+        }
+
+
+        .admin-menu a.activo {
+
+            background: rgba(245,130,32,0.15);
+
+            color: white;
+
+        }
+
+
+        .admin-menu a.activo::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            top: 8px;
+
+            bottom: 8px;
+
+            width: 3px;
+
+            background: var(--naranja);
+
+            border-radius: 5px;
+
+        }
+
+
+        .admin-menu a.activo i {
+
+            color: var(--naranja);
+
+        }
+
+
+        /* =====================================================
+           CERRAR SESIÓN
+        ====================================================== */
+
+        .admin-salir {
+
+            padding: 14px;
+
+            border-top: 1px solid rgba(255,255,255,0.08);
+
+        }
+
+
+        .admin-salir a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 13px;
+
+            border-radius: 9px;
+
+            color: rgba(255,255,255,0.55);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .admin-salir a:hover {
+
+            background: rgba(192,57,43,0.12);
+
+            color: white;
+
+        }
+
+
+        .admin-salir i {
+
+            color: var(--rojo);
+
+            font-size: 17px;
+
+        }
+
+
+        /* =====================================================
+           CONTENIDO
+        ====================================================== */
+
+        .admin-content {
+
+            width: calc(100% - 260px);
+
+            margin-left: 260px;
+
+            padding: 38px 42px 60px;
+
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ====================================================== */
+
+        .admin-header {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .admin-etiqueta {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom: 9px;
+
+            color: var(--naranja);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.7px;
+
+        }
+
+
+        .admin-header h1 {
+
+            margin: 0;
+
+            font-size: 38px;
+
+            line-height: 1.1;
+
+            font-weight: 800;
+
+            letter-spacing: -1.2px;
+
+        }
+
+
+        .admin-header p {
+
+            margin-top: 8px;
+
+            color: var(--gris-texto);
+
+            font-size: 12px;
+
+        }
+
+
+        .estado-dashboard {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 9px 13px;
+
+            background: white;
+
+            border: 1px solid var(--gris-borde);
+
+            border-radius: 10px;
+
+            color: #56606c;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            box-shadow: 0 3px 12px rgba(0,0,0,0.03);
+
+            white-space: nowrap;
+
+        }
+
+
+        .estado-punto {
+
+            width: 8px;
+            height: 8px;
+
+            background: #22a06b;
+
+            border-radius: 50%;
+
+        }
+
+
+        /* =====================================================
+           KPI
+        ====================================================== */
+
+        .kpi-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 17px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .kpi-card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background: white;
+
+            border: 1px solid var(--gris-borde);
+
+            border-radius: 15px;
+
+            padding: 21px;
+
+            box-shadow: var(--sombra);
+
+        }
+
+
+        .kpi-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            right: -25px;
+
+            top: -25px;
+
+            width: 95px;
+            height: 95px;
+
+            background: var(--naranja-claro);
+
+            border-radius: 50%;
+
+            opacity: 0.7;
+
+        }
+
+
+        .kpi-icono {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 15px;
+
+            background: var(--naranja-claro);
+
+            color: var(--naranja);
+
+            border-radius: 11px;
+
+            font-size: 19px;
+
+        }
+
+
+        .kpi-card:nth-child(2) .kpi-icono {
+
+            background: var(--azul-claro);
+
+            color: var(--azul);
+
+        }
+
+
+        .kpi-card:nth-child(3) .kpi-icono {
+
+            background: var(--verde-claro);
+
+            color: var(--verde);
+
+        }
+
+
+        .kpi-titulo {
+
+            position: relative;
+
+            z-index: 2;
+
+            color: var(--gris-texto);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+        }
+
+
+        .kpi-valor {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin-top: 7px;
+
+            color: var(--negro);
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.8px;
+
+        }
+
+
+        .kpi-descripcion {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin-top: 7px;
+
+            color: #9299a3;
+
+            font-size: 9px;
+
+            font-weight: 500;
+
+        }
+
+
+        /* =====================================================
+           TARJETAS DE GRÁFICOS
+        ====================================================== */
+
+        .graficos-principal {
+
+            display: grid;
+
+            grid-template-columns: 2fr 1fr;
+
+            gap: 18px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .grafico-card {
+
+            background: white;
+
+            border: 1px solid var(--gris-borde);
+
+            border-radius: 15px;
+
+            padding: 21px;
+
+            box-shadow: var(--sombra);
+
+        }
+
+
+        .grafico-cabecera {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .grafico-titulo h2 {
+
+            margin: 0;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            color: #171717;
+
+        }
+
+
+        .grafico-titulo p {
+
+            margin-top: 5px;
+
+            color: #8a919b;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .grafico-badge {
+
+            padding: 6px 9px;
+
+            background: var(--gris-suave);
+
+            border-radius: 7px;
+
+            color: #747c87;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+
+        }
+
+
+        .grafico-contenedor {
+
+            position: relative;
+
+            height: 285px;
+
+        }
+
+
+        /* =====================================================
+           RESUMEN DE VENTAS
+        ====================================================== */
+
+        .resumen-card {
+
+            background: white;
+
+            border: 1px solid var(--gris-borde);
+
+            border-radius: 15px;
+
+            padding: 21px;
+
+            box-shadow: var(--sombra);
+
+        }
+
+
+        .resumen-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .resumen-header h2 {
+
+            margin: 0;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+        }
+
+
+        .resumen-header span {
+
+            color: #9097a1;
+
+            font-size: 9px;
+
+        }
+
+
+        .tabla-contenedor {
+
+            overflow-x: auto;
+
+        }
+
+
+        .tabla-ventas {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+        }
+
+
+        .tabla-ventas th {
+
+            padding: 11px 12px;
+
+            background: #f8f9fa;
+
+            color: #737b86;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            text-align: left;
+
+            text-transform: uppercase;
+
+            letter-spacing: .4px;
+
+            border-bottom: 1px solid var(--gris-borde);
+
+        }
+
+
+        .tabla-ventas td {
+
+            padding: 13px 12px;
+
+            color: #343a40;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            border-bottom: 1px solid #f0f1f3;
+
+        }
+
+
+        .tabla-ventas tr:last-child td {
+
+            border-bottom: none;
+
+        }
+
+
+        .tabla-ventas tr:hover td {
+
+            background: #fafafa;
+
+        }
+
+
+        .importe {
+
+            font-weight: 800 !important;
+
+            color: var(--negro) !important;
+
+        }
+
+
+        .badge-ventas {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            padding: 5px 8px;
+
+            background: var(--naranja-claro);
+
+            color: #d9680b;
+
+            border-radius: 6px;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           VENTAS POR MES
+        ====================================================== */
+
+        .grafico-mes {
+
+            margin-top: 18px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        /* =====================================================
+           SIN DATOS
+        ====================================================== */
+
+        .sin-datos {
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            height: 100%;
+
+            color: #9299a3;
+
+            font-size: 11px;
+
+            text-align: center;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1150px) {
+
+            .graficos-principal {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 950px) {
+
+            .kpi-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .admin-sidebar {
+
+                width: 220px;
+
+            }
+
+            .admin-content {
+
+                width: calc(100% - 220px);
+
+                margin-left: 220px;
+
+                padding: 30px 25px;
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .admin-sidebar {
+
+                position: relative;
+
+                width: 100%;
+
+                height: auto;
+
+            }
+
+            .admin-layout {
+
+                display: block;
+
+            }
+
+            .admin-menu {
+
+                padding-bottom: 10px;
+
+            }
+
+            .admin-menu a {
+
+                display: inline-flex;
+
+                width: auto;
+
+                margin-right: 4px;
+
+            }
+
+            .admin-menu-titulo {
+
+                display: none;
+
+            }
+
+            .admin-salir {
+
+                display: none;
+
+            }
+
+            .admin-content {
+
+                width: 100%;
+
+                margin-left: 0;
+
+                padding: 25px 16px 40px;
+
+            }
+
+            .admin-header {
+
+                display: block;
+
+            }
+
+            .estado-dashboard {
+
+                margin-top: 15px;
+
+                display: inline-flex;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="admin-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="{{ url_for('panel_admin') }}"
+            class="admin-logo"
+        >
+
+            <img
+                src="{{ url_for('static', filename='img/logo-crocants.png') }}"
+                alt="Crocant's"
+            >
+
+            <div>
+
+                <strong>Crocant's</strong>
+
+                <span>
+                    POLLERÍA & RESTAURANTE
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- PERFIL -->
+
+        <div class="admin-perfil">
+
+            <div class="admin-perfil-icono">
+
+                <i class="bi bi-shield-lock"></i>
+
+            </div>
+
+            <small>
+                Sesión actual
+            </small>
+
+            <strong>
+                Administrador
+            </strong>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="admin-menu">
+
+            <div class="admin-menu-titulo">
+                Administración
+            </div>
+
+
+            <!-- DASHBOARD -->
+
+            <a
+                href="{{ url_for('panel_admin') }}"
+                class="activo"
+            >
+
+                <i class="bi bi-grid-1x2-fill"></i>
+
+                Dashboard
+
+            </a>
+
+
+            <!-- INVENTARIO -->
+
+            <a href="/inventario">
+
+                <i class="bi bi-box-seam"></i>
+
+                Inventario
+
+            </a>
+
+            <!-- USUARIOS -->
+             <a
+                  href="{{ url_for('admin_usuarios') }}"
+                  class="{% if request.path == '/admin_usuarios' %}activo{% endif %}"
+            > 
+               
+                <i class="bi bi-people-fill"></i>
+
+                Usuarios
+             
+            </a>
+
+
+            <!-- PEDIDOS -->
+
+            <a href="/admin_pedidos">
+
+                <i class="bi bi-bag-check"></i>
+
+                Pedidos
+
+            </a>
+
+
+            <!-- TRABAJADORES -->
+
+            <a href="/admin_trabajadores">
+
+                <i class="bi bi-people"></i>
+
+                Trabajadores
+
+            </a>
+
+
+            <!-- RESERVAS -->
+
+            <a href="/admin_reservas">
+
+                <i class="bi bi-calendar-check"></i>
+
+                Reservas
+
+            </a>
+
+        </nav>
+
+
+        <!-- CERRAR SESIÓN -->
+
+        <div class="admin-salir">
+
+            <a href="/logout">
+
+                <i class="bi bi-box-arrow-left"></i>
+
+                Cerrar sesión
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="admin-content">
+
+
+        <!-- =================================================
+             ENCABEZADO
+        ================================================== -->
+
+        <header class="admin-header">
+
+            <div>
+
+                <div class="admin-etiqueta">
+
+                    <i class="bi bi-speedometer2"></i>
+
+                    PANEL DE CONTROL
+
+                </div>
+
+
+                <h1>
+                    Dashboard
+                </h1>
+
+
+                <p>
+                    Resumen comercial y comportamiento de las ventas de Crocant's.
+                </p>
+
+            </div>
+
+
+            <div class="estado-dashboard">
+
+                <span class="estado-punto"></span>
+
+                Datos conectados a ventas
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             KPI PRINCIPALES
+        ================================================== -->
+
+        <section class="kpi-grid">
+
+
+            <!-- VENTAS TOTALES -->
+
+            <div class="kpi-card">
+
+                <div class="kpi-icono">
+
+                    <i class="bi bi-cash-stack"></i>
+
+                </div>
+
+
+                <div class="kpi-titulo">
+
+                    Ventas totales
+
+                </div>
+
+
+                <div class="kpi-valor">
+
+                    S/
+                    {{ "%.2f"|format(ventas_totales|default(0, true)) }}
+
+                </div>
+
+
+                <div class="kpi-descripcion">
+
+                    Acumulado de ventas registradas
+
+                </div>
+
+            </div>
+
+
+            <!-- CANTIDAD DE VENTAS -->
+
+            <div class="kpi-card">
+
+                <div class="kpi-icono">
+
+                    <i class="bi bi-receipt"></i>
+
+                </div>
+
+
+                <div class="kpi-titulo">
+
+                    Número de ventas
+
+                </div>
+
+
+                <div class="kpi-valor">
+
+                    {{ cantidad_ventas|default(0, true) }}
+
+                </div>
+
+
+                <div class="kpi-descripcion">
+
+                    Operaciones registradas en el sistema
+
+                </div>
+
+            </div>
+
+
+            <!-- TICKET PROMEDIO -->
+
+            <div class="kpi-card">
+
+                <div class="kpi-icono">
+
+                    <i class="bi bi-cart-check"></i>
+
+                </div>
+
+
+                <div class="kpi-titulo">
+
+                    Ticket promedio
+
+                </div>
+
+
+                <div class="kpi-valor">
+
+                    S/
+                    {{ "%.2f"|format(ticket_promedio|default(0, true)) }}
+
+                </div>
+
+
+                <div class="kpi-descripcion">
+
+                    Gasto promedio por operación
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             GRÁFICOS PRINCIPALES
+        ================================================== -->
+
+        <section class="graficos-principal">
+
+
+            <!-- =================================================
+                 VENTAS POR DÍA
+            ================================================== -->
+
+            <div class="grafico-card">
+
+                <div class="grafico-cabecera">
+
+                    <div class="grafico-titulo">
+
+                        <h2>
+                            Evolución de ventas
+                        </h2>
+
+                        <p>
+                            Permite observar cómo varía el importe vendido según la fecha.
+                        </p>
+
+                    </div>
+
+
+                    <span class="grafico-badge">
+
+                        POR DÍA
+
+                    </span>
+
+                </div>
+
+
+                <div class="grafico-contenedor">
+
+                    <canvas id="graficoVentasDia"></canvas>
+
+                    <div
+                        class="sin-datos"
+                        id="sinDatosDia"
+                    >
+                        No existen ventas registradas.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 MÉTODOS DE PAGO
+            ================================================== -->
+
+            <div class="grafico-card">
+
+                <div class="grafico-cabecera">
+
+                    <div class="grafico-titulo">
+
+                        <h2>
+                            Métodos de pago
+                        </h2>
+
+                        <p>
+                            Distribución de las operaciones según el método utilizado.
+                        </p>
+
+                    </div>
+
+
+                    <span class="grafico-badge">
+
+                        DISTRIBUCIÓN
+
+                    </span>
+
+                </div>
+
+
+                <div class="grafico-contenedor">
+
+                    <canvas id="graficoMetodosPago"></canvas>
+
+                    <div
+                        class="sin-datos"
+                        id="sinDatosPago"
+                    >
+                        No existen métodos de pago registrados.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             VENTAS POR MES
+        ================================================== -->
+
+        <section class="grafico-card grafico-mes">
+
+            <div class="grafico-cabecera">
+
+                <div class="grafico-titulo">
+
+                    <h2>
+                        Comparación mensual
+                    </h2>
+
+                    <p>
+                        Permite comparar el importe acumulado de las ventas entre meses.
+                    </p>
+
+                </div>
+
+
+                <span class="grafico-badge">
+
+                    POR MES
+
+                </span>
+
+            </div>
+
+
+            <div class="grafico-contenedor">
+
+                <canvas id="graficoVentasMes"></canvas>
+
+                <div
+                    class="sin-datos"
+                    id="sinDatosMes"
+                >
+                    No existen ventas mensuales registradas.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RESUMEN DE VENTAS
+        ================================================== -->
+
+        <section class="resumen-card">
+
+            <div class="resumen-header">
+
+                <h2>
+                    Resumen de ventas por día
+                </h2>
+
+                <span>
+                    Información obtenida de la tabla ventas
+                </span>
+
+            </div>
+
+
+            <div class="tabla-contenedor">
+
+                <table class="tabla-ventas">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Fecha
+                            </th>
+
+                            <th>
+                                Operaciones
+                            </th>
+
+                            <th>
+                                Importe vendido
+                            </th>
+
+                            <th>
+                                Estado
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="tablaResumenVentas">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     DATOS ENVIADOS DESDE FLASK
+========================================================= -->
+
+<script
+    type="application/json"
+    id="datosVentasDia"
+>{{ ventas_por_dia|default([], true)|tojson }}</script>
+
+
+<script
+    type="application/json"
+    id="datosVentasMes"
+>{{ ventas_por_mes|default([], true)|tojson }}</script>
+
+
+<script
+    type="application/json"
+    id="datosMetodosPago"
+>{{ ventas_metodo_pago|default([], true)|tojson }}</script>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /* ========================================================
+       LEER DATOS DE FLASK
+    ======================================================== */
+
+    const ventasPorDia = JSON.parse(
+        document.getElementById('datosVentasDia').textContent
+    );
+
+
+    const ventasPorMes = JSON.parse(
+        document.getElementById('datosVentasMes').textContent
+    );
+
+
+    const metodosPago = JSON.parse(
+        document.getElementById('datosMetodosPago').textContent
+    );
+
+
+    /* ========================================================
+       FORMATEAR FECHAS
+    ======================================================== */
+
+    function formatearFecha(fecha) {
+
+        if (!fecha) {
+
+            return '';
+
+        }
+
+        const partes = String(fecha).split('-');
+
+        if (partes.length !== 3) {
+
+            return fecha;
+
+        }
+
+        return partes[2] + '/' + partes[1] + '/' + partes[0];
+
+    }
+
+
+    /* ========================================================
+       FORMATEAR MESES
+    ======================================================== */
+
+    function formatearMes(mes) {
+
+        if (!mes) {
+
+            return '';
+
+        }
+
+        const partes = String(mes).split('-');
+
+        if (partes.length !== 2) {
+
+            return mes;
+
+        }
+
+        const nombres = [
+
+            'Ene',
+            'Feb',
+            'Mar',
+            'Abr',
+            'May',
+            'Jun',
+            'Jul',
+            'Ago',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dic'
+
+        ];
+
+        const numeroMes = parseInt(partes[1], 10);
+
+        const nombreMes =
+            nombres[numeroMes - 1] || partes[1];
+
+        return nombreMes + ' ' + partes[0];
+
+    }
+
+
+    /* ========================================================
+       GRÁFICO 1
+       EVOLUCIÓN DE VENTAS
+    ======================================================== */
+
+    const fechas = ventasPorDia.map(function(item) {
+
+        return formatearFecha(item.fecha);
+
+    });
+
+
+    const totalesDia = ventasPorDia.map(function(item) {
+
+        return Number(item.total || 0);
+
+    });
+
+
+    if (ventasPorDia.length > 0) {
+
+        new Chart(
+            document.getElementById('graficoVentasDia'),
+            {
+
+                type: 'line',
+
+                data: {
+
+                    labels: fechas,
+
+                    datasets: [
+
+                        {
+
+                            label: 'Ventas',
+
+                            data: totalesDia,
+
+                            borderColor: '#f58220',
+
+                            backgroundColor: 'rgba(245,130,32,0.10)',
+
+                            borderWidth: 3,
+
+                            pointRadius: 4,
+
+                            pointHoverRadius: 6,
+
+                            tension: 0.35,
+
+                            fill: true
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    interaction: {
+
+                        intersect: false,
+
+                        mode: 'index'
+
+                    },
+
+
+                    plugins: {
+
+                        legend: {
+
+                            display: false
+
+                        },
+
+
+                        tooltip: {
+
+                            callbacks: {
+
+                                label: function(context) {
+
+                                    return 'Ventas: S/ ' +
+                                        Number(context.raw).toFixed(2);
+
+                                }
+
+                            }
+
+                        }
+
+                    },
+
+
+                    scales: {
+
+                        x: {
+
+                            grid: {
+
+                                display: false
+
+                            }
+
+                        },
+
+
+                        y: {
+
+                            beginAtZero: true,
+
+                            grid: {
+
+                                color: '#eef0f2'
+
+                            },
+
+
+                            ticks: {
+
+                                callback: function(value) {
+
+                                    return 'S/ ' + value;
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        );
+
+    } else {
+
+        document.getElementById(
+            'sinDatosDia'
+        ).style.display = 'flex';
+
+    }
+
+
+    /* ========================================================
+       GRÁFICO 2
+       MÉTODOS DE PAGO
+    ======================================================== */
+
+    const nombresMetodos = metodosPago.map(function(item) {
+
+        return item.metodo_pago || 'Sin especificar';
+
+    });
+
+
+    const cantidadesMetodos = metodosPago.map(function(item) {
+
+        return Number(item.cantidad || 0);
+
+    });
+
+
+    const totalMetodos = cantidadesMetodos.reduce(
+
+        function(total, cantidad) {
+
+            return total + cantidad;
+
+        },
+
+        0
+
+    );
+
+
+    if (metodosPago.length > 0) {
+
+        new Chart(
+            document.getElementById('graficoMetodosPago'),
+            {
+
+                type: 'doughnut',
+
+                data: {
+
+                    labels: nombresMetodos,
+
+                    datasets: [
+
+                        {
+
+                            data: cantidadesMetodos,
+
+                            backgroundColor: [
+
+                                '#f58220',
+                                '#2f80ed',
+                                '#198754',
+                                '#8e44ad',
+                                '#e67e22'
+
+                            ],
+
+                            borderWidth: 3,
+
+                            borderColor: '#ffffff'
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    cutout: '65%',
+
+
+                    plugins: {
+
+                        legend: {
+
+                            position: 'bottom',
+
+                            labels: {
+
+                                padding: 15,
+
+                                usePointStyle: true,
+
+                                font: {
+
+                                    size: 10,
+
+                                    family: 'Montserrat'
+
+                                }
+
+                            }
+
+                        },
+
+
+                        tooltip: {
+
+                            callbacks: {
+
+                                label: function(context) {
+
+                                    const cantidad =
+                                        Number(context.raw || 0);
+
+                                    const porcentaje =
+                                        totalMetodos > 0
+                                            ? (
+                                                cantidad /
+                                                totalMetodos
+                                            ) * 100
+                                            : 0;
+
+                                    return (
+                                        ' ' +
+                                        context.label +
+                                        ': ' +
+                                        cantidad +
+                                        ' ventas (' +
+                                        porcentaje.toFixed(1) +
+                                        '%)'
+                                    );
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        );
+
+    } else {
+
+        document.getElementById(
+            'sinDatosPago'
+        ).style.display = 'flex';
+
+    }
+
+
+    /* ========================================================
+       GRÁFICO 3
+       VENTAS POR MES
+    ======================================================== */
+
+    const meses = ventasPorMes.map(function(item) {
+
+        return formatearMes(item.mes);
+
+    });
+
+
+    const totalesMes = ventasPorMes.map(function(item) {
+
+        return Number(item.total || 0);
+
+    });
+
+
+    if (ventasPorMes.length > 0) {
+
+        new Chart(
+            document.getElementById('graficoVentasMes'),
+            {
+
+                type: 'bar',
+
+                data: {
+
+                    labels: meses,
+
+                    datasets: [
+
+                        {
+
+                            label: 'Ventas mensuales',
+
+                            data: totalesMes,
+
+                            backgroundColor: '#f58220',
+
+                            borderRadius: 7,
+
+                            maxBarThickness: 70
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+
+                    plugins: {
+
+                        legend: {
+
+                            display: false
+
+                        },
+
+
+                        tooltip: {
+
+                            callbacks: {
+
+                                label: function(context) {
+
+                                    return 'Ventas: S/ ' +
+                                        Number(context.raw).toFixed(2);
+
+                                }
+
+                            }
+
+                        }
+
+                    },
+
+
+                    scales: {
+
+                        x: {
+
+                            grid: {
+
+                                display: false
+
+                            }
+
+                        },
+
+
+                        y: {
+
+                            beginAtZero: true,
+
+                            grid: {
+
+                                color: '#eef0f2'
+
+                            },
+
+
+                            ticks: {
+
+                                callback: function(value) {
+
+                                    return 'S/ ' + value;
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        );
+
+    } else {
+
+        document.getElementById(
+            'sinDatosMes'
+        ).style.display = 'flex';
+
+    }
+
+
+    /* ========================================================
+       TABLA DE RESUMEN
+    ======================================================== */
+
+    const tabla = document.getElementById(
+        'tablaResumenVentas'
+    );
+
+
+    if (ventasPorDia.length > 0) {
+
+        ventasPorDia.forEach(function(item) {
+
+            const fila = document.createElement('tr');
+
+            const fecha = formatearFecha(
+                item.fecha
+            );
+
+            const total = Number(
+                item.total || 0
+            );
+
+
+            fila.innerHTML = `
+
+                <td>
+                    ${fecha}
+                </td>
+
+                <td>
+                    <span class="badge-ventas">
+                        Registradas
+                    </span>
+                </td>
+
+                <td class="importe">
+                    S/ ${total.toFixed(2)}
+                </td>
+
+                <td>
+                    <span style="color:#198754;">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Confirmado
+                    </span>
+                </td>
+
+            `;
+
+
+            tabla.appendChild(fila);
+
+        });
+
+    } else {
+
+        tabla.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    style="
+                        text-align:center;
+                        color:#9299a3;
+                        padding:25px;
+                    "
+                >
+
+                    No existen ventas registradas.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+</script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nuevo trabajador | Crocant's</title>
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff 0%,
+                    #faf9f8 55%,
+                    #f7f2ed 100%
+                );
+
+            color: #202020;
+        }
+
+
+        /* =====================================================
+           LAYOUT
+        ===================================================== */
+
+        .layout {
+
+            min-height: 100vh;
+
+            display: flex;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+           MISMO ESTILO DEL PANEL POLLERO
+        ===================================================== */
+
+        .sidebar {
+
+            width: 300px;
+
+            min-height: 100vh;
+
+            background: #ffffff;
+
+            border-right:
+                1px solid #e7e2de;
+
+            padding:
+                38px 22px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo {
+
+            text-align: center;
+
+            padding-bottom: 30px;
+
+            border-bottom:
+                1px solid #e8e3df;
+        }
+
+
+        .logo-icon {
+
+            width: 72px;
+
+            height: 72px;
+
+            margin:
+                0 auto 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 34px;
+
+            background:
+                #fff1e7;
+
+            border:
+                1px solid #ffd0b0;
+
+            border-radius: 20px;
+        }
+
+
+        .logo h2 {
+
+            color: #f87519;
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+        }
+
+
+        .logo p {
+
+            margin-top: 8px;
+
+            color: #747b8b;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           INFORMACIÓN
+        ===================================================== */
+
+        .info-box {
+
+            margin-top: 25px;
+
+            padding: 20px;
+
+            background:
+                #fffaf6;
+
+            border:
+                1px solid #f0e4da;
+
+            border-radius: 18px;
+        }
+
+
+        .info-title {
+
+            color: #8a817b;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .info-text {
+
+            color: #252525;
+
+            font-size: 15px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           MENÚ LATERAL
+        ===================================================== */
+
+        .menu {
+
+            margin-top: 28px;
+        }
+
+
+        .menu-title {
+
+            padding:
+                0 14px 12px;
+
+            color: #8b8580;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+
+        .menu-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            width: 100%;
+
+            padding:
+                15px 16px;
+
+            margin-bottom: 8px;
+
+            border-radius: 15px;
+
+            color: #687080;
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            transition:
+                background .2s,
+                color .2s,
+                transform .2s;
+        }
+
+
+        .menu-item:hover {
+
+            background: #fff4eb;
+
+            color: #f87519;
+
+            transform:
+                translateX(2px);
+        }
+
+
+        .menu-icon {
+
+            width: 38px;
+
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #fff4eb;
+
+            font-size: 19px;
+        }
+
+
+        .menu-item.active {
+
+            background:
+                #fff0e5;
+
+            color:
+                #f87519;
+
+            border:
+                1px solid #ffd2b4;
+        }
+
+
+        /* =====================================================
+           CERRAR SESIÓN
+        ===================================================== */
+
+        .logout {
+
+            margin-top: auto;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid #e8e3df;
+        }
+
+
+        .logout a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            color: #777e8c;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            padding:
+                12px 14px;
+
+            border-radius: 12px;
+
+            transition: .2s;
+        }
+
+
+        .logout a:hover {
+
+            color: #f87519;
+
+            background: #fff5ef;
+        }
+
+
+        /* =====================================================
+           CONTENIDO
+        ===================================================== */
+
+        .contenido {
+
+            flex: 1;
+
+            min-width: 0;
+
+            padding:
+                48px 55px;
+
+            overflow-y: auto;
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ===================================================== */
+
+        .top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .titulo h1 {
+
+            font-size: 42px;
+
+            line-height: 1.1;
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+
+            color: #1d1d1d;
+        }
+
+
+        .titulo h1 span {
+
+            color: #f87519;
+        }
+
+
+        .titulo p {
+
+            margin-top: 10px;
+
+            color: #7b8291;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           TARJETA DE USUARIO
+        ===================================================== */
+
+        .usuario {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding:
+                12px 18px;
+
+            background: #ffffff;
+
+            border:
+                1px solid #e5e1dd;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(40, 30, 20, 0.05);
+        }
+
+
+        .usuario-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #fff1e7;
+
+            border:
+                1px solid #ffd1b1;
+
+            border-radius: 14px;
+
+            font-size: 23px;
+        }
+
+
+        .usuario strong {
+
+            display: block;
+
+            color: #222;
+
+            font-size: 15px;
+        }
+
+
+        .usuario small {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: #7d8492;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           TARJETA DEL FORMULARIO
+        ===================================================== */
+
+        .form-card {
+
+            max-width: 850px;
+
+            margin: 0 auto;
+
+            background: #ffffff;
+
+            border:
+                1px solid #e4dfdb;
+
+            border-radius: 24px;
+
+            padding:
+                38px 42px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(35, 25, 15, 0.07);
+        }
+
+
+        /* =====================================================
+           ENCABEZADO FORMULARIO
+        ===================================================== */
+
+        .form-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin-bottom: 32px;
+
+            padding-bottom: 25px;
+
+            border-bottom:
+                1px solid #eee9e5;
+        }
+
+
+        .form-icon {
+
+            width: 62px;
+
+            height: 62px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                #fff1e7;
+
+            border:
+                1px solid #ffd0b0;
+
+            border-radius: 17px;
+
+            font-size: 30px;
+        }
+
+
+        .form-header h2 {
+
+            color: #222;
+
+            font-size: 25px;
+
+            font-weight: 800;
+        }
+
+
+        .form-header p {
+
+            margin-top: 5px;
+
+            color: #7d8492;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           FORMULARIO
+        ===================================================== */
+
+        .formulario {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                20px 22px;
+        }
+
+
+        .campo {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+
+        .campo.completo {
+
+            grid-column:
+                1 / -1;
+        }
+
+
+        /* =====================================================
+           LABEL
+        ===================================================== */
+
+        label {
+
+            color: #333;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           INPUTS
+        ===================================================== */
+
+        .form-control {
+
+            width: 100%;
+
+            height: 50px;
+
+            padding:
+                0 15px;
+
+            background: #ffffff;
+
+            color: #242424;
+
+            border:
+                1px solid #ddd8d4;
+
+            border-radius: 13px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            transition:
+                border .2s,
+                box-shadow .2s,
+                background .2s;
+        }
+
+
+        .form-control::placeholder {
+
+            color: #a2a2a2;
+        }
+
+
+        .form-control:hover {
+
+            border-color:
+                #ffb17d;
+        }
+
+
+        .form-control:focus {
+
+            border-color:
+                #f87519;
+
+            background:
+                #fffdfb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(248, 117, 25, 0.12);
+        }
+
+
+        /* =====================================================
+           SELECT
+        ===================================================== */
+
+        select.form-control {
+
+            cursor: pointer;
+
+            appearance: auto;
+        }
+
+
+        select option {
+
+            background: #ffffff;
+
+            color: #222;
+        }
+
+
+        /* =====================================================
+           AYUDA
+        ===================================================== */
+
+        .ayuda {
+
+            margin-top: -2px;
+
+            color: #8a909c;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           BOTÓN
+        ===================================================== */
+
+        .btn-guardar {
+
+            grid-column:
+                1 / -1;
+
+            width: 100%;
+
+            height: 52px;
+
+            margin-top: 8px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff7a00,
+                    #f56f16
+                );
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 20px
+                rgba(248, 117, 25, 0.22);
+
+            transition:
+                transform .2s,
+                box-shadow .2s,
+                filter .2s;
+        }
+
+
+        .btn-guardar:hover {
+
+            transform:
+                translateY(-2px);
+
+            filter:
+                brightness(1.05);
+
+            box-shadow:
+                0 12px 28px
+                rgba(248, 117, 25, 0.30);
+        }
+
+
+        .btn-guardar:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           VOLVER
+        ===================================================== */
+
+        .volver {
+
+            margin-top: 22px;
+
+            text-align: center;
+        }
+
+
+        .volver a {
+
+            color: #f87519;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        .volver a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .sidebar {
+
+                width: 240px;
+            }
+
+            .contenido {
+
+                padding:
+                    35px 30px;
+            }
+
+            .titulo h1 {
+
+                font-size: 34px;
+            }
+        }
+
+
+        @media (max-width: 800px) {
+
+            .layout {
+
+                display: block;
+            }
+
+            .sidebar {
+
+                width: 100%;
+
+                min-height: auto;
+
+                border-right: none;
+
+                border-bottom:
+                    1px solid #e7e2de;
+
+                padding: 20px;
+            }
+
+            .logo {
+
+                display: flex;
+
+                align-items: center;
+
+                gap: 15px;
+
+                text-align: left;
+
+                padding-bottom: 18px;
+            }
+
+            .logo-icon {
+
+                margin: 0;
+
+                width: 55px;
+
+                height: 55px;
+            }
+
+            .logo h2 {
+
+                font-size: 24px;
+            }
+
+            .info-box {
+
+                display: none;
+            }
+
+            .menu {
+
+                display: none;
+            }
+
+            .logout {
+
+                display: none;
+            }
+
+            .contenido {
+
+                padding:
+                    28px 18px;
+            }
+
+            .top {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .usuario {
+
+                width: 100%;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .form-card {
+
+                padding:
+                    25px 20px;
+
+                border-radius: 20px;
+            }
+
+            .formulario {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .campo.completo {
+
+                grid-column:
+                    auto;
+            }
+
+            .btn-guardar {
+
+                grid-column:
+                    auto;
+            }
+
+            .titulo h1 {
+
+                font-size: 30px;
+            }
+
+            .form-header {
+
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🍗
+            </div>
+
+            <div>
+
+                <h2>CROCANT'S</h2>
+
+                <p>
+                    Administración
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div class="info-title">
+                MÓDULO ACTUAL
+            </div>
+
+            <div class="info-text">
+                Gestión de trabajadores
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <div class="menu-title">
+                Administración
+            </div>
+
+
+            <a
+                href="/admin_trabajadores"
+                class="menu-item active"
+            >
+
+                <span class="menu-icon">
+                    👥
+                </span>
+
+                Trabajadores
+
+            </a>
+
+
+            <a
+                href="/admin"
+                class="menu-item"
+            >
+
+                <span class="menu-icon">
+                    🏠
+                </span>
+
+                Inicio
+
+            </a>
+
+        </nav>
+
+
+        <div class="logout">
+
+            <a href="/logout">
+
+                <span>
+                    ↪
+                </span>
+
+                Cerrar sesión
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         CONTENIDO
+    ====================================================== -->
+
+    <main class="contenido">
+
+
+        <!-- =================================================
+             CABECERA
+        ================================================== -->
+
+        <div class="top">
+
+
+            <div class="titulo">
+
+                <h1>
+                    Nuevo <span>trabajador</span>
+                </h1>
+
+                <p>
+                    Registra un nuevo integrante del equipo de Crocant's.
+                </p>
+
+            </div>
+
+
+            <div class="usuario">
+
+                <div class="usuario-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <strong>
+                        Administrador
+                    </strong>
+
+                    <small>
+                        Gestión del sistema
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FORMULARIO
+        ================================================== -->
+
+        <section class="form-card">
+
+
+            <div class="form-header">
+
+                <div class="form-icon">
+                    👷
+                </div>
+
+                <div>
+
+                    <h2>
+                        Registrar trabajador
+                    </h2>
+
+                    <p>
+                        Completa los datos del nuevo integrante.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <form
+                class="formulario"
+                method="POST"
+                action="/trabajadores/agregar"
+            >
+
+
+                <!-- NOMBRES -->
+
+                <div class="campo">
+
+                    <label for="nombres">
+                        Nombres
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nombres"
+                        name="nombres"
+                        class="form-control"
+                        placeholder="Ej. Juan"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- APELLIDOS -->
+
+                <div class="campo">
+
+                    <label for="apellidos">
+                        Apellidos
+                    </label>
+
+                    <input
+                        type="text"
+                        id="apellidos"
+                        name="apellidos"
+                        class="form-control"
+                        placeholder="Ej. Pérez"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- CORREO -->
+
+                <div class="campo">
+
+                    <label for="correo">
+                        Correo
+                    </label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        class="form-control"
+                        placeholder="juan@mail.com"
+                        pattern="[a-zA-Z0-9._%+-]+@mail\.com"
+                        title="El correo debe terminar en @mail.com"
+                        required
+                    >
+
+                    <div class="ayuda">
+                        El correo debe terminar en @mail.com
+                    </div>
+
+                </div>
+
+
+
+                <!-- CARGO -->
+
+                <div class="campo">
+
+                    <label for="cargo">
+                        Cargo
+                    </label>
+
+                    <select
+                        id="cargo"
+                        name="cargo"
+                        class="form-control"
+                        required
+                    >
+
+                        <option value="">
+                            Seleccionar cargo
+                        </option>
+
+                        <option value="mozo">
+                            Mozo
+                        </option>
+
+                        <option value="pollero">
+                            Pollero
+                        </option>
+
+                        <option value="cajero">
+                            Cajero
+                        </option>
+
+                        <option value="delivery">
+                            Delivery
+                        </option>
+
+                        <option value="gerente">
+                            Gerente
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- TELÉFONO -->
+
+                <div class="campo">
+
+                    <label for="telefono">
+                        Teléfono
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefono"
+                        name="telefono"
+                        class="form-control"
+                        placeholder="Ej. 987654321"
+                        pattern="[0-9]{9}"
+                        maxlength="9"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- CONTRASEÑA -->
+
+                <div class="campo">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Contraseña"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- GUARDAR -->
+
+                <button
+                    type="submit"
+                    class="btn-guardar"
+                >
+
+                    Guardar trabajador
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- VOLVER -->
+
+            <div class="volver">
+
+                <a href="/admin_trabajadores">
+                    ← Volver a trabajadores
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

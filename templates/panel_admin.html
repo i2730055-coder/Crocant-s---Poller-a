@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Panel Administrador | Crocant's</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Fuente -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS general -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <style>
+
+        :root {
+            --negro: #111111;
+            --negro-navbar: #1c1713;
+            --blanco: #ffffff;
+            --gris: #6b7280;
+            --gris-claro: #f7f7f5;
+            --borde: #e6e6e1;
+            --naranja: #f58220;
+            --naranja-hover: #ff9638;
+            --verde: #17845b;
+            --rojo: #c0392b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--gris-claro);
+            color: var(--negro);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 255px;
+            height: 100vh;
+            background: var(--negro-navbar);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 8px 0 30px rgba(0,0,0,0.12);
+        }
+
+        .sidebar-logo {
+            height: 92px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sidebar-logo img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .sidebar-logo strong {
+            display: block;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .sidebar-logo span {
+            display: block;
+            margin-top: 2px;
+            color: rgba(255,255,255,0.50);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .admin-label {
+            padding: 25px 25px 12px;
+            color: rgba(255,255,255,0.40);
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .sidebar-menu {
+            padding: 0 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-height: 48px;
+            padding: 0 15px;
+            border-radius: 9px;
+            color: rgba(255,255,255,0.68);
+            font-size: 12px;
+            font-weight: 700;
+            transition: 0.25s ease;
+        }
+
+        .sidebar-menu a i {
+            width: 20px;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        .sidebar-menu a:hover {
+            color: #ffffff;
+            background: rgba(245,130,32,0.10);
+            transform: translateX(2px);
+        }
+
+        .sidebar-menu a.activo {
+            color: #ffffff;
+            background: var(--naranja);
+            box-shadow: 0 7px 18px rgba(245,130,32,0.20);
+        }
+
+        .sidebar-menu a.activo i {
+            color: #ffffff;
+        }
+
+        .sidebar-separador {
+            height: 1px;
+            background: rgba(255,255,255,0.08);
+            margin: 18px;
+        }
+
+        /* =====================================================
+           PARTE INFERIOR
+        ===================================================== */
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding: 15px 13px 20px;
+        }
+
+        .usuario-admin {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .usuario-admin-icono {
+            width: 37px;
+            height: 37px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(245,130,32,0.15);
+            color: var(--naranja);
+            font-size: 18px;
+        }
+
+        .usuario-admin-info {
+            overflow: hidden;
+        }
+
+        .usuario-admin-info strong {
+            display: block;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .usuario-admin-info span {
+            display: block;
+            color: rgba(255,255,255,0.45);
+            font-size: 9px;
+            margin-top: 2px;
+        }
+
+        .btn-cerrar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            min-height: 43px;
+            padding: 0 13px;
+            color: rgba(255,255,255,0.65);
+            border-radius: 9px;
+            font-size: 11px;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .btn-cerrar:hover {
+            background: rgba(192,57,43,0.12);
+            color: #e74c3c;
+        }
+
+        /* =====================================================
+           CONTENIDO
+        ===================================================== */
+
+        .admin-main {
+            margin-left: 255px;
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .topbar {
+            height: 76px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--borde);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 38px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .topbar-titulo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .topbar-titulo i {
+            color: var(--naranja);
+            font-size: 22px;
+        }
+
+        .topbar-titulo h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .topbar-derecha {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #777777;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .estado-online {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .estado-online::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--verde);
+        }
+
+        /* =====================================================
+           DASHBOARD
+        ===================================================== */
+
+        .dashboard-wrapper {
+            width: min(1250px, 94%);
+            margin: 0 auto;
+            padding: 40px 0 70px;
+        }
+
+        .bienvenida {
+            margin-bottom: 35px;
+        }
+
+        .bienvenida-etiqueta {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--naranja);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.7px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .bienvenida h2 {
+            margin: 0;
+            color: var(--negro);
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+        }
+
+        .bienvenida p {
+            margin-top: 10px;
+            color: #777777;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           ESTADISTICAS
+        ===================================================== */
+
+        .estadisticas {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0,1fr));
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .estadistica-card {
+            background: #ffffff;
+            border: 1px solid var(--borde);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            transition: 0.25s ease;
+        }
+
+        .estadistica-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .estadistica-icono {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 11px;
+            background: #fff4e9;
+            color: var(--naranja);
+            font-size: 21px;
+        }
+
+        .estadistica-info span {
+            display: block;
+            color: #888888;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .estadistica-info strong {
+            display: block;
+            margin-top: 4px;
+            color: var(--negro);
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           MODULOS
+        ===================================================== */
+
+        .seccion-titulo {
+            margin-bottom: 18px;
+        }
+
+        .seccion-titulo h3 {
+            margin: 0;
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .seccion-titulo p {
+            margin-top: 5px;
+            color: #888888;
+            font-size: 12px;
+        }
+
+        .modulos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 20px;
+        }
+
+        .modulo-card {
+            position: relative;
+            background: #ffffff;
+            border: 1px solid var(--borde);
+            border-radius: 16px;
+            padding: 25px;
+            min-height: 190px;
+            overflow: hidden;
+            transition: 0.25s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        }
+
+        .modulo-card::after {
+            content: "";
+            position: absolute;
+            right: -35px;
+            bottom: -35px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(245,130,32,0.06);
+            transition: 0.25s ease;
+        }
+
+        .modulo-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(245,130,32,0.35);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+        }
+
+        .modulo-card:hover::after {
+            transform: scale(1.2);
+        }
+
+        .modulo-icono {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff4e9;
+            color: var(--naranja);
+            border-radius: 11px;
+            font-size: 22px;
+            margin-bottom: 18px;
+        }
+
+        .modulo-card h4 {
+            margin: 0;
+            color: var(--negro);
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .modulo-card p {
+            margin: 8px 0 18px;
+            color: #777777;
+            font-size: 11px;
+            line-height: 1.6;
+            max-width: 280px;
+        }
+
+        .modulo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--naranja);
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .modulo-link i {
+            transition: 0.2s ease;
+        }
+
+        .modulo-card:hover .modulo-link i {
+            transform: translateX(4px);
+        }
+
+        /* =====================================================
+           INFORMACION
+        ===================================================== */
+
+        .admin-info {
+            margin-top: 25px;
+            background: var(--negro-navbar);
+            border-radius: 16px;
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            color: #ffffff;
+        }
+
+        .admin-info-text h4 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .admin-info-text p {
+            margin: 6px 0 0;
+            color: rgba(255,255,255,0.55);
+            font-size: 11px;
+        }
+
+        .admin-info-icono {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(245,130,32,0.12);
+            color: var(--naranja);
+            border-radius: 12px;
+            font-size: 23px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .estadisticas {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .modulos-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 75px;
+            }
+
+            .sidebar-logo {
+                justify-content: center;
+                padding: 0;
+            }
+
+            .sidebar-logo img {
+                width: 43px;
+                height: 43px;
+            }
+
+            .sidebar-logo div,
+            .admin-label,
+            .sidebar-menu a span,
+            .usuario-admin-info,
+            .btn-cerrar span {
+                display: none;
+            }
+
+            .sidebar-menu {
+                padding: 0 10px;
+            }
+
+            .sidebar-menu a {
+                justify-content: center;
+                padding: 0;
+            }
+
+            .sidebar-menu a i {
+                font-size: 19px;
+            }
+
+            .usuario-admin {
+                justify-content: center;
+                padding: 8px;
+            }
+
+            .admin-main {
+                margin-left: 75px;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .estadisticas {
+                grid-template-columns: 1fr;
+            }
+
+            .modulos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-wrapper {
+                padding-top: 30px;
+            }
+
+            .topbar-derecha {
+                display: none;
+            }
+
+            .bienvenida h2 {
+                font-size: 30px;
+            }
+
+            .admin-info {
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar">
+
+    <!-- LOGO -->
+
+    <div class="sidebar-logo">
+
+        <img
+            src="{{ url_for('static', filename='img/logo-crocants.png') }}"
+            alt="Crocant's"
+        >
+
+        <div>
+            <strong>Crocant's</strong>
+
+            <span>
+                POLLERÍA & RESTAURANTE
+            </span>
+        </div>
+
+    </div>
+
+    <!-- MENU -->
+
+    <div class="admin-label">
+        Administración
+    </div>
+
+    <nav class="sidebar-menu">
+
+        <!-- DASHBOARD -->
+
+        <a
+            href="{{ url_for('panel_admin') }}"
+            class="{% if request.path == '/admin' %}activo{% endif %}"
+        >
+            <i class="bi bi-grid-1x2-fill"></i>
+
+            <span>
+                Dashboard
+            </span>
+        </a>
+
+        <!-- INVENTARIO -->
+
+        <a
+            href="{{ url_for('inventario') }}"
+            class="{% if request.path == '/inventario' %}activo{% endif %}"
+        >
+            <i class="bi bi-box-seam"></i>
+
+            <span>
+                Inventario
+            </span>
+        </a>
+
+        <!-- USUARIOS -->
+
+        <a
+            href="/usuarios"
+            class="{% if request.path == '/usuarios' %}activo{% endif %}"
+        >
+            <i class="bi bi-people"></i>
+
+            <span>
+                Usuarios
+            </span>
+        </a>
+
+        <!-- PEDIDOS -->
+
+        <a
+            href="/pedidos"
+            class="{% if request.path == '/pedidos' %}activo{% endif %}"
+        >
+            <i class="bi bi-receipt"></i>
+
+            <span>
+                Pedidos
+            </span>
+        </a>
+
+        <!-- REPORTES -->
+
+        <a
+            href="/reportes"
+            class="{% if request.path == '/reportes' %}activo{% endif %}"
+        >
+            <i class="bi bi-bar-chart-line"></i>
+
+            <span>
+                Reportes
+            </span>
+        </a>
+
+        <!-- RESERVAS -->
+
+        <a
+            href="/mis_reservas"
+            class="{% if request.path == '/mis_reservas' %}activo{% endif %}"
+        >
+            <i class="bi bi-calendar-check"></i>
+
+            <span>
+                Reservas
+            </span>
+        </a>
+
+        <div class="sidebar-separador"></div>
+
+        <!-- CARTA -->
+
+        <a
+            href="/carta"
+            class="{% if request.path == '/carta' %}activo{% endif %}"
+        >
+            <i class="bi bi-journal-text"></i>
+
+            <span>
+                Ver carta
+            </span>
+        </a>
+
+    </nav>
+
+    <!-- PARTE INFERIOR -->
+
+    <div class="sidebar-bottom">
+
+        <div class="usuario-admin">
+
+            <div class="usuario-admin-icono">
+                <i class="bi bi-person-fill"></i>
+            </div>
+
+            <div class="usuario-admin-info">
+
+                <strong>
+                    Administrador
+                </strong>
+
+                <span>
+                    {{ session.get('usuario', 'Admin') }}
+                </span>
+
+            </div>
+
+        </div>
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="btn-cerrar"
+        >
+            <i class="bi bi-box-arrow-left"></i>
+
+            <span>
+                Cerrar sesión
+            </span>
+        </a>
+
+    </div>
+
+</aside>
+
+<!-- =========================================================
+     CONTENIDO PRINCIPAL
+========================================================= -->
+
+<div class="admin-main">
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="topbar-titulo">
+
+            <i class="bi bi-speedometer2"></i>
+
+            <h1>
+                Panel de administración
+            </h1>
+
+        </div>
+
+        <div class="topbar-derecha">
+
+            <span class="estado-online">
+                Sistema operativo
+            </span>
+
+        </div>
+
+    </header>
+
+    <!-- DASHBOARD -->
+
+    <main class="dashboard-wrapper">
+
+        <!-- BIENVENIDA -->
+
+        <section class="bienvenida">
+
+            <div class="bienvenida-etiqueta">
+
+                <i class="bi bi-stars"></i>
+
+                PANEL PRINCIPAL
+
+            </div>
+
+            <h2>
+                Bienvenido, administrador
+            </h2>
+
+            <p>
+                Desde este panel puedes administrar
+                y controlar los principales módulos
+                de Crocant's.
+            </p>
+
+        </section>
+
+        <!-- ESTADISTICAS -->
+
+        <section class="estadisticas">
+
+            <div class="estadistica-card">
+
+                <div class="estadistica-icono">
+                    <i class="bi bi-box-seam"></i>
+                </div>
+
+                <div class="estadistica-info">
+
+                    <span>
+                        Productos
+                    </span>
+
+                    <strong>
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="estadistica-card">
+
+                <div class="estadistica-icono">
+                    <i class="bi bi-receipt"></i>
+                </div>
+
+                <div class="estadistica-info">
+
+                    <span>
+                        Pedidos
+                    </span>
+
+                    <strong>
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="estadistica-card">
+
+                <div class="estadistica-icono">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <div class="estadistica-info">
+
+                    <span>
+                        Usuarios
+                    </span>
+
+                    <strong>
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="estadistica-card">
+
+                <div class="estadistica-icono">
+                    <i class="bi bi-calendar-check"></i>
+                </div>
+
+                <div class="estadistica-info">
+
+                    <span>
+                        Reservas
+                    </span>
+
+                    <strong>
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- MODULOS -->
+
+        <section>
+
+            <div class="seccion-titulo">
+
+                <h3>
+                    Módulos del sistema
+                </h3>
+
+                <p>
+                    Selecciona el área que deseas administrar.
+                </p>
+
+            </div>
+
+            <div class="modulos-grid">
+
+                <!-- INVENTARIO -->
+
+                <a
+                    href="{{ url_for('inventario') }}"
+                    class="modulo-card"
+                >
+
+                    <div class="modulo-icono">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+
+                    <h4>
+                        Inventario
+                    </h4>
+
+                    <p>
+                        Administra productos,
+                        stock y disponibilidad
+                        de la carta.
+                    </p>
+
+                    <span class="modulo-link">
+                        INGRESAR
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </a>
+
+                <!-- USUARIOS -->
+
+                <a
+                    href="/usuarios"
+                    class="modulo-card"
+                >
+
+                    <div class="modulo-icono">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <h4>
+                        Usuarios
+                    </h4>
+
+                    <p>
+                        Gestiona usuarios,
+                        trabajadores y
+                        sus respectivos roles.
+                    </p>
+
+                    <span class="modulo-link">
+                        INGRESAR
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </a>
+
+                <!-- PEDIDOS -->
+
+                <a
+                    href="/pedidos"
+                    class="modulo-card"
+                >
+
+                    <div class="modulo-icono">
+                        <i class="bi bi-receipt"></i>
+                    </div>
+
+                    <h4>
+                        Pedidos
+                    </h4>
+
+                    <p>
+                        Consulta y administra
+                        los pedidos registrados
+                        en el sistema.
+                    </p>
+
+                    <span class="modulo-link">
+                        INGRESAR
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </a>
+
+                <!-- REPORTES -->
+
+                <a
+                    href="/reportes"
+                    class="modulo-card"
+                >
+
+                    <div class="modulo-icono">
+                        <i class="bi bi-bar-chart-line"></i>
+                    </div>
+
+                    <h4>
+                        Reportes
+                    </h4>
+
+                    <p>
+                        Visualiza información
+                        y resultados de las
+                        ventas del negocio.
+                    </p>
+
+                    <span class="modulo-link">
+                        INGRESAR
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </a>
+
+                <!-- RESERVAS -->
+
+                <a
+                    href="/mis_reservas"
+                    class="modulo-card"
+                >
+
+                    <div class="modulo-icono">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+
+                    <h4>
+                        Reservas
+                    </h4>
+
+                    <p>
+                        Consulta las reservas
+                        realizadas por los
+                        clientes.
+                    </p>
+
+                    <span class="modulo-link">
+                        INGRESAR
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </a>
+
+                <!-- CARTA -->
+
+                <a
+                    href="/carta"
+                    class="modulo-card"
+                >
+
+                    <div class="modulo-icono">
+                        <i class="bi bi-journal-text"></i>
+                    </div>
+
+                    <h4>
+                        Carta
+                    </h4>
+
+                    <p>
+                        Visualiza cómo se
+                        presenta actualmente
+                        la carta de Crocant's.
+                    </p>
+
+                    <span class="modulo-link">
+                        VER CARTA
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- INFORMACION -->
+
+        <section class="admin-info">
+
+            <div class="admin-info-text">
+
+                <h4>
+                    Centro de administración Crocant's
+                </h4>
+
+                <p>
+                    Selecciona un módulo del menú lateral
+                    o de las tarjetas para continuar.
+                </p>
+
+            </div>
+
+            <div class="admin-info-icono">
+                <i class="bi bi-shield-check"></i>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+</html>

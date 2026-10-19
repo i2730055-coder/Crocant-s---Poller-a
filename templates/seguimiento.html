@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Seguimiento del pedido | Crocant's</title>
+
+
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         BOOTSTRAP ICONS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+
+    <!-- =====================================================
+         MONTSERRAT
+    ====================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           VARIABLES CROCANT'S
+        ====================================================== */
+
+        :root {
+
+            --negro: #111111;
+            --negro-suave: #1c1713;
+
+            --blanco: #ffffff;
+
+            --gris: #707070;
+            --gris-claro: #f6f6f3;
+            --gris-linea: #e8e5df;
+
+            --naranja: #f58220;
+            --naranja-claro: #fff1e4;
+            --naranja-borde: #ffd4b0;
+
+            --verde: #17845b;
+
+            --sombra:
+                0 20px 55px rgba(0, 0, 0, .08);
+        }
+
+
+        /* =====================================================
+           GENERAL
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f7f7f5 0%,
+                    #ffffff 100%
+                );
+
+            color: var(--negro);
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            min-height: 100vh;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        .navbar-crocants {
+
+            position: relative;
+
+            width: 100%;
+
+            background: var(--negro-suave);
+
+            padding: 17px 0;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, .18);
+        }
+
+
+        .navbar-crocants::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 2px;
+
+            background: var(--naranja);
+
+            box-shadow:
+                0 0 12px
+                rgba(245, 130, 32, .45);
+        }
+
+
+        .nav-contenedor {
+
+            width: min(1200px, 92%);
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        /* =====================================================
+           MARCA
+        ====================================================== */
+
+        .marca-crocants {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .logo-navbar {
+
+            width: 48px;
+            height: 48px;
+
+            object-fit: contain;
+
+            border-radius: 9px;
+        }
+
+
+        .marca-crocants strong {
+
+            display: block;
+
+            color: white;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            line-height: 1.1;
+        }
+
+
+        .marca-crocants span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color:
+                rgba(255, 255, 255, .55);
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+            letter-spacing: 1.3px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           BOTÓN NAVBAR
+        ====================================================== */
+
+        .btn-navbar {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 11px 16px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .13);
+
+            border-radius: 9px;
+
+            color: white;
+
+            background:
+                rgba(255, 255, 255, .05);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            transition: .2s ease;
+        }
+
+
+        .btn-navbar:hover {
+
+            color: var(--naranja);
+
+            border-color:
+                rgba(245, 130, 32, .45);
+
+            background:
+                rgba(245, 130, 32, .08);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           CONTENEDOR
+        ====================================================== */
+
+        .seguimiento-wrapper {
+
+            width: min(1050px, 92%);
+
+            margin: auto;
+
+            padding: 65px 0 80px;
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ====================================================== */
+
+        .seguimiento-header {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .seguimiento-etiqueta {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--naranja);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 12px;
+        }
+
+
+        .seguimiento-header h1 {
+
+            font-size:
+                clamp(32px, 5vw, 48px);
+
+            font-weight: 800;
+
+            letter-spacing: -1.8px;
+
+            color: var(--negro);
+        }
+
+
+        .seguimiento-header p {
+
+            max-width: 650px;
+
+            margin: 12px auto 0;
+
+            color: var(--gris);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           TARJETA
+        ====================================================== */
+
+        .seguimiento-card {
+
+            background: var(--blanco);
+
+            border:
+                1px solid
+                var(--gris-linea);
+
+            border-radius: 24px;
+
+            padding: 34px;
+
+            box-shadow: var(--sombra);
+        }
+
+
+        /* =====================================================
+           INFORMACIÓN PEDIDO
+        ====================================================== */
+
+        .pedido-info {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding-bottom: 25px;
+
+            margin-bottom: 28px;
+
+            border-bottom:
+                1px solid
+                var(--gris-linea);
+        }
+
+
+        .pedido-info-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+        }
+
+
+        .pedido-icono {
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background:
+                var(--naranja-claro);
+
+            color:
+                var(--naranja);
+
+            font-size: 20px;
+        }
+
+
+        .pedido-numero {
+
+            color: var(--negro);
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .pedido-numero span {
+
+            color:
+                var(--naranja);
+        }
+
+
+        .pedido-subtitulo {
+
+            margin-top: 4px;
+
+            color:
+                var(--gris);
+
+            font-size: 10px;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           ESTADO
+        ====================================================== */
+
+        .estado-actual {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 10px 15px;
+
+            border:
+                1px solid
+                var(--naranja-borde);
+
+            border-radius: 30px;
+
+            background:
+                var(--naranja-claro);
+
+            color:
+                var(--naranja);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+
+        .estado-punto {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                var(--naranja);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(245, 130, 32, .12);
+
+            animation:
+                pulso 1.8s infinite;
+        }
+
+
+        @keyframes pulso {
+
+            0% {
+                box-shadow:
+                    0 0 0 0
+                    rgba(245, 130, 32, .35);
+            }
+
+            70% {
+                box-shadow:
+                    0 0 0 7px
+                    rgba(245, 130, 32, 0);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 0 0
+                    rgba(245, 130, 32, 0);
+            }
+        }
+
+
+        /* =====================================================
+           ESTADO DESTACADO
+        ====================================================== */
+
+        .estado-destacado {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 27px;
+
+            border-radius: 19px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #17130f,
+                    #28201a
+                );
+
+            color: white;
+
+            margin-bottom: 34px;
+        }
+
+
+        .estado-destacado::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 190px;
+            height: 190px;
+
+            right: -70px;
+            top: -90px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(245, 130, 32, .10);
+        }
+
+
+        .destacado-contenido {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+        }
+
+
+        .destacado-icono {
+
+            width: 58px;
+            height: 58px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 17px;
+
+            background:
+                var(--naranja);
+
+            color: white;
+
+            font-size: 25px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(245, 130, 32, .28);
+        }
+
+
+        .destacado-texto small {
+
+            display: block;
+
+            margin-bottom: 5px;
+
+            color:
+                rgba(255, 255, 255, .55);
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .destacado-texto strong {
+
+            display: block;
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .destacado-texto p {
+
+            margin: 5px 0 0;
+
+            color:
+                rgba(255, 255, 255, .68);
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           RUTA
+        ====================================================== */
+
+        .ruta-titulo {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 30px;
+        }
+
+
+        .ruta-titulo h2 {
+
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+
+        .ruta-titulo span {
+
+            color:
+                var(--gris);
+
+            font-size: 10px;
+
+            font-weight: 600;
+        }
+
+
+        .ruta-visual {
+
+            position: relative;
+
+            padding: 10px 0 8px;
+        }
+
+
+        .ruta-linea {
+
+            position: absolute;
+
+            left: 30px;
+
+            top: 35px;
+
+            bottom: 35px;
+
+            width: 3px;
+
+            background:
+                #e8e5df;
+
+            border-radius: 5px;
+        }
+
+
+        .ruta-linea-activa {
+
+            position: absolute;
+
+            left: 30px;
+
+            top: 35px;
+
+            width: 3px;
+
+            height: var(--progreso);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--naranja),
+                    #ffab58
+                );
+
+            border-radius: 5px;
+
+            transition:
+                height .6s ease;
+        }
+
+
+        /* =====================================================
+           PASOS
+        ====================================================== */
+
+        .ruta-paso {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            min-height: 78px;
+        }
+
+
+        .ruta-icono {
+
+            position: relative;
+
+            z-index: 3;
+
+            width: 62px;
+            height: 62px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: white;
+
+            border:
+                3px solid
+                #e8e5df;
+
+            color: #999;
+
+            font-size: 20px;
+
+            transition: .3s ease;
+        }
+
+
+        .ruta-paso.completado .ruta-icono {
+
+            border-color:
+                var(--naranja);
+
+            background:
+                var(--naranja);
+
+            color: white;
+
+            box-shadow:
+                0 0 0 6px
+                rgba(245, 130, 32, .10);
+        }
+
+
+        .ruta-paso.actual .ruta-icono {
+
+            border-color:
+                var(--naranja);
+
+            background: white;
+
+            color:
+                var(--naranja);
+
+            box-shadow:
+                0 0 0 7px
+                rgba(245, 130, 32, .10);
+        }
+
+
+        .ruta-paso.actual .ruta-icono::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: -7px;
+
+            border:
+                2px solid
+                rgba(245, 130, 32, .35);
+
+            border-radius: 50%;
+
+            animation:
+                anillo 1.8s infinite;
+        }
+
+
+        @keyframes anillo {
+
+            0% {
+                transform: scale(.85);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.25);
+                opacity: 0;
+            }
+        }
+
+
+        .ruta-info {
+
+            flex: 1;
+        }
+
+
+        .ruta-info strong {
+
+            display: block;
+
+            color:
+                #252525;
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+
+        .ruta-info span {
+
+            display: block;
+
+            margin-top: 4px;
+
+            color: #999;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+
+        .ruta-paso.actual .ruta-info strong {
+
+            color:
+                var(--naranja);
+        }
+
+
+        /* =====================================================
+           MENSAJE
+        ====================================================== */
+
+        .mensaje-seguimiento {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 13px;
+
+            margin-top: 32px;
+
+            padding: 17px 18px;
+
+            border:
+                1px solid
+                #f2dcc9;
+
+            border-radius: 13px;
+
+            background:
+                #fff9f4;
+
+            color:
+                #5f5f5f;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+
+        .mensaje-seguimiento i {
+
+            color:
+                var(--naranja);
+
+            font-size: 17px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =====================================================
+           INFORMACIÓN EXTRA
+        ====================================================== */
+
+        .info-extra {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+
+        .info-box {
+
+            padding: 16px;
+
+            border:
+                1px solid
+                var(--gris-linea);
+
+            border-radius: 12px;
+
+            background:
+                #fafaf8;
+        }
+
+
+        .info-box small {
+
+            display: block;
+
+            color: #999;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .7px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .info-box strong {
+
+            color:
+                #252525;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           BOTONES
+        ====================================================== */
+
+        .acciones {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-top: 28px;
+        }
+
+
+        .btn-principal,
+        .btn-secundario {
+
+            min-height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            border-radius: 10px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            transition: .2s ease;
+        }
+
+
+        .btn-principal {
+
+            background:
+                var(--negro);
+
+            color: white;
+        }
+
+
+        .btn-principal:hover {
+
+            background:
+                var(--naranja);
+
+            color: white;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(245, 130, 32, .22);
+        }
+
+
+        .btn-secundario {
+
+            background: white;
+
+            color: #333;
+
+            border:
+                1px solid
+                var(--gris-linea);
+        }
+
+
+        .btn-secundario:hover {
+
+            color:
+                var(--naranja);
+
+            border-color:
+                var(--naranja);
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 700px) {
+
+            .seguimiento-wrapper {
+
+                width: 94%;
+
+                padding: 42px 0 60px;
+            }
+
+
+            .seguimiento-card {
+
+                padding: 21px;
+
+                border-radius: 19px;
+            }
+
+
+            .pedido-info {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .estado-actual {
+
+                width: 100%;
+
+                justify-content: center;
+            }
+
+
+            .estado-destacado {
+
+                padding: 21px;
+            }
+
+
+            .destacado-contenido {
+
+                align-items: flex-start;
+            }
+
+
+            .ruta-linea,
+            .ruta-linea-activa {
+
+                left: 27px;
+            }
+
+
+            .ruta-icono {
+
+                width: 56px;
+                height: 56px;
+
+                font-size: 18px;
+            }
+
+
+            .ruta-paso {
+
+                gap: 15px;
+            }
+
+
+            .ruta-info strong {
+
+                font-size: 12px;
+            }
+
+
+            .info-extra,
+            .acciones {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .marca-crocants span {
+
+                display: none;
+            }
+
+
+            .btn-navbar {
+
+                padding: 9px 11px;
+
+                font-size: 9px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<header class="navbar-crocants">
+
+    <div class="nav-contenedor">
+
+        <a
+            href="/carta"
+            class="marca-crocants"
+        >
+
+            <img
+                src="{{ url_for('static', filename='img/logo-crocants.png') }}"
+                alt="Crocant's"
+                class="logo-navbar"
+            >
+
+            <div>
+
+                <strong>
+                    Crocant's
+                </strong>
+
+                <span>
+                    Pollería & Restaurante
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="/mis_pedidos"
+            class="btn-navbar"
+        >
+
+            <i class="bi bi-arrow-left"></i>
+
+            Mis pedidos
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     CONTENIDO
+====================================================== -->
+
+<main class="seguimiento-wrapper">
+
+
+    <!-- =================================================
+         ENCABEZADO
+    ================================================== -->
+
+    <section class="seguimiento-header">
+
+        <div class="seguimiento-etiqueta">
+
+            <i class="bi bi-broadcast-pin"></i>
+
+            SEGUIMIENTO DEL PEDIDO
+
+        </div>
+
+
+        <h1>
+            Sigue tu pedido
+        </h1>
+
+
+        <p>
+
+            Te mostramos en qué etapa se encuentra
+            tu pedido y cómo avanza hasta llegar
+            a tus manos.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================================
+         TARJETA PRINCIPAL
+    ================================================== -->
+
+    <section class="seguimiento-card">
+
+
+        <!-- =================================================
+             INFORMACIÓN DEL PEDIDO
+        ================================================== -->
+
+        <div class="pedido-info">
+
+            <div class="pedido-info-left">
+
+                <div class="pedido-icono">
+
+                    <i class="bi bi-bag-check-fill"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="pedido-numero">
+
+                        Pedido
+
+                        <span>
+                            #{{ pedido.id }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="pedido-subtitulo">
+
+                        Seguimiento de tu compra
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="estado-actual">
+
+                <span class="estado-punto"></span>
+
+                {{ pedido.estado }}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ESTADO ACTUAL
+        ================================================== -->
+
+        {% if pedido.estado == 'En camino' %}
+
+            {% set icono_estado = "bi-bicycle" %}
+            {% set titulo_estado = "Tu pedido está en camino" %}
+            {% set texto_estado = "El motorizado ya lleva tu pedido y se dirige hacia tu dirección." %}
+
+        {% elif pedido.estado == 'Entregado' %}
+
+            {% set icono_estado = "bi-check-circle-fill" %}
+            {% set titulo_estado = "Pedido entregado" %}
+            {% set texto_estado = "Tu pedido llegó correctamente. ¡Gracias por elegir Crocant's!" %}
+
+        {% elif pedido.estado == 'Listo' %}
+
+            {% set icono_estado = "bi-box-seam-fill" %}
+            {% set titulo_estado = "Pedido listo" %}
+            {% set texto_estado = "Tu pedido ya está preparado y listo para continuar con la entrega." %}
+
+        {% elif pedido.estado == 'Preparando' %}
+
+            {% set icono_estado = "bi-fire" %}
+            {% set titulo_estado = "Estamos preparando tu pedido" %}
+            {% set texto_estado = "Nuestro equipo está preparando tu pedido con cuidado." %}
+
+        {% elif pedido.estado == 'Pagado' %}
+
+            {% set icono_estado = "bi-credit-card-fill" %}
+            {% set titulo_estado = "Pago confirmado" %}
+            {% set texto_estado = "Tu pago fue registrado correctamente y estamos procesando tu pedido." %}
+
+        {% else %}
+
+            {% set icono_estado = "bi-receipt" %}
+            {% set titulo_estado = "Pedido recibido" %}
+            {% set texto_estado = "Hemos recibido tu pedido y pronto comenzaremos a procesarlo." %}
+
+        {% endif %}
+
+
+
+        <div class="estado-destacado">
+
+            <div class="destacado-contenido">
+
+                <div class="destacado-icono">
+
+                    <i class="bi {{ icono_estado }}"></i>
+
+                </div>
+
+
+                <div class="destacado-texto">
+
+                    <small>
+                        Estado actual
+                    </small>
+
+                    <strong>
+                        {{ titulo_estado }}
+                    </strong>
+
+                    <p>
+                        {{ texto_estado }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TÍTULO DE RECORRIDO
+        ================================================== -->
+
+        <div class="ruta-titulo">
+
+            <h2>
+                Recorrido de tu pedido
+            </h2>
+
+            <span>
+                Estado actualizado
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             RUTA VISUAL
+        ================================================== -->
+
+        <div class="ruta-visual">
+
+            <div class="ruta-linea"></div>
+
+
+            {% if pedido.estado == 'Recibido' %}
+
+                {% set progreso = '0%' %}
+
+            {% elif pedido.estado == 'Pagado' %}
+
+                {% set progreso = '20%' %}
+
+            {% elif pedido.estado == 'Preparando' %}
+
+                {% set progreso = '40%' %}
+
+            {% elif pedido.estado == 'Listo' %}
+
+                {% set progreso = '60%' %}
+
+            {% elif pedido.estado == 'En camino' %}
+
+                {% set progreso = '80%' %}
+
+            {% elif pedido.estado == 'Entregado' %}
+
+                {% set progreso = '100%' %}
+
+            {% else %}
+
+                {% set progreso = '0%' %}
+
+            {% endif %}
+
+
+            <div
+                class="ruta-linea-activa"
+                style="--progreso: {{ progreso }};"
+            ></div>
+
+
+
+            <!-- =================================================
+                 PASO 1
+            ================================================== -->
+
+            <div
+                class="ruta-paso
+                {% if pedido.estado in ['Recibido', 'Pagado', 'Preparando', 'Listo', 'En camino', 'Entregado'] %}
+                    completado
+                {% endif %}"
+            >
+
+                <div class="ruta-icono">
+
+                    <i class="bi bi-receipt"></i>
+
+                </div>
+
+
+                <div class="ruta-info">
+
+                    <strong>
+                        Pedido recibido
+                    </strong>
+
+                    <span>
+                        Hemos recibido correctamente tu pedido.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PASO 2
+            ================================================== -->
+
+            <div
+                class="ruta-paso
+                {% if pedido.estado in ['Pagado', 'Preparando', 'Listo', 'En camino', 'Entregado'] %}
+                    completado
+                {% endif %}"
+            >
+
+                <div class="ruta-icono">
+
+                    <i class="bi bi-credit-card"></i>
+
+                </div>
+
+
+                <div class="ruta-info">
+
+                    <strong>
+                        Pago confirmado
+                    </strong>
+
+                    <span>
+                        Tu método de pago fue registrado.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PASO 3
+            ================================================== -->
+
+            <div
+                class="ruta-paso
+                {% if pedido.estado in ['Preparando', 'Listo', 'En camino', 'Entregado'] %}
+                    completado
+                {% endif %}"
+            >
+
+                <div class="ruta-icono">
+
+                    <i class="bi bi-fire"></i>
+
+                </div>
+
+
+                <div class="ruta-info">
+
+                    <strong>
+                        Preparando
+                    </strong>
+
+                    <span>
+                        Nuestro equipo está preparando tu pedido.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PASO 4
+            ================================================== -->
+
+            <div
+                class="ruta-paso
+                {% if pedido.estado in ['Listo', 'En camino', 'Entregado'] %}
+                    completado
+                {% endif %}"
+            >
+
+                <div class="ruta-icono">
+
+                    <i class="bi bi-box-seam"></i>
+
+                </div>
+
+
+                <div class="ruta-info">
+
+                    <strong>
+                        Pedido listo
+                    </strong>
+
+                    <span>
+                        Tu pedido está listo para continuar con la entrega.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PASO 5
+            ================================================== -->
+
+            <div
+                class="ruta-paso
+                {% if pedido.estado == 'En camino' %}
+                    actual
+                {% elif pedido.estado == 'Entregado' %}
+                    completado
+                {% endif %}"
+            >
+
+                <div class="ruta-icono">
+
+                    <i class="bi bi-bicycle"></i>
+
+                </div>
+
+
+                <div class="ruta-info">
+
+                    <strong>
+                        En camino
+                    </strong>
+
+                    <span>
+                        El motorizado se dirige hacia tu dirección.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PASO 6
+            ================================================== -->
+
+            <div
+                class="ruta-paso
+                {% if pedido.estado == 'Entregado' %}
+                    actual
+                {% endif %}"
+            >
+
+                <div class="ruta-icono">
+
+                    <i class="bi bi-house-check-fill"></i>
+
+                </div>
+
+
+                <div class="ruta-info">
+
+                    <strong>
+                        Entregado
+                    </strong>
+
+                    <span>
+                        Tu pedido llegó a su destino.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MENSAJE
+        ================================================== -->
+
+        <div class="mensaje-seguimiento">
+
+            {% if pedido.estado == 'En camino' %}
+
+                <i class="bi bi-bicycle"></i>
+
+                <div>
+
+                    <strong>
+                        Tu pedido está en camino.
+                    </strong>
+
+                    <br>
+
+                    El motorizado ya salió con tu pedido
+                    y se dirige hacia la dirección registrada.
+
+                </div>
+
+
+            {% elif pedido.estado == 'Listo' %}
+
+                <i class="bi bi-box-seam"></i>
+
+                <div>
+
+                    <strong>
+                        Tu pedido está listo.
+                    </strong>
+
+                    <br>
+
+                    Pronto continuará con el proceso de entrega.
+
+                </div>
+
+
+            {% elif pedido.estado == 'Preparando' %}
+
+                <i class="bi bi-fire"></i>
+
+                <div>
+
+                    <strong>
+                        Estamos preparando tu pedido.
+                    </strong>
+
+                    <br>
+
+                    Nuestro equipo está trabajando para que
+                    tu pedido esté listo lo antes posible.
+
+                </div>
+
+
+            {% elif pedido.estado == 'Entregado' %}
+
+                <i class="bi bi-check-circle-fill"></i>
+
+                <div>
+
+                    <strong>
+                        ¡Pedido entregado!
+                    </strong>
+
+                    <br>
+
+                    Gracias por confiar en Crocant's.
+                    ¡Esperamos volver a atenderte pronto!
+
+                </div>
+
+
+            {% else %}
+
+                <i class="bi bi-info-circle-fill"></i>
+
+                <div>
+
+                    <strong>
+                        Estamos procesando tu pedido.
+                    </strong>
+
+                    <br>
+
+                    Aquí podrás consultar cómo avanza
+                    hasta completar la entrega.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- =================================================
+             INFORMACIÓN EXTRA
+        ================================================== -->
+
+        <div class="info-extra">
+
+            <div class="info-box">
+
+                <small>
+                    Pedido
+                </small>
+
+                <strong>
+                    #{{ pedido.id }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <small>
+                    Estado
+                </small>
+
+                <strong>
+                    {{ pedido.estado }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BOTONES
+        ================================================== -->
+
+        <div class="acciones">
+
+            <a
+                href="/mis_pedidos"
+                class="btn-principal"
+            >
+
+                <i class="bi bi-list-ul"></i>
+
+                VER MIS PEDIDOS
+
+            </a>
+
+
+            <a
+                href="/carta"
+                class="btn-secundario"
+            >
+
+                <i class="bi bi-journal-text"></i>
+
+                VOLVER A LA CARTA
+
+            </a>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     BOOTSTRAP JS
+====================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+></script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>
