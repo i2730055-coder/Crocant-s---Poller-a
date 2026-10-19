@@ -1,0 +1,859 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos para llevar | Crocant's</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        :root {
+            --naranja: #f58220;
+            --naranja-hover: #df6d10;
+            --naranja-claro: #fff1e5;
+            --texto: #292524;
+            --gris: #78716c;
+            --borde: #e9e5e1;
+            --fondo: #f7f5f2;
+            --blanco: #fff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--fondo);
+            color: var(--texto);
+            font-family: -apple-system, BlinkMacSystemFont,
+                         "Segoe UI", Arial, sans-serif;
+        }
+
+        a { text-decoration: none; }
+        button, input { font: inherit; }
+
+        .pagina {
+            max-width: 1450px;
+            margin: auto;
+            padding: 34px;
+        }
+
+        .encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .titulo-seccion {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .titulo-icono {
+            width: 62px;
+            height: 62px;
+            display: grid;
+            place-items: center;
+            border-radius: 18px;
+            background: var(--naranja-claro);
+            font-size: 30px;
+        }
+
+        .titulo-seccion h1 {
+            margin: 0 0 7px;
+            font-size: clamp(25px, 3vw, 34px);
+            font-weight: 800;
+        }
+
+        .titulo-seccion p {
+            margin: 0;
+            color: var(--gris);
+            font-size: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            min-height: 45px;
+            padding: 12px 18px;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .btn-naranja {
+            background: var(--naranja);
+            color: white;
+        }
+
+        .btn-naranja:hover {
+            background: var(--naranja-hover);
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        .btn-claro {
+            background: white;
+            color: var(--texto);
+            border-color: var(--borde);
+        }
+
+        .banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+            padding: 32px;
+            margin-bottom: 26px;
+            color: white;
+            border-radius: 23px;
+            background:
+                radial-gradient(circle at 90% 10%,
+                    rgba(245,130,32,.25), transparent 30%),
+                linear-gradient(120deg, #171310, #292019);
+        }
+
+        .banner-contenido { max-width: 720px; }
+
+        .banner-etiqueta {
+            display: inline-flex;
+            padding: 7px 11px;
+            margin-bottom: 13px;
+            border: 1px solid rgba(245,130,32,.35);
+            border-radius: 30px;
+            background: rgba(245,130,32,.12);
+            color: #ffb36d;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .banner h2 {
+            margin: 0 0 12px;
+            font-size: clamp(24px, 3vw, 32px);
+        }
+
+        .banner p {
+            margin: 0;
+            color: #d2cbc5;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .banner-ilustracion {
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            width: 108px;
+            height: 108px;
+            border-radius: 28px;
+            background: rgba(245,130,32,.12);
+            font-size: 53px;
+        }
+
+        .rejilla {
+            display: grid;
+            grid-template-columns: minmax(0,1.5fr) minmax(260px,.8fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .tarjeta {
+            min-width: 0;
+            padding: 27px;
+            border: 1px solid var(--borde);
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 6px 20px rgba(36,25,15,.035);
+        }
+
+        .tarjeta-cabecera {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .tarjeta-cabecera h3 {
+            margin: 0 0 7px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .tarjeta-cabecera p {
+            margin: 0;
+            color: var(--gris);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .etiqueta {
+            padding: 7px 10px;
+            border-radius: 30px;
+            background: var(--naranja-claro);
+            color: #bd5b0a;
+            font-size: 11px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 19px;
+        }
+
+        .campo label {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .campo input {
+            width: 100%;
+            min-height: 45px;
+            padding: 12px 14px;
+            outline: none;
+            border: 1px solid #ded8d2;
+            border-radius: 11px;
+            background: white;
+        }
+
+        .campo input:focus,
+        .cantidad-control input:focus,
+        .buscador-productos:focus-within {
+            border-color: var(--naranja);
+            box-shadow: 0 0 0 3px rgba(245,130,32,.12);
+        }
+
+        .ayuda {
+            color: var(--gris);
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .separador {
+            height: 1px;
+            margin: 22px 0;
+            background: var(--borde);
+        }
+
+        .aviso {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 15px;
+            margin-bottom: 16px;
+            border: 1px solid #f3dfca;
+            border-radius: 13px;
+            background: #fff9f3;
+            color: #79502e;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .buscador-productos {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 14px;
+            margin-bottom: 12px;
+            min-height: 52px;
+            border: 1px solid #ded8d2;
+            border-radius: 13px;
+            background: white;
+        }
+
+        .buscador-productos input {
+            flex: 1;
+            width: 100%;
+            min-width: 0;
+            padding: 14px 0;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--texto);
+        }
+
+        .buscador-productos input:focus {
+            box-shadow: none;
+        }
+
+        .contador-productos {
+            flex-shrink: 0;
+            color: var(--gris);
+            font-size: 11px;
+        }
+
+        .catalogo {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 12px;
+        }
+
+        .producto {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 0;
+            padding: 15px;
+            border: 1px solid var(--borde);
+            border-radius: 14px;
+            background: white;
+        }
+
+        .producto[hidden],
+        .sin-resultados[hidden] {
+            display: none !important;
+        }
+
+        .producto-nombre {
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1.4;
+            overflow-wrap: anywhere;
+        }
+
+        .producto-precio {
+            color: var(--naranja-hover);
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .producto-stock {
+            color: var(--gris);
+            font-size: 11px;
+        }
+
+        .cantidad-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .cantidad-control input {
+            width: 80px;
+            min-width: 0;
+            padding: 9px;
+            border: 1px solid #ded8d2;
+            border-radius: 9px;
+            text-align: center;
+        }
+
+        .cantidad-control label {
+            color: var(--gris);
+            font-size: 12px;
+        }
+
+        .sin-resultados {
+            padding: 25px 15px;
+            border: 1px dashed var(--borde);
+            border-radius: 13px;
+            color: var(--gris);
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .total-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 18px;
+            margin-top: 22px;
+            border-radius: 13px;
+            background: #fff7ef;
+        }
+
+        .total-box span {
+            color: #79502e;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .total-box strong {
+            color: var(--naranja-hover);
+            font-size: 24px;
+        }
+
+        .acciones {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .resumen-icono {
+            display: grid;
+            place-items: center;
+            width: 49px;
+            height: 49px;
+            margin-bottom: 15px;
+            border-radius: 14px;
+            background: var(--naranja-claro);
+            font-size: 25px;
+        }
+
+        .resumen h3 {
+            margin: 0 0 8px;
+            font-size: 19px;
+        }
+
+        .resumen > p {
+            margin: 0;
+            color: var(--gris);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .paso {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .paso-numero {
+            display: grid;
+            place-items: center;
+            width: 29px;
+            height: 29px;
+            flex-shrink: 0;
+            border-radius: 9px;
+            background: var(--naranja-claro);
+            color: var(--naranja-hover);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .paso strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        .paso span {
+            display: block;
+            color: var(--gris);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .estado-sin-mesa {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px;
+            margin-top: 20px;
+            border: 1px solid #ccebd9;
+            border-radius: 11px;
+            background: #f0fbf4;
+            color: #187447;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .pie {
+            padding-top: 24px;
+            color: #a8a29e;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        @media (max-width: 850px) {
+            .pagina { padding: 22px; }
+            .rejilla { grid-template-columns: 1fr; }
+            .banner { padding: 25px; }
+            .banner-ilustracion {
+                width: 78px;
+                height: 78px;
+                font-size: 38px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .pagina { padding: 17px 13px; }
+            .titulo-icono {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+            }
+            .banner { padding: 22px; }
+            .banner-ilustracion { display: none; }
+            .tarjeta { padding: 20px; }
+            .catalogo { grid-template-columns: 1fr; }
+            .encabezado > .btn,
+            .acciones .btn { width: 100%; }
+            .contador-productos { max-width: 90px; text-align: right; }
+        }
+    </style>
+</head>
+
+<body>
+<main class="pagina">
+
+    <header class="encabezado">
+        <div class="titulo-seccion">
+            <div class="titulo-icono">🛍️</div>
+            <div>
+                <h1>Pedidos para llevar</h1>
+                <p>Atención presencial sin asignación de mesa.</p>
+            </div>
+        </div>
+
+        <a href="{{ url_for('panel_mozo') }}" class="btn btn-claro">
+            ← Volver al panel
+        </a>
+    </header>
+
+    <section class="banner">
+        <div class="banner-contenido">
+            <span class="banner-etiqueta">● MODALIDAD PRESENCIAL</span>
+            <h2>Una atención rápida y sencilla</h2>
+            <p>
+                Registra las compras de los clientes que desean llevar
+                su pedido. El pedido quedará disponible para caja.
+                No se asignará una mesa.
+            </p>
+        </div>
+        <div class="banner-ilustracion">🍗</div>
+    </section>
+
+    <section class="rejilla">
+        <div class="tarjeta">
+            <div class="tarjeta-cabecera">
+                <div>
+                    <h3>Registrar nuevo pedido</h3>
+                    <p>Ingresa los datos del cliente y selecciona los productos.</p>
+                </div>
+                <span class="etiqueta">PARA LLEVAR</span>
+            </div>
+
+            {% with mensajes = get_flashed_messages(with_categories=true) %}
+                {% if mensajes %}
+                    {% for categoria, mensaje in mensajes %}
+                        <div class="aviso" role="alert">
+                            <span>
+                                {% if categoria == 'success' %}✓{% else %}⚠️{% endif %}
+                            </span>
+                            <div>{{ mensaje }}</div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST"
+                  action="{{ url_for('mozo_para_llevar') }}"
+                  id="formPedido">
+
+                <div class="campo">
+                    <label for="nombre_cliente">
+                        Nombre del cliente <span class="ayuda">(opcional)</span>
+                    </label>
+                    <input type="text"
+                           id="nombre_cliente"
+                           name="nombre_cliente"
+                           placeholder="Ej. Juan Pérez"
+                           autocomplete="name"
+                           maxlength="120">
+                </div>
+
+                <div class="campo">
+                    <label for="telefono_cliente">
+                        Teléfono <span class="ayuda">(opcional)</span>
+                    </label>
+                    <input type="tel"
+                           id="telefono_cliente"
+                           name="telefono_cliente"
+                           placeholder="Número de contacto"
+                           autocomplete="tel"
+                           maxlength="20">
+                </div>
+
+                <div class="separador"></div>
+
+                <div class="tarjeta-cabecera">
+                    <div>
+                        <h3>La carta completa</h3>
+                        <p>Busca por nombre o categoría y selecciona las cantidades.</p>
+                    </div>
+                </div>
+
+                <div class="buscador-productos">
+                    <span aria-hidden="true">🔎</span>
+                    <input type="search"
+                           id="buscarProducto"
+                           placeholder="Buscar pollo, papas, bebidas..."
+                           autocomplete="off"
+                           aria-label="Buscar productos de la carta">
+                    <span id="contadorProductos" class="contador-productos"></span>
+                </div>
+
+                {% if productos %}
+                    <div class="catalogo" id="catalogoProductos">
+                        {% for producto in productos %}
+                            <article class="producto"
+                                     data-nombre="{{ producto.nombre|default('', true)|lower|e }}"
+                                     data-categoria="{{ producto.categoria|default('', true)|lower|e }}">
+
+                                <div class="producto-nombre">
+                                    {{ producto.nombre }}
+                                </div>
+
+                                <div class="producto-precio">
+                                    S/ {{ '%.2f'|format(producto.precio|float) }}
+                                </div>
+
+                                <div class="producto-stock">
+                                    {% if producto.equivalencia_pollo is not none %}
+                                        Stock de pollo compartido
+                                    {% else %}
+                                        Stock registrado:
+                                        {{ producto.stock if producto.stock is not none else 0 }}
+                                    {% endif %}
+                                </div>
+
+                                <div class="cantidad-control">
+                                    <label for="cantidad_{{ producto.id }}">Cantidad</label>
+                                    <input type="number"
+                                           id="cantidad_{{ producto.id }}"
+                                           name="cantidad_{{ producto.id }}"
+                                           class="cantidad-producto"
+                                           min="0"
+                                           step="1"
+                                           value="0"
+                                           inputmode="numeric"
+                                           data-precio="{{ producto.precio }}"
+                                           aria-label="Cantidad de {{ producto.nombre }}">
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+
+                    <div class="sin-resultados" id="sinResultados" hidden>
+                        No se encontraron productos. Prueba con otro nombre o categoría.
+                    </div>
+                {% else %}
+                    <div class="aviso" role="alert">
+                        <span>⚠️</span>
+                        <div>
+                            No se encontraron productos. Comprueba que la ruta
+                            Flask envíe todos los registros de la tabla
+                            <strong>productos</strong> en la variable
+                            <strong>productos</strong>.
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="total-box">
+                    <span>Total estimado</span>
+                    <strong id="totalPedido">S/ 0.00</strong>
+                </div>
+
+                <p class="ayuda">
+                    El servidor debe validar los precios, las cantidades y
+                    el stock antes de registrar el pedido.
+                </p>
+
+                <div class="acciones">
+                    <a href="{{ url_for('panel_mozo') }}" class="btn btn-claro">
+                        Cancelar
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-naranja"
+                            id="btnRegistrar"
+                            {% if not productos %}disabled{% endif %}>
+                        🛍️ Registrar pedido
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <aside class="tarjeta resumen">
+            <div class="resumen-icono">📋</div>
+            <h3>Flujo del pedido</h3>
+            <p>El pedido se registra para que el cajero pueda cobrarlo.</p>
+
+            <div class="paso">
+                <div class="paso-numero">1</div>
+                <div>
+                    <strong>Registrar productos</strong>
+                    <span>El mozo selecciona los productos y las cantidades.</span>
+                </div>
+            </div>
+
+            <div class="paso">
+                <div class="paso-numero">2</div>
+                <div>
+                    <strong>Enviar a caja</strong>
+                    <span>El pedido queda registrado con su número y total.</span>
+                </div>
+            </div>
+
+            <div class="paso">
+                <div class="paso-numero">3</div>
+                <div>
+                    <strong>Realizar el cobro</strong>
+                    <span>El cajero registra el pago y genera el ticket.</span>
+                </div>
+            </div>
+
+            <div class="estado-sin-mesa">
+                ✓ Sin mesa · Pedido para llevar
+            </div>
+        </aside>
+    </section>
+
+    <footer class="pie">
+        Crocant's · Pollería &amp; Restaurante
+    </footer>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const formulario = document.getElementById('formPedido');
+    const buscador = document.getElementById('buscarProducto');
+    const catalogo = document.getElementById('catalogoProductos');
+    const contador = document.getElementById('contadorProductos');
+    const sinResultados = document.getElementById('sinResultados');
+    const totalElemento = document.getElementById('totalPedido');
+    const botonRegistrar = document.getElementById('btnRegistrar');
+
+    const cantidades = Array.from(
+        document.querySelectorAll('.cantidad-producto')
+    );
+
+    const tarjetas = catalogo
+        ? Array.from(catalogo.querySelectorAll('.producto'))
+        : [];
+
+    function normalizar(texto) {
+        return String(texto || '')
+            .toLocaleLowerCase('es')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .trim();
+    }
+
+    function filtrarProductos() {
+        const texto = normalizar(buscador ? buscador.value : '');
+        let visibles = 0;
+
+        tarjetas.forEach(function (tarjeta) {
+            const nombre = normalizar(tarjeta.dataset.nombre);
+            const categoria = normalizar(tarjeta.dataset.categoria);
+
+            const coincide =
+                nombre.includes(texto) ||
+                categoria.includes(texto);
+
+            tarjeta.hidden = !coincide;
+
+            if (coincide) {
+                visibles++;
+            }
+        });
+
+        if (contador) {
+            contador.textContent =
+                visibles + (visibles === 1 ? ' producto' : ' productos');
+        }
+
+        if (sinResultados) {
+            sinResultados.hidden = visibles !== 0;
+        }
+    }
+
+    function calcularTotal() {
+        let total = 0;
+        let hayProductos = false;
+
+        cantidades.forEach(function (input) {
+            const cantidad = Number(input.value);
+            const precio = Number(input.dataset.precio);
+
+            if (!Number.isInteger(cantidad) || cantidad < 0) {
+                input.setCustomValidity('Ingresa una cantidad entera igual o mayor que cero.');
+                return;
+            }
+
+            input.setCustomValidity('');
+
+            if (cantidad > 0) {
+                hayProductos = true;
+                total += cantidad * (Number.isFinite(precio) ? precio : 0);
+            }
+        });
+
+        totalElemento.textContent = 'S/ ' + total.toFixed(2);
+
+        if (botonRegistrar) {
+            botonRegistrar.disabled = !hayProductos;
+        }
+    }
+
+    if (buscador) {
+        buscador.addEventListener('input', filtrarProductos);
+    }
+
+    cantidades.forEach(function (input) {
+        input.addEventListener('input', calcularTotal);
+        input.addEventListener('change', calcularTotal);
+    });
+
+    formulario.addEventListener('submit', function (evento) {
+        let hayProductos = false;
+
+        for (const input of cantidades) {
+            if (!input.reportValidity()) {
+                evento.preventDefault();
+                input.focus();
+                return;
+            }
+
+            if (Number(input.value) > 0) {
+                hayProductos = true;
+            }
+        }
+
+        if (!hayProductos) {
+            evento.preventDefault();
+            alert('Selecciona al menos un producto para registrar el pedido.');
+            return;
+        }
+
+        if (!confirm('¿Deseas registrar este pedido para llevar?')) {
+            evento.preventDefault();
+        }
+    });
+
+    filtrarProductos();
+    calcularTotal();
+});
+</script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+</html>
+```

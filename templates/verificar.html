@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificar código - Crocant's</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="login">
+
+<div class="contenedor-principal">
+
+    <div class="contenido contenido-login">
+
+        <h3 class="titulo-login">📧 Verificar código</h3>
+
+        <p class="texto-login text-center mb-4">
+            Hemos enviado un código de verificación a tu correo.
+        </p>
+
+        <form method="POST">
+
+            <input type="text"
+                   name="codigo"
+                   class="input-pro mb-3"
+                   placeholder="Ingresa el código"
+                   maxlength="6"
+                   required>
+
+            <button type="submit" class="btn-pro btn-main w-100">
+                ✅ Verificar código
+            </button>
+
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="/registro" class="link-pro">
+                ⬅ Volver al registro
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+</html> 

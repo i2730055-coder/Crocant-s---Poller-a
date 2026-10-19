@@ -1,0 +1,3128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Panel del Pollero | Crocant's</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        :root {
+
+            --negro: #100d0a;
+            --negro-2: #17120e;
+
+            --naranja: #ff7a00;
+            --naranja-claro: #ff8a1f;
+            --naranja-suave: #fff0e2;
+            --naranja-borde: #ffd1ad;
+
+            --blanco: #ffffff;
+
+            --gris: #747b8a;
+
+            --borde: #e8e3de;
+
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(255,122,0,.07),
+                    transparent 25%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #f8f8f8,
+                    #ffffff
+                );
+
+            color: #171717;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 365px;
+
+            height: 100vh;
+
+            padding:
+                36px 22px 25px;
+
+            background:
+
+                radial-gradient(
+                    circle at 85% 12%,
+                    rgba(255,122,0,.12),
+                    transparent 25%
+                ),
+
+                linear-gradient(
+                    180deg,
+                    #17130f 0%,
+                    #0d0b09 100%
+                );
+
+            border-right:
+                1px solid
+                rgba(255,255,255,.06);
+
+            box-shadow:
+                8px 0 35px
+                rgba(0,0,0,.15);
+
+            z-index: 100;
+
+        }
+
+
+        .logo-area {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+
+            padding:
+                0 14px 32px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.10);
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .logo-icon {
+
+            width: 68px;
+            height: 68px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255,122,0,.10);
+
+            border:
+                1px solid
+                rgba(255,122,0,.55);
+
+            font-size: 32px;
+
+        }
+
+
+        .logo-text h2 {
+
+            margin: 0;
+
+            color: #ffffff;
+
+            font-size: 25px;
+
+            font-weight: 800;
+
+        }
+
+
+        .logo-text span {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: #85817d;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 1.4px;
+
+        }
+
+
+        .sesion {
+
+            margin:
+                0 2px 32px;
+
+            padding: 20px;
+
+            background:
+                rgba(255,255,255,.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius: 18px;
+
+        }
+
+
+        .sesion-icon {
+
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,122,0,.12);
+
+            color: #ffffff;
+
+            font-size: 23px;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .sesion-label {
+
+            margin-bottom: 6px;
+
+            color: #77716b;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            letter-spacing: 1.5px;
+
+        }
+
+
+        .sesion-email {
+
+            color: #ffffff;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            word-break: break-word;
+
+        }
+
+
+        .menu-titulo {
+
+            margin:
+                0 14px 10px;
+
+            color: #716b65;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            letter-spacing: 1.5px;
+
+        }
+
+
+        .menu {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 6px;
+
+        }
+
+
+        .menu a {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding:
+                15px 18px;
+
+            color: #a8a39d;
+
+            text-decoration: none;
+
+            border-radius: 15px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                .25s ease;
+
+        }
+
+
+        .menu-icon {
+
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            font-size: 18px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .menu a:hover {
+
+            color: #ffffff;
+
+            background:
+                rgba(255,255,255,.055);
+
+            transform:
+                translateX(3px);
+
+        }
+
+
+        .menu a.activo {
+
+            color: #ffffff;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,122,0,.18),
+                    rgba(255,122,0,.08)
+                );
+
+            box-shadow:
+                inset 3px 0 0
+                var(--naranja);
+
+        }
+
+
+        .menu a.activo .menu-icon {
+
+            background:
+                rgba(255,122,0,.13);
+
+        }
+
+
+        .cerrar {
+
+            position: absolute;
+
+            left: 22px;
+            right: 22px;
+
+            bottom: 24px;
+
+            color: #9b9590 !important;
+
+            border-radius: 12px;
+
+        }
+
+
+        .cerrar:hover {
+
+            color: #ff8a1f !important;
+
+            background:
+                rgba(255,122,0,.08) !important;
+
+        }
+
+
+        /* =====================================================
+           CONTENIDO
+        ===================================================== */
+
+        .contenido {
+
+            margin-left: 365px;
+
+            min-height: 100vh;
+
+            padding:
+                50px 70px 70px;
+
+        }
+
+
+        .vista {
+
+            display: none;
+
+            animation:
+                aparecer .25s ease;
+
+        }
+
+
+        .vista.activa {
+
+            display: block;
+
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(8px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        .cabecera {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 30px;
+
+            margin-bottom: 40px;
+
+        }
+
+
+        .titulo h1 {
+
+            margin: 0;
+
+            color: #161616;
+
+            font-size: 42px;
+
+            line-height: 1.1;
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+
+        }
+
+
+        .titulo h1 span {
+
+            color:
+                var(--naranja);
+
+        }
+
+
+        .titulo p {
+
+            margin:
+                12px 0 0;
+
+            color:
+                var(--gris);
+
+            font-size: 17px;
+
+        }
+
+
+        .usuario {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding:
+                13px 22px 13px 13px;
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.05);
+
+        }
+
+
+        .avatar {
+
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background:
+                var(--naranja-suave);
+
+            border:
+                1px solid
+                var(--naranja-borde);
+
+            font-size: 28px;
+
+        }
+
+
+        .usuario strong {
+
+            color: #202020;
+
+            font-size: 16px;
+
+        }
+
+
+        .usuario small {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color:
+                var(--gris);
+
+            font-size: 13px;
+
+        }
+
+
+        /* =====================================================
+           ESTADÍSTICAS
+        ===================================================== */
+
+        .estadisticas {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 24px;
+
+            margin-top: 30px;
+
+        }
+
+
+        .stat {
+
+            min-height: 190px;
+
+            padding: 28px;
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,.035);
+
+        }
+
+
+        .stat:first-child {
+
+            border-color:
+                #ffc99e;
+
+        }
+
+
+        .stat-icon {
+
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
+            border-radius: 16px;
+
+            background:
+                var(--naranja-suave);
+
+            border:
+                1px solid
+                var(--naranja-borde);
+
+            font-size: 27px;
+
+        }
+
+
+        .stat h3 {
+
+            margin: 0;
+
+            color:
+                var(--naranja);
+
+            font-size: 34px;
+
+            font-weight: 800;
+
+        }
+
+
+        .stat p {
+
+            margin:
+                6px 0 0;
+
+            color:
+                var(--gris);
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =====================================================
+           TÍTULOS
+        ===================================================== */
+
+        .seccion-titulo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin-bottom: 22px;
+
+            color: #171717;
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+        }
+
+
+        .seccion-titulo::before {
+
+            content: "";
+
+            width: 55px;
+
+            height: 4px;
+
+            border-radius: 5px;
+
+            background:
+                var(--naranja);
+
+        }
+
+
+        /* =====================================================
+           PEDIDOS
+        ===================================================== */
+
+        .pedidos {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(340px, 1fr)
+                );
+
+            gap: 22px;
+
+        }
+
+
+        .pedido {
+
+            padding: 24px;
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,.035);
+
+            transition:
+                .25s ease;
+
+        }
+
+
+        .pedido:hover {
+
+            transform:
+                translateY(-4px);
+
+            border-color:
+                #ffc99e;
+
+            box-shadow:
+                0 18px 40px
+                rgba(0,0,0,.08);
+
+        }
+
+
+        .pedido-cabecera {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .pedido-info h3 {
+
+            margin:
+                10px 0 0;
+
+            color: #202020;
+
+            font-size: 20px;
+
+        }
+
+
+        .pedido-info p {
+
+            margin:
+                6px 0 0;
+
+            color:
+                var(--gris);
+
+            font-size: 13px;
+
+        }
+
+
+        /* =====================================================
+           ORIGEN
+        ===================================================== */
+
+        .origen {
+
+            display: inline-block;
+
+            padding:
+                7px 11px;
+
+            border-radius: 8px;
+
+            background:
+                var(--naranja-suave);
+
+            color:
+                var(--naranja);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: .7px;
+
+        }
+
+
+        .origen.delivery {
+
+            background:
+                #eaf3ff;
+
+            color:
+                #1670d2;
+
+        }
+
+
+        .origen.mesa {
+
+            background:
+                #fff0e2;
+
+            color:
+                #ff7a00;
+
+        }
+
+
+        .origen.recojo {
+
+            background:
+                #edf8ef;
+
+            color:
+                #258b45;
+
+        }
+
+
+        .origen.llevar {
+
+            background:
+                #f1edff;
+
+            color:
+                #6846c7;
+
+        }
+
+
+        /* =====================================================
+           ESTADOS
+        ===================================================== */
+
+        .estado {
+
+            padding:
+                8px 12px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+
+        }
+
+
+        .estado-pendiente {
+
+            background:
+                #fff4d8;
+
+            color:
+                #c98700;
+
+        }
+
+
+        .estado-preparando {
+
+            background:
+                var(--naranja-suave);
+
+            color:
+                var(--naranja);
+
+        }
+
+
+        .estado-listo {
+
+            background:
+                #e9f8ed;
+
+            color:
+                #269447;
+
+        }
+
+
+        /* =====================================================
+           PRODUCTOS
+        ===================================================== */
+
+        .productos {
+
+            padding-top: 8px;
+
+            border-top:
+                1px solid
+                #eee8e3;
+
+        }
+
+
+        .producto {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding:
+                13px 0;
+
+            border-bottom:
+                1px solid
+                #f0ece8;
+
+        }
+
+
+        .producto:last-child {
+
+            border-bottom:
+                none;
+
+        }
+
+
+        .producto-nombre {
+
+            color:
+                #353535;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        .cantidad {
+
+            min-width: 42px;
+
+            padding:
+                6px 9px;
+
+            text-align: center;
+
+            border-radius: 9px;
+
+            background:
+                var(--naranja-suave);
+
+            color:
+                var(--naranja);
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           DATOS DELIVERY
+        ===================================================== */
+
+        .datos-delivery {
+
+            margin-top: 15px;
+
+            padding: 14px;
+
+            background:
+                #f8f9fb;
+
+            border-radius: 12px;
+
+            border:
+                1px solid
+                #eceef1;
+
+            font-size: 13px;
+
+            color: #555;
+
+        }
+
+
+        .datos-delivery div {
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .datos-delivery div:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        /* =====================================================
+           BOTONES
+        ===================================================== */
+
+        .botones {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .botones button {
+
+            flex: 1;
+
+            min-width: 100px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            padding:
+                11px 13px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                .2s ease;
+
+        }
+
+
+        .botones button:hover {
+
+            transform:
+                translateY(-2px);
+
+            opacity: .9;
+
+        }
+
+
+        .btn-pendiente {
+
+            background:
+                #e6a400;
+
+            color:
+                #ffffff;
+
+        }
+
+
+        .btn-preparando {
+
+            background:
+                var(--naranja);
+
+            color:
+                #ffffff;
+
+        }
+
+
+        .btn-listo {
+
+            background:
+                #2ca44f;
+
+            color:
+                #ffffff;
+
+        }
+
+
+        /* =====================================================
+           SIN PEDIDOS
+        ===================================================== */
+
+        .sin-pedidos {
+
+            grid-column:
+                1 / -1;
+
+            min-height: 300px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding:
+                45px 30px;
+
+            text-align: center;
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius: 22px;
+
+        }
+
+
+        .sin-pedidos-icono {
+
+            width: 90px;
+            height: 90px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
+            border-radius: 20px;
+
+            background:
+                var(--naranja-suave);
+
+            border:
+                1px solid
+                var(--naranja-borde);
+
+            font-size: 42px;
+
+        }
+
+
+        .sin-pedidos h3 {
+
+            margin:
+                0 0 8px;
+
+            color:
+                #202020;
+
+            font-size: 25px;
+
+        }
+
+
+        .sin-pedidos p {
+
+            margin: 0;
+
+            color:
+                var(--gris);
+
+            font-size: 15px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1200px) {
+
+            .sidebar {
+
+                width: 300px;
+
+            }
+
+            .contenido {
+
+                margin-left: 300px;
+
+                padding: 40px;
+
+            }
+
+            .estadisticas {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+
+                width: 90px;
+
+                padding:
+                    25px 12px;
+
+            }
+
+
+            .logo-area {
+
+                justify-content: center;
+
+                padding:
+                    0 0 25px;
+
+            }
+
+
+            .logo-text,
+            .sesion,
+            .menu-titulo,
+            .menu-text {
+
+                display: none;
+
+            }
+
+
+            .logo-icon {
+
+                width: 58px;
+                height: 58px;
+
+            }
+
+
+            .menu a {
+
+                justify-content: center;
+
+                padding: 14px;
+
+            }
+
+
+            .menu-icon {
+
+                width: 40px;
+                height: 40px;
+
+            }
+
+
+            .cerrar {
+
+                left: 10px;
+                right: 10px;
+
+            }
+
+
+            .contenido {
+
+                margin-left: 90px;
+
+                padding:
+                    35px 25px;
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .contenido {
+
+                padding:
+                    25px 18px;
+
+            }
+
+
+            .cabecera {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+            }
+
+
+            .titulo h1 {
+
+                font-size: 32px;
+
+            }
+
+
+            .usuario {
+
+                width: 100%;
+
+            }
+
+
+            .pedidos {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .pedido-cabecera {
+
+                flex-direction: column;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar">
+
+
+    <div class="logo-area">
+
+        <div class="logo-icon">
+            🍗
+        </div>
+
+
+        <div class="logo-text">
+
+            <h2>
+                Crocant's
+            </h2>
+
+            <span>
+                POLLERÍA & RESTAURANTE
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="sesion">
+
+        <div class="sesion-icon">
+            👤
+        </div>
+
+
+        <div class="sesion-label">
+            SESIÓN ACTUAL
+        </div>
+
+
+        <div class="sesion-email">
+
+            {{ session.get('usuario', 'Pollero') }}
+
+        </div>
+
+    </div>
+
+
+    <div class="menu-titulo">
+        OPERACIONES
+    </div>
+
+
+    <nav class="menu">
+
+
+        <a
+            href="#"
+            id="menuInicio"
+            class="activo"
+            onclick="mostrarInicio(); return false;"
+        >
+
+            <span class="menu-icon">
+                🏠
+            </span>
+
+            <span class="menu-text">
+                Inicio
+            </span>
+
+        </a>
+
+
+        <a
+            href="#"
+            id="menuCocina"
+            onclick="mostrarCocina(); return false;"
+        >
+
+            <span class="menu-icon">
+                🔥
+            </span>
+
+            <span class="menu-text">
+                Cocina
+            </span>
+
+        </a>
+
+
+    </nav>
+
+
+    <a
+        href="/logout"
+        class="menu cerrar"
+    >
+
+        <span class="menu-icon">
+            🚪
+        </span>
+
+        <span class="menu-text">
+            Cerrar sesión
+        </span>
+
+    </a>
+
+
+</aside>
+
+
+
+<!-- =========================================================
+     CONTENIDO
+========================================================= -->
+
+<main class="contenido">
+
+
+    <!-- =====================================================
+         INICIO
+    ====================================================== -->
+
+    <section
+        id="inicio"
+        class="vista activa"
+    >
+
+
+        <header class="cabecera">
+
+
+            <div class="titulo">
+
+                <h1>
+
+                    Bienvenido,
+                    <span>Pollero</span>
+
+                </h1>
+
+
+                <p>
+
+                    Este es el panel principal
+                    del área de cocina.
+
+                </p>
+
+            </div>
+
+
+            <div class="usuario">
+
+                <div class="avatar">
+                    🍗
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Pollero
+                    </strong>
+
+                    <small>
+                        Área de cocina
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+        <div class="seccion-titulo">
+
+            Resumen de cocina
+
+        </div>
+
+
+        <section class="estadisticas">
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    📋
+                </div>
+
+
+                <h3 id="totalPedidos">
+                    0
+                </h3>
+
+
+                <p>
+                    Pedidos recibidos
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    🔥
+                </div>
+
+
+                <h3 id="pedidosPreparando">
+                    0
+                </h3>
+
+
+                <p>
+                    Pedidos preparando
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+
+                <h3 id="pedidosListos">
+                    0
+                </h3>
+
+
+                <p>
+                    Pedidos listos
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         COCINA
+    ====================================================== -->
+
+    <section
+        id="cocina"
+        class="vista"
+    >
+
+
+        <header class="cabecera">
+
+
+            <div class="titulo">
+
+                <h1>
+                    <span>Cocina</span>
+                </h1>
+
+
+                <p>
+
+                    Gestiona y prepara los pedidos
+                    recibidos.
+
+                </p>
+
+            </div>
+
+
+            <div class="usuario">
+
+                <div class="avatar">
+                    🔥
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Pollero
+                    </strong>
+
+
+                    <small>
+                        Pedidos de cocina
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+        <div class="seccion-titulo">
+
+            Pedidos de pollo
+
+        </div>
+
+
+        <section
+            id="pedidos"
+            class="pedidos"
+        >
+
+            <div class="sin-pedidos">
+
+                <div class="sin-pedidos-icono">
+                    🍗
+                </div>
+
+
+                <h3>
+                    Cargando pedidos...
+                </h3>
+
+
+                <p>
+                    Consultando los pedidos de cocina.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </section>
+
+
+</main>
+
+
+
+<script>
+
+
+/* =========================================================
+   ESCAPAR HTML
+========================================================= */
+
+function escaparHTML(texto) {
+
+    const div =
+        document.createElement("div");
+
+
+    div.textContent =
+        texto ?? "";
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   NORMALIZAR TEXTO
+========================================================= */
+
+function normalizarTexto(valor) {
+
+    return String(valor || "")
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        );
+
+}
+
+
+/* =========================================================
+   OBTENER TIPO DEL PEDIDO
+========================================================= */
+
+function obtenerTipoPedido(pedido) {
+
+    const valores = [
+
+        pedido.tipo,
+
+        pedido.tipo_pedido,
+
+        pedido.origen,
+
+        pedido.nombre_origen
+
+    ];
+
+
+    for (
+        const valor
+        of valores
+    ) {
+
+        const tipo =
+            normalizarTexto(valor);
+
+
+        if (
+
+            tipo.includes("delivery") ||
+
+            tipo.includes("domicilio") ||
+
+            tipo.includes("envio")
+
+        ) {
+
+            return "delivery";
+
+        }
+
+
+        if (
+
+            tipo.includes("recojo") ||
+
+            tipo.includes("recoger") ||
+
+            tipo.includes("pickup")
+
+        ) {
+
+            return "recojo";
+
+        }
+
+
+        if (
+
+            tipo.includes("llevar") ||
+
+            tipo.includes("take away") ||
+
+            tipo.includes("takeaway")
+
+        ) {
+
+            return "llevar";
+
+        }
+
+
+        if (
+
+            tipo.includes("mesa") ||
+
+            tipo.includes("salon") ||
+
+            tipo.includes("local")
+
+        ) {
+
+            if (
+                pedido.mesa_id ||
+                pedido.mesa ||
+                pedido.mesa_numero
+            ) {
+
+                return "mesa";
+
+            }
+
+        }
+
+    }
+
+
+    if (
+
+        pedido.mesa_id ||
+
+        pedido.mesa ||
+
+        pedido.mesa_numero
+
+    ) {
+
+        return "mesa";
+
+    }
+
+
+    if (
+
+        pedido.direccion &&
+
+        String(
+            pedido.direccion
+        ).trim() !== ""
+
+    ) {
+
+        return "delivery";
+
+    }
+
+
+    return "desconocido";
+
+}
+
+
+/* =========================================================
+   TEXTO DEL ORIGEN
+========================================================= */
+
+function textoOrigen(pedido) {
+
+    const tipo =
+        obtenerTipoPedido(pedido);
+
+
+    if (
+        tipo === "delivery"
+    ) {
+
+        return "🚚 DELIVERY";
+
+    }
+
+
+    if (
+        tipo === "mesa"
+    ) {
+
+        return "🪑 MESA";
+
+    }
+
+
+    if (
+        tipo === "recojo"
+    ) {
+
+        return "🏪 RECOJO EN LOCAL";
+
+    }
+
+
+    if (
+        tipo === "llevar"
+    ) {
+
+        return "📦 PARA LLEVAR";
+
+    }
+
+
+    return "📋 PEDIDO";
+
+}
+
+
+/* =========================================================
+   CLASE DEL ORIGEN
+========================================================= */
+
+function claseOrigen(pedido) {
+
+    return obtenerTipoPedido(
+        pedido
+    );
+
+}
+
+
+/* =========================================================
+   NOMBRE DEL LUGAR
+========================================================= */
+
+function nombreLugar(pedido) {
+
+    const tipo =
+        obtenerTipoPedido(pedido);
+
+
+    if (
+        tipo === "delivery"
+    ) {
+
+        return (
+
+            pedido.cliente ||
+
+            "Cliente delivery"
+
+        );
+
+    }
+
+
+    if (
+        tipo === "mesa"
+    ) {
+
+        const mesa =
+
+            pedido.mesa_numero ||
+
+            pedido.mesa;
+
+
+        if (mesa) {
+
+            return (
+                "Mesa " + mesa
+            );
+
+        }
+
+
+        return "Mesa sin número";
+
+    }
+
+
+    if (
+        tipo === "recojo"
+    ) {
+
+        return (
+
+            pedido.cliente ||
+
+            "Cliente - Recojo"
+
+        );
+
+    }
+
+
+    if (
+        tipo === "llevar"
+    ) {
+
+        return (
+
+            pedido.cliente ||
+
+            "Cliente - Para llevar"
+
+        );
+
+    }
+
+
+    return (
+
+        pedido.cliente ||
+
+        "Cliente"
+
+    );
+
+}
+
+
+/* =========================================================
+   CREAR TARJETA
+   =========================================================
+   
+   IMPORTANTE:
+   
+   Aquí NO agrupamos.
+   
+   Flask ya manda:
+   
+   {
+       pedido_id: 52,
+       productos: [
+           {
+               producto: "...",
+               cantidad: 2
+           },
+           {
+               producto: "...",
+               cantidad: 1
+           }
+       ]
+   }
+   
+========================================================= */
+
+function crearPedidoHTML(pedido) {
+
+
+    const estado = (
+
+        pedido.estado ||
+
+        "pendiente"
+
+    )
+    .toLowerCase()
+    .trim();
+
+
+    let claseEstado =
+        "estado-pendiente";
+
+
+    let nombreEstado =
+        "PENDIENTE";
+
+
+    if (
+        estado === "preparando"
+    ) {
+
+        claseEstado =
+            "estado-preparando";
+
+        nombreEstado =
+            "PREPARANDO";
+
+    }
+
+
+    if (
+        estado === "listo"
+    ) {
+
+        claseEstado =
+            "estado-listo";
+
+        nombreEstado =
+            "LISTO";
+
+    }
+
+
+    /* =====================================================
+       ID DEL PEDIDO PRINCIPAL
+    ===================================================== */
+
+    const numeroPedido =
+        pedido.pedido_id ??
+        pedido.pedido_real_id ??
+        pedido.id ??
+        null;
+
+
+    if (numeroPedido === null || numeroPedido === "") {
+        return "";
+    }
+
+    /* =====================================================
+       TIPO
+    ===================================================== */
+
+    const tipo =
+        obtenerTipoPedido(pedido);
+
+
+    /* =====================================================
+       PRODUCTOS
+    ===================================================== */
+
+    const productos =
+
+        Array.isArray(
+            pedido.productos
+        )
+
+            ?
+
+            pedido.productos
+
+            :
+
+            [];
+
+
+    /* =====================================================
+       HTML DE PRODUCTOS
+    ===================================================== */
+
+    const productosHTML =
+
+        productos
+            .map(
+                function(producto) {
+
+
+                    const nombre =
+
+                        producto.producto ||
+
+                        "Pollo";
+
+
+                    const cantidad =
+
+                        producto.cantidad != null
+
+                            ?
+
+                            producto.cantidad
+
+                            :
+
+                            1;
+
+
+                    return `
+
+                        <div class="producto">
+
+                            <span class="producto-nombre">
+
+                                🍗
+
+                                ${escaparHTML(
+                                    nombre
+                                )}
+
+                            </span>
+
+
+                            <span class="cantidad">
+
+                                x${escaparHTML(
+                                    String(
+                                        cantidad
+                                    )
+                                )}
+
+                            </span>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+
+    /* =====================================================
+       OBSERVACIONES
+    ===================================================== */
+
+    const observaciones =
+
+        productos
+
+            .filter(
+                function(producto) {
+
+                    return (
+
+                        producto.observacion &&
+
+                        String(
+                            producto.observacion
+                        ).trim() !== ""
+
+                    );
+
+                }
+            )
+
+            .map(
+                function(producto) {
+
+                    return `
+
+                        <div style="
+                            padding-top:10px;
+                            color:#747b8a;
+                            font-size:13px;
+                        ">
+
+                            📝
+
+                            ${escaparHTML(
+                                producto.observacion
+                            )}
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+
+    /* =====================================================
+       DELIVERY
+    ===================================================== */
+
+    let datosDelivery = "";
+
+
+    if (
+        tipo === "delivery"
+    ) {
+
+        datosDelivery = `
+
+            <div class="datos-delivery">
+
+
+                <div>
+
+                    📍
+
+                    <strong>
+                        Dirección:
+                    </strong>
+
+                    ${escaparHTML(
+                        pedido.direccion ||
+                        "No registrada"
+                    )}
+
+                </div>
+
+
+                ${
+                    pedido.referencia
+                    ?
+                    `
+
+                        <div>
+
+                            📝
+
+                            <strong>
+                                Referencia:
+                            </strong>
+
+                            ${escaparHTML(
+                                pedido.referencia
+                            )}
+
+                        </div>
+
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    pedido.telefono
+                    ?
+                    `
+
+                        <div>
+
+                            📞
+
+                            <strong>
+                                Teléfono:
+                            </strong>
+
+                            ${escaparHTML(
+                                pedido.telefono
+                            )}
+
+                        </div>
+
+                    `
+                    :
+                    ""
+                }
+
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       TARJETA COMPLETA
+    ===================================================== */
+
+    return `
+
+        <article
+            class="pedido"
+
+            data-id="${escaparHTML(
+                String(numeroPedido)
+            )}"
+
+            data-estado="${escaparHTML(
+                estado
+            )}"
+        >
+
+
+            <div class="pedido-cabecera">
+
+
+                <div class="pedido-info">
+
+
+                    <span
+                        class="
+                            origen
+                            ${claseOrigen(pedido)}
+                        "
+                    >
+
+                        ${textoOrigen(
+                            pedido
+                        )}
+
+                    </span>
+
+
+                    <h3>
+
+                        ${escaparHTML(
+                            nombreLugar(pedido)
+                        )}
+
+                    </h3>
+
+
+                    <p>
+
+                        Pedido #
+
+                        ${escaparHTML(
+                            String(numeroPedido)
+                        )}
+
+                    </p>
+
+
+                </div>
+
+
+                <span
+                    class="
+                        estado
+                        ${claseEstado}
+                    "
+                >
+
+                    ${nombreEstado}
+
+                </span>
+
+
+            </div>
+
+
+            <div class="productos">
+
+                ${
+                    productosHTML ||
+
+                    `
+
+                        <div class="producto">
+
+                            <span class="producto-nombre">
+                                🍗 Sin productos
+                            </span>
+
+                        </div>
+
+                    `
+                }
+
+
+                ${observaciones}
+
+            </div>
+
+
+            ${datosDelivery}
+
+
+            <div class="botones">
+
+
+                <button
+                    class="btn-pendiente"
+
+                    onclick="
+                        cambiarEstado(
+                            ${Number(numeroPedido)},
+                            'pendiente'
+                        )
+                    "
+                >
+
+                    Pendiente
+
+                </button>
+
+
+                <button
+                    class="btn-preparando"
+
+                    onclick="
+                        cambiarEstado(
+                            ${Number(numeroPedido)},
+                            'preparando'
+                        )
+                    "
+                >
+
+                    🔥 Preparando
+
+                </button>
+
+
+                <button
+                    class="btn-listo"
+
+                    onclick="
+                        cambiarEstado(
+                            ${Number(numeroPedido)},
+                            'listo'
+                        )
+                    "
+                >
+
+                    ✅ Listo
+
+                </button>
+
+
+            </div>
+
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================================================
+   ACTUALIZAR RESUMEN
+========================================================= */
+
+function actualizarResumen() {
+
+
+    const pedidos =
+
+        document.querySelectorAll(
+            ".pedido"
+        );
+
+
+    let preparando = 0;
+
+    let listos = 0;
+
+
+    pedidos.forEach(
+        function(pedido) {
+
+
+            const estado =
+                pedido.dataset.estado;
+
+
+            if (
+                estado === "preparando"
+            ) {
+
+                preparando++;
+
+            }
+
+
+            if (
+                estado === "listo"
+            ) {
+
+                listos++;
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "totalPedidos"
+    ).textContent =
+        pedidos.length;
+
+
+    document.getElementById(
+        "pedidosPreparando"
+    ).textContent =
+        preparando;
+
+
+    document.getElementById(
+        "pedidosListos"
+    ).textContent =
+        listos;
+
+}
+
+
+/* =========================================================
+   CARGAR PEDIDOS
+========================================================= */
+
+async function cargarPedidos() {
+
+
+    try {
+
+
+        const respuesta =
+
+            await fetch(
+                "/api/pollero/pedidos",
+                {
+
+                    method: "GET",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    cache:
+                        "no-store"
+
+                }
+            );
+
+
+        if (
+            !respuesta.ok
+        ) {
+
+            throw new Error(
+                "No se pudieron cargar los pedidos."
+            );
+
+        }
+
+
+        const datos =
+
+            await respuesta.json();
+
+
+        console.log(
+            "================================"
+        );
+
+
+        console.log(
+            "🍗 PEDIDOS DEL POLLERO:"
+        );
+
+
+        console.log(
+            datos
+        );
+
+
+        console.log(
+            "================================"
+        );
+
+
+        if (
+            datos.ok === false
+        ) {
+
+            throw new Error(
+
+                datos.mensaje ||
+
+                "Error del servidor."
+
+            );
+
+        }
+
+
+        /* =================================================
+           IMPORTANTE:
+           
+           NO HACEMOS:
+           
+           agruparPedidos()
+           
+           Flask YA AGRUPÓ.
+           ================================================= */
+
+        const pedidos =
+
+            Array.isArray(
+                datos.pedidos
+            )
+
+                ?
+
+                datos.pedidos
+
+                :
+
+                [];
+
+
+        const contenedor =
+
+            document.getElementById(
+                "pedidos"
+            );
+
+
+        if (
+            pedidos.length === 0
+        ) {
+
+
+            contenedor.innerHTML = `
+
+                <div class="sin-pedidos">
+
+
+                    <div class="sin-pedidos-icono">
+                        🍗
+                    </div>
+
+
+                    <h3>
+                        No hay pedidos
+                    </h3>
+
+
+                    <p>
+
+                        Los pedidos de pollo
+                        aparecerán aquí.
+
+                    </p>
+
+
+                </div>
+
+            `;
+
+
+        }
+
+        else {
+
+
+            contenedor.innerHTML =
+
+                pedidos
+
+                    .map(
+                        crearPedidoHTML
+                    )
+
+                    .join("");
+
+        }
+
+
+        actualizarResumen();
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "❌ Error cargando pedidos:",
+            error
+        );
+
+
+        document.getElementById(
+            "pedidos"
+        ).innerHTML = `
+
+            <div class="sin-pedidos">
+
+
+                <div class="sin-pedidos-icono">
+                    ⚠️
+                </div>
+
+
+                <h3>
+                    Error al cargar
+                </h3>
+
+
+                <p>
+
+                    No se pudieron cargar
+                    los pedidos de cocina.
+
+                </p>
+
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   CAMBIAR ESTADO
+========================================================= */
+
+async function cambiarEstado(
+    pedidoId,
+    estado
+) {
+
+
+    if (
+        !pedidoId
+    ) {
+
+        alert(
+            "No se encontró el ID del pedido."
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "Actualizando pedido:",
+        pedidoId,
+        "Estado:",
+        estado
+    );
+
+
+    try {
+
+
+        const respuesta =
+
+            await fetch(
+
+                `/api/pollero/pedido/${pedidoId}/estado`,
+
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    body:
+
+                        JSON.stringify({
+
+                            estado:
+                                estado
+
+                        })
+
+                }
+
+            );
+
+
+        const datos =
+
+            await respuesta.json();
+
+
+        console.log(
+            "RESPUESTA ESTADO:",
+            datos
+        );
+
+
+        if (
+
+            !respuesta.ok ||
+
+            datos.ok === false
+
+        ) {
+
+
+            alert(
+
+                datos.mensaje ||
+
+                "No se pudo actualizar el estado."
+
+            );
+
+
+            return;
+
+        }
+
+
+        /*
+         * Volver a cargar.
+         *
+         * Así todos los productos del mismo
+         * pedido muestran el mismo estado.
+         */
+
+        await cargarPedidos();
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "❌ Error actualizando estado:",
+            error
+        );
+
+
+        alert(
+            "Error de conexión con el servidor."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MOSTRAR INICIO
+========================================================= */
+
+function mostrarInicio() {
+
+
+    document.getElementById(
+        "inicio"
+    ).classList.add(
+        "activa"
+    );
+
+
+    document.getElementById(
+        "cocina"
+    ).classList.remove(
+        "activa"
+    );
+
+
+    document.getElementById(
+        "menuInicio"
+    ).classList.add(
+        "activo"
+    );
+
+
+    document.getElementById(
+        "menuCocina"
+    ).classList.remove(
+        "activo"
+    );
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* =========================================================
+   MOSTRAR COCINA
+========================================================= */
+
+function mostrarCocina() {
+
+
+    document.getElementById(
+        "inicio"
+    ).classList.remove(
+        "activa"
+    );
+
+
+    document.getElementById(
+        "cocina"
+    ).classList.add(
+        "activa"
+    );
+
+
+    document.getElementById(
+        "menuCocina"
+    ).classList.add(
+        "activo"
+    );
+
+
+    document.getElementById(
+        "menuInicio"
+    ).classList.remove(
+        "activo"
+    );
+
+
+    cargarPedidos();
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* =========================================================
+   CARGA INICIAL
+========================================================= */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function() {
+
+
+        mostrarInicio();
+
+
+        cargarPedidos();
+
+
+    }
+
+);
+
+
+/* =========================================================
+   ACTUALIZACIÓN AUTOMÁTICA
+========================================================= */
+
+setInterval(
+
+    cargarPedidos,
+
+    5000
+
+);
+
+
+</script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>

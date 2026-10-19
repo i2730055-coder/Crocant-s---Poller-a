@@ -1,0 +1,4178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mesa {{ mesa.numero }} | Crocant's</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        :root {
+
+            --naranja: #f47b20;
+            --naranja-2: #e9680d;
+            --crema: #fff0e2;
+            --crema-2: #fff7ef;
+
+            --negro: #171411;
+            --texto: #171717;
+
+            --gris: #777d8a;
+            --gris-claro: #a0a4ac;
+
+            --fondo: #f7f7f6;
+
+            --blanco: #ffffff;
+
+            --borde: #e8e4df;
+
+            --verde: #168545;
+
+        }
+
+
+        /* =====================================================
+           CUERPO
+        ===================================================== */
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: var(--texto);
+
+            background:
+
+                radial-gradient(
+                    circle at 8% 0%,
+                    rgba(244,123,32,.10),
+                    transparent 25%
+                ),
+
+                radial-gradient(
+                    circle at 95% 85%,
+                    rgba(244,123,32,.07),
+                    transparent 28%
+                ),
+
+                var(--fondo);
+        }
+
+
+        /* =====================================================
+           CONTENEDOR
+        ===================================================== */
+
+        .contenido {
+
+            width: 100%;
+
+            max-width: 1550px;
+
+            margin: auto;
+
+            padding:
+                35px 45px 60px;
+        }
+
+
+        /* =====================================================
+           CABECERA
+        ===================================================== */
+
+        .cabecera {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 25px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .titulo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 17px;
+        }
+
+
+        .titulo-icon {
+
+            width: 62px;
+            height: 62px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            background:
+                var(--crema);
+
+            border:
+                1px solid
+                #ffd8ba;
+
+            border-radius: 17px;
+
+            color:
+                var(--naranja);
+
+            box-shadow:
+                0 8px 22px
+                rgba(244,123,32,.08);
+        }
+
+
+        .titulo-icon svg {
+
+            width: 32px;
+            height: 32px;
+        }
+
+
+        .titulo h1 {
+
+            margin: 0;
+
+            font-size: 38px;
+
+            line-height: 1;
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+        }
+
+
+        .titulo h1 span {
+
+            color:
+                var(--naranja);
+        }
+
+
+        .titulo p {
+
+            margin:
+                9px 0 0;
+
+            color:
+                var(--gris);
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           BOTÓN VOLVER
+        ===================================================== */
+
+        .btn-volver {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding:
+                13px 20px;
+
+            background:
+                var(--blanco);
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius: 13px;
+
+            color:
+                var(--texto);
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 7px 20px
+                rgba(0,0,0,.04);
+
+            transition:
+                .25s ease;
+        }
+
+
+        .btn-volver:hover {
+
+            transform:
+                translateY(-2px);
+
+            color:
+                var(--naranja);
+
+            border-color:
+                #ffc99f;
+
+            box-shadow:
+                0 10px 25px
+                rgba(244,123,32,.10);
+        }
+
+
+        .btn-volver svg {
+
+            width: 18px;
+            height: 18px;
+        }
+
+
+        /* =====================================================
+           INFORMACIÓN DE LA MESA
+        ===================================================== */
+
+        .mesa-info {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding:
+                25px 28px;
+
+            margin-bottom: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #211a15,
+                    #171411
+                );
+
+            border-radius: 20px;
+
+            color: white;
+
+            box-shadow:
+                0 14px 35px
+                rgba(0,0,0,.10);
+        }
+
+
+        .mesa-info::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 240px;
+            height: 240px;
+
+            right: -90px;
+            top: -120px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(244,123,32,.24),
+                    transparent 68%
+                );
+        }
+
+
+        .mesa-info h2 {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin:
+                0 0 7px;
+
+            font-size: 24px;
+        }
+
+
+        .mesa-info h2 span {
+
+            color:
+                var(--naranja);
+        }
+
+
+        .mesa-info p {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin:
+                0 0 15px;
+
+            color:
+                #aaa49f;
+
+            font-size: 13px;
+        }
+
+
+        .estado {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                7px 12px;
+
+            border-radius: 30px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        .estado-dot {
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+        }
+
+
+        .estado.libre {
+
+            background:
+                #eaf8ef;
+
+            color:
+                #168545;
+        }
+
+
+        .estado.libre .estado-dot {
+
+            background:
+                #22b85a;
+        }
+
+
+        .estado.ocupada {
+
+            background:
+                #fff0ed;
+
+            color:
+                #d94a32;
+        }
+
+
+        .estado.ocupada .estado-dot {
+
+            background:
+                #ef5940;
+        }
+
+
+        /* =====================================================
+           CARTA + PEDIDO
+        ===================================================== */
+
+        .zona-mesa {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.65fr)
+                minmax(370px, .75fr);
+
+            gap: 25px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           PANEL CARTA
+        ===================================================== */
+
+        .carta-panel {
+
+            background:
+                var(--blanco);
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,.045);
+        }
+
+
+        .carta-cabecera {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding:
+                23px 25px;
+
+            background:
+                var(--blanco);
+
+            border-bottom:
+                1px solid
+                var(--borde);
+        }
+
+
+        .carta-titulo h2 {
+
+            margin: 0;
+
+            color:
+                var(--texto);
+
+            font-size: 23px;
+
+            font-weight: 800;
+        }
+
+
+        .carta-titulo h2 span {
+
+            color:
+                var(--naranja);
+        }
+
+
+        .carta-titulo p {
+
+            margin:
+                5px 0 0;
+
+            color:
+                var(--gris);
+
+            font-size: 12px;
+        }
+
+
+        .indicador-mesa {
+
+            padding:
+                9px 14px;
+
+            background:
+                var(--crema);
+
+            border:
+                1px solid
+                #ffd8ba;
+
+            border-radius: 11px;
+
+            color:
+                var(--naranja);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           CATEGORÍAS DE LA CARTA
+        ===================================================== */
+
+        .categorias-carta {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            padding: 18px 20px 0;
+        }
+
+        .btn-categoria {
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 14px;
+            padding: 14px 16px;
+            background: rgba(255,255,255,.05);
+            color: #ddd;
+            cursor: pointer;
+            text-align: left;
+            transition: .25s ease;
+            font-family: inherit;
+        }
+
+        .btn-categoria:hover {
+            border-color: rgba(255,122,0,.45);
+            background: rgba(255,122,0,.08);
+            transform: translateY(-1px);
+        }
+
+        .btn-categoria.activa {
+            border-color: #ff7a00;
+            background: rgba(255,122,0,.12);
+            box-shadow: 0 6px 18px rgba(255,122,0,.10);
+        }
+
+        .btn-categoria .categoria-icono {
+            font-size: 22px;
+            margin-right: 8px;
+        }
+
+        .btn-categoria .categoria-titulo {
+            display: inline;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .btn-categoria .categoria-descripcion {
+            display: block;
+            margin-top: 5px;
+            color: #999;
+            font-size: 11px;
+        }
+
+        .categoria-vacia {
+            grid-column: 1 / -1;
+            padding: 45px 20px;
+            text-align: center;
+            color: #999;
+            border: 1px dashed rgba(255,255,255,.12);
+            border-radius: 14px;
+            background: rgba(255,255,255,.025);
+        }
+
+
+        /* =====================================================
+           PRODUCTOS
+        ===================================================== */
+
+        .productos-contenedor {
+
+            padding:
+                22px;
+        }
+
+
+        .productos {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(210px, 1fr)
+                );
+
+            gap: 18px;
+        }
+
+
+        .producto {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                var(--blanco);
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 7px 22px
+                rgba(0,0,0,.035);
+
+            transition:
+                .25s ease;
+        }
+
+
+        .producto:hover {
+
+            transform:
+                translateY(-5px);
+
+            border-color:
+                #ffc99f;
+
+            box-shadow:
+                0 14px 30px
+                rgba(0,0,0,.08);
+        }
+
+
+        .producto-seleccionado {
+
+            border-color:
+                #ffb47d !important;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(244,123,32,.10),
+                0 12px 30px
+                rgba(0,0,0,.08);
+        }
+
+
+        .producto-imagen {
+
+            width: 100%;
+
+            height: 180px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f4f2ef;
+
+            overflow: hidden;
+
+            padding: 10px;
+        }
+
+
+        .producto-imagen img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+            object-position: center center;
+
+            display: block;
+
+            transition: transform .35s ease;
+        }
+
+
+        .producto:hover .producto-imagen img {
+
+            transform: scale(1.03);
+        }
+
+
+        .imagen-default {
+
+            font-size: 50px;
+        }
+
+
+        .producto-contenido {
+
+            padding:
+                16px;
+        }
+
+
+        .producto h3 {
+
+            margin:
+                0 0 9px;
+
+            color:
+                var(--texto);
+
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           CATEGORÍA
+        ===================================================== */
+
+        .categoria {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            padding:
+                5px 9px;
+
+            margin-bottom:
+                9px;
+
+            background:
+                #f4f2ef;
+
+            border-radius: 7px;
+
+            color:
+                #737373;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        .categoria-pollos {
+
+            background:
+                var(--crema);
+
+            color:
+                var(--naranja);
+        }
+
+
+        /* =====================================================
+           PRECIO
+        ===================================================== */
+
+        .precio {
+
+            margin-bottom:
+                6px;
+
+            color:
+                var(--naranja);
+
+            font-size: 19px;
+
+            font-weight: 800;
+        }
+
+
+        .stock {
+
+            margin-bottom:
+                13px;
+
+            color:
+                var(--gris);
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           AGREGAR
+        ===================================================== */
+
+        .btn-agregar {
+
+            width: 100%;
+
+            padding:
+                11px 14px;
+
+            border:
+                1px solid
+                var(--naranja);
+
+            border-radius: 10px;
+
+            background:
+                var(--naranja);
+
+            color:
+                white;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                .25s ease;
+        }
+
+
+        .btn-agregar:hover {
+
+            background:
+                var(--naranja-2);
+
+            border-color:
+                var(--naranja-2);
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 18px
+                rgba(244,123,32,.20);
+        }
+
+
+        /* =====================================================
+           PANEL PEDIDO
+        ===================================================== */
+
+        .pedido {
+
+            position: sticky;
+
+            top: 20px;
+
+            max-height:
+                calc(100vh - 40px);
+
+            overflow-y: auto;
+
+            padding:
+                22px;
+
+            background:
+                var(--blanco);
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0,0,0,.06);
+        }
+
+
+        .pedido::-webkit-scrollbar {
+
+            width: 6px;
+        }
+
+
+        .pedido::-webkit-scrollbar-thumb {
+
+            background:
+                #d9d4ce;
+
+            border-radius: 10px;
+        }
+
+
+        /* =====================================================
+           CABECERA PEDIDO
+        ===================================================== */
+
+        .pedido-cabecera {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding-bottom:
+                18px;
+
+            margin-bottom:
+                8px;
+
+            border-bottom:
+                1px solid
+                var(--borde);
+        }
+
+
+        .pedido-icono {
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 13px;
+
+            background:
+                var(--crema);
+
+            color:
+                var(--naranja);
+
+            font-size: 22px;
+        }
+
+
+        .pedido-cabecera h2 {
+
+            margin: 0;
+
+            color:
+                var(--texto);
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+
+        .pedido-cabecera h2 span {
+
+            color:
+                var(--naranja);
+        }
+
+
+        .pedido-cabecera p {
+
+            margin:
+                5px 0 0;
+
+            color:
+                var(--gris);
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           PEDIDO VACÍO
+        ===================================================== */
+
+        .pedido-vacio {
+
+            margin:
+                15px 0;
+
+            padding:
+                30px 15px;
+
+            text-align: center;
+
+            background:
+                var(--crema-2);
+
+            border:
+                1px dashed
+                #f4c9a7;
+
+            border-radius: 13px;
+
+            color:
+                var(--gris);
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           ITEM PEDIDO
+        ===================================================== */
+
+        .pedido-item {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 12px;
+
+            padding:
+                15px 0;
+
+            border-bottom:
+                1px solid
+                #eee9e4;
+        }
+
+
+        .pedido-item:last-child {
+
+            border-bottom:
+                none;
+        }
+
+
+        .pedido-nombre {
+
+            margin-bottom:
+                5px;
+
+            color:
+                var(--texto);
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+
+        .pedido-precio {
+
+            color:
+                var(--naranja);
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+
+        .pedido-item small {
+
+            display: block;
+
+            margin-top:
+                7px;
+
+            color:
+                var(--gris);
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           DESTINO
+        ===================================================== */
+
+        .destino {
+
+            display: inline-flex;
+
+            padding:
+                5px 8px;
+
+            border-radius: 7px;
+
+            font-size: 9px;
+
+            font-weight: 800;
+        }
+
+
+        .destino-pollero {
+
+            background:
+                var(--crema);
+
+            color:
+                var(--naranja);
+        }
+
+
+        .destino-cuenta {
+
+            background:
+                #f1f1ef;
+
+            color:
+                #777;
+        }
+
+
+        /* =====================================================
+           CANTIDAD
+        ===================================================== */
+
+        .cantidad-control {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top:
+                9px;
+        }
+
+
+        .cantidad-control button {
+
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius: 8px;
+
+            background:
+                #f5f3f0;
+
+            color:
+                var(--texto);
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            transition:
+                .2s;
+        }
+
+
+        .cantidad-control button:hover {
+
+            background:
+                var(--crema);
+
+            border-color:
+                #ffc99f;
+
+            color:
+                var(--naranja);
+        }
+
+
+        .cantidad {
+
+            min-width:
+                27px;
+
+            text-align:
+                center;
+
+            color:
+                var(--texto);
+
+            font-weight:
+                800;
+        }
+
+
+        .btn-eliminar {
+
+            background:
+                #fff0ed !important;
+
+            border-color:
+                #ffd1c8 !important;
+
+            color:
+                #df5942 !important;
+        }
+
+
+        .btn-eliminar:hover {
+
+            background:
+                #df5942 !important;
+
+            border-color:
+                #df5942 !important;
+
+            color:
+                white !important;
+        }
+
+
+        /* =====================================================
+           TOTAL
+        ===================================================== */
+
+        .total {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-top:
+                17px;
+
+            padding-top:
+                17px;
+
+            border-top:
+                2px solid
+                #eee8e2;
+
+            font-size:
+                20px;
+
+            font-weight:
+                800;
+        }
+
+
+        .total span:last-child {
+
+            color:
+                var(--naranja);
+
+            font-size:
+                22px;
+        }
+
+
+        /* =====================================================
+           BOTONES
+        ===================================================== */
+
+        .zona-botones {
+
+            display:
+                grid;
+
+            gap:
+                10px;
+
+            margin-top:
+                20px;
+        }
+
+
+        .btn-guardar-pedido,
+        .btn-generar-cuenta {
+
+            width: 100%;
+
+            padding:
+                14px;
+
+            border:
+                none;
+
+            border-radius:
+                11px;
+
+            color:
+                white;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            transition:
+                .25s ease;
+        }
+
+
+        .btn-guardar-pedido {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f47b20,
+                    #e9680d
+                );
+        }
+
+
+        .btn-generar-cuenta {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #168545,
+                    #25a65a
+                );
+        }
+
+
+        .btn-guardar-pedido:hover:not(:disabled),
+        .btn-generar-cuenta:hover:not(:disabled) {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 9px 22px
+                rgba(0,0,0,.12);
+        }
+
+
+        .btn-guardar-pedido:disabled,
+        .btn-generar-cuenta:disabled {
+
+            background:
+                #d8d5d1;
+
+            color:
+                #92908d;
+
+            cursor:
+                not-allowed;
+        }
+
+
+        #estadoGuardado {
+
+            min-height:
+                18px;
+
+            margin-top:
+                10px;
+
+            text-align:
+                center;
+
+            color:
+                var(--gris);
+
+            font-size:
+                11px;
+        }
+
+
+        /* =====================================================
+           SIN PRODUCTOS
+        ===================================================== */
+
+        .sin-productos {
+
+            padding:
+                50px 20px;
+
+            text-align:
+                center;
+
+            background:
+                var(--crema-2);
+
+            border:
+                1px solid
+                #f1dfd0;
+
+            border-radius:
+                15px;
+
+            color:
+                var(--gris);
+        }
+
+
+        .sin-productos h3 {
+
+            margin:
+                0 0 7px;
+
+            color:
+                var(--texto);
+        }
+
+
+        .sin-productos p {
+
+            margin:
+                0;
+
+            font-size:
+                12px;
+        }
+
+
+        /* =====================================================
+           MENSAJE
+        ===================================================== */
+
+        #mensaje {
+
+            position:
+                fixed;
+
+            right:
+                25px;
+
+            bottom:
+                25px;
+
+            display:
+                none;
+
+            max-width:
+                360px;
+
+            padding:
+                14px 18px;
+
+            background:
+                var(--blanco);
+
+            border:
+                1px solid
+                #ffd0ad;
+
+            border-left:
+                4px solid
+                var(--naranja);
+
+            border-radius:
+                12px;
+
+            color:
+                var(--texto);
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,.12);
+
+            z-index:
+                9999;
+        }
+
+
+        /* =====================================================
+           MODAL CUENTA
+        ===================================================== */
+
+        #cuentaModal {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            display:
+                none;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
+
+            background:
+                rgba(23,20,17,.55);
+
+            backdrop-filter:
+                blur(5px);
+
+            z-index:
+                10000;
+        }
+
+
+        .cuenta-contenido {
+
+            width:
+                100%;
+
+            max-width:
+                550px;
+
+            max-height:
+                90vh;
+
+            overflow-y:
+                auto;
+
+            padding:
+                30px;
+
+            background:
+                var(--blanco);
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius:
+                22px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.20);
+        }
+
+
+        .cuenta-cabecera {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            padding-bottom:
+                18px;
+
+            margin-bottom:
+                18px;
+
+            border-bottom:
+                1px solid
+                var(--borde);
+        }
+
+
+        .cuenta-cabecera h2 {
+
+            margin:
+                0;
+
+            color:
+                var(--texto);
+
+            font-size:
+                24px;
+        }
+
+
+        .cuenta-cabecera h2::first-letter {
+
+            color:
+                var(--naranja);
+        }
+
+
+        .btn-cerrar-cuenta {
+
+            width:
+                38px;
+
+            height:
+                38px;
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius:
+                10px;
+
+            background:
+                #f5f3f0;
+
+            color:
+                var(--texto);
+
+            font-size:
+                20px;
+
+            cursor:
+                pointer;
+        }
+
+
+        .btn-cerrar-cuenta:hover {
+
+            background:
+                var(--crema);
+
+            color:
+                var(--naranja);
+        }
+
+
+        .cuenta-info {
+
+            margin-bottom:
+                18px;
+
+            color:
+                var(--gris);
+
+            font-size:
+                13px;
+
+            line-height:
+                1.7;
+        }
+
+
+        .cuenta-info strong {
+
+            color:
+                var(--texto);
+
+            font-size:
+                17px;
+        }
+
+
+        .cuenta-linea {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding:
+                13px 0;
+
+            border-bottom:
+                1px solid
+                #eee9e4;
+        }
+
+
+        .cuenta-linea-nombre {
+
+            flex:
+                1;
+        }
+
+
+        .cuenta-linea-nombre strong {
+
+            color:
+                var(--texto);
+
+            font-size:
+                13px;
+        }
+
+
+        .cuenta-linea-nombre small {
+
+            color:
+                var(--gris);
+        }
+
+
+        .cuenta-linea-precio {
+
+            color:
+                var(--naranja);
+
+            font-weight:
+                800;
+
+            white-space:
+                nowrap;
+        }
+
+
+        .cuenta-total {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-top:
+                20px;
+
+            padding-top:
+                18px;
+
+            border-top:
+                2px solid
+                #f2ddd0;
+
+            font-size:
+                22px;
+
+            font-weight:
+                800;
+        }
+
+
+        .cuenta-total span:last-child {
+
+            color:
+                var(--naranja);
+        }
+
+
+        .cuenta-acciones {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                10px;
+
+            margin-top:
+                25px;
+        }
+
+
+        .btn-cuenta-accion {
+
+            width:
+                100%;
+
+            padding:
+                14px;
+
+            border:
+                none;
+
+            border-radius:
+                11px;
+
+            color:
+                white;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            transition:
+                .25s;
+        }
+
+
+        .btn-cuenta-accion:hover:not(:disabled) {
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .btn-enviar-caja {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #168545,
+                    #25a65a
+                );
+        }
+
+
+        .btn-cerrar {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f47b20,
+                    #e9680d
+                );
+        }
+
+
+        .btn-cuenta-accion:disabled {
+
+            background:
+                #d8d5d1;
+
+            color:
+                #92908d;
+
+            cursor:
+                not-allowed;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .contenido {
+
+                padding:
+                    30px;
+            }
+
+
+            .zona-mesa {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .pedido {
+
+                position:
+                    relative;
+
+                top:
+                    auto;
+
+                max-height:
+                    none;
+
+                order:
+                    2;
+            }
+
+
+            .carta-panel {
+
+                order:
+                    1;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .contenido {
+
+                padding:
+                    22px 16px 40px;
+            }
+
+
+            .cabecera {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+            }
+
+
+            .btn-volver {
+
+                width:
+                    100%;
+            }
+
+
+            .titulo h1 {
+
+                font-size:
+                    31px;
+            }
+
+
+            .carta-cabecera {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+
+
+            .indicador-mesa {
+
+                width:
+                    100%;
+
+                text-align:
+                    center;
+            }
+
+
+            .productos {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .cuenta-acciones {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="contenido">
+
+
+    <!-- =====================================================
+         CABECERA
+    ===================================================== -->
+
+    <div class="cabecera">
+
+
+        <div class="titulo">
+
+
+            <div class="titulo-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <rect
+                        x="3"
+                        y="5"
+                        width="18"
+                        height="5"
+                        rx="2"
+                    />
+
+                    <path d="M6 10v9"/>
+
+                    <path d="M18 10v9"/>
+
+                    <path d="M8 19h-3"/>
+
+                    <path d="M19 19h-3"/>
+
+                </svg>
+
+            </div>
+
+
+            <div>
+
+                <h1>
+
+                    Mesa
+                    <span>
+                        {{ mesa.numero }}
+                    </span>
+
+                </h1>
+
+                <p>
+                    Gestiona el consumo y registra
+                    los productos de esta mesa.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <a
+            href="{{ url_for('mozo_mesas') }}"
+            class="btn-volver"
+        >
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+
+                <path d="M19 12H5"/>
+
+                <path d="M12 19l-7-7 7-7"/>
+
+            </svg>
+
+            Volver a mesas
+
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         INFORMACIÓN MESA
+    ===================================================== -->
+
+    <div class="mesa-info">
+
+
+        <h2>
+
+            Mesa
+            <span>
+                {{ mesa.numero }}
+            </span>
+
+        </h2>
+
+
+        <p>
+
+            Continúa el pedido existente o agrega
+            nuevos productos para el cliente.
+
+        </p>
+
+
+        {% if mesa.estado and mesa.estado|lower|trim == 'ocupada' %}
+
+            <span class="estado ocupada">
+
+                <span class="estado-dot"></span>
+
+                Ocupada
+
+            </span>
+
+        {% else %}
+
+            <span class="estado libre">
+
+                <span class="estado-dot"></span>
+
+                Libre
+
+            </span>
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CARTA + PEDIDO
+    ===================================================== -->
+
+    <div class="zona-mesa">
+
+
+        <!-- =================================================
+             CARTA
+        ================================================= -->
+
+        <section class="carta-panel">
+
+
+            <div class="carta-cabecera">
+
+
+                <div class="carta-titulo">
+
+                    <h2>
+
+                        🍗
+                        <span>Carta</span>
+
+                    </h2>
+
+                    <p>
+                        Selecciona los productos
+                        para agregarlos al pedido.
+                    </p>
+
+                </div>
+
+
+                <div class="indicador-mesa">
+
+                    Mesa {{ mesa.numero }}
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="categorias-carta">
+
+                <button
+                    type="button"
+                    class="btn-categoria activa"
+                    data-categoria="bebidas"
+                >
+                    <span class="categoria-icono">🥤</span>
+                    <span class="categoria-titulo">Bebidas</span>
+                    <span class="categoria-descripcion">Bebidas, cócteles y postres</span>
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-categoria"
+                    data-categoria="comidas"
+                >
+                    <span class="categoria-icono">🍗</span>
+                    <span class="categoria-titulo">Comidas</span>
+                    <span class="categoria-descripcion">Pollos y complementos</span>
+                </button>
+
+            </div>
+
+
+            <div class="productos-contenedor">
+
+
+                {% if productos %}
+
+
+                    <div class="productos">
+
+
+                        {% for producto in productos %}
+
+                            {% set categoria_filtro = (producto.categoria or '')|lower|trim %}
+
+                            {% if categoria_filtro in ['bebidas', 'cocteles', 'cócteles', 'postres'] %}
+                                {% set grupo_carta = 'bebidas' %}
+                            {% else %}
+                                {% set grupo_carta = 'comidas' %}
+                            {% endif %}
+
+                            <div
+                                class="producto"
+                                id="producto-{{ producto.id }}"
+                                data-grupo="{{ grupo_carta }}"
+                            >
+
+
+                                <!-- IMAGEN -->
+
+                                <div class="producto-imagen">
+
+
+                                    {% if producto.imagen %}
+
+                                        {% set imagen_producto = producto.imagen|string|trim %}
+
+                                        {% if imagen_producto.startswith('img/') %}
+                                            <img
+                                                src="{{ url_for('static', filename=imagen_producto) }}"
+                                                alt="{{ producto.nombre }}"
+                                                loading="lazy"
+                                                onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;imagen-default&quot;>🍗</div>';"
+                                            >
+                                        {% elif imagen_producto.startswith('productos/') %}
+                                            <img
+                                                src="{{ url_for('static', filename='img/' ~ imagen_producto) }}"
+                                                alt="{{ producto.nombre }}"
+                                                loading="lazy"
+                                                onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;imagen-default&quot;>🍗</div>';"
+                                            >
+                                        {% else %}
+                                            <img
+                                                src="{{ url_for('static', filename='img/productos/' ~ imagen_producto) }}"
+                                                alt="{{ producto.nombre }}"
+                                                loading="lazy"
+                                                onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;imagen-default&quot;>🍗</div>';"
+                                            >
+                                        {% endif %}
+
+                                    {% else %}
+
+                                        <div class="imagen-default">
+                                            🍗
+                                        </div>
+
+                                    {% endif %}
+
+
+                                </div>
+
+
+
+                                <!-- INFORMACIÓN -->
+
+                                <div class="producto-contenido">
+
+
+                                    <h3>
+                                        {{ producto.nombre }}
+                                    </h3>
+
+
+
+                                    {% if producto.categoria %}
+
+                                        {% set categoria =
+                                            producto.categoria|lower|trim
+                                        %}
+
+
+                                        {% if categoria == 'pollos' %}
+
+                                            <div class="categoria categoria-pollos">
+                                                🔥 Pollos
+                                            </div>
+
+
+                                        {% elif categoria == 'bebidas' %}
+
+                                            <div class="categoria">
+                                                🥤 Bebidas
+                                            </div>
+
+
+                                        {% elif categoria == 'cocteles'
+                                              or categoria == 'cócteles' %}
+
+                                            <div class="categoria">
+                                                🍹 Cócteles
+                                            </div>
+
+
+                                        {% elif categoria == 'complementos' %}
+
+                                            <div class="categoria">
+                                                🍟 Complementos
+                                            </div>
+
+
+                                        {% elif categoria == 'postres' %}
+
+                                            <div class="categoria">
+                                                🍰 Postres
+                                            </div>
+
+
+                                        {% else %}
+
+                                            <div class="categoria">
+                                                {{ producto.categoria }}
+                                            </div>
+
+                                        {% endif %}
+
+                                    {% endif %}
+
+
+
+                                    <div class="precio">
+
+                                        S/
+                                        {{ "%.2f"|format(producto.precio|float) }}
+
+                                    </div>
+
+
+
+                                    <div class="stock">
+
+                                        Stock disponible:
+                                        {{ producto.stock_mostrar if producto.stock_mostrar is defined else producto.stock }}
+
+                                    </div>
+
+
+
+                                    <button
+                                        type="button"
+                                        class="btn-agregar"
+
+                                        data-producto-id="{{ producto.id }}"
+
+                                        data-producto-nombre="{{ producto.nombre }}"
+
+                                        data-producto-precio="{{ producto.precio }}"
+
+                                        data-producto-categoria="{{ producto.categoria or '' }}"
+                                    >
+
+                                        + Agregar al pedido
+
+                                    </button>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <div class="sin-productos">
+
+                        <h3>
+                            No hay productos disponibles
+                        </h3>
+
+                        <p>
+                            Actualmente no existen productos
+                            con stock disponible.
+                        </p>
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PEDIDO
+        ================================================= -->
+
+        <aside class="pedido">
+
+
+            <div class="pedido-cabecera">
+
+
+                <div class="pedido-icono">
+                    🛒
+                </div>
+
+
+                <div>
+
+                    <h2>
+
+                        Pedido —
+                        <span>
+                            Mesa {{ mesa.numero }}
+                        </span>
+
+                    </h2>
+
+                    <p>
+                        Productos actuales de esta mesa.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div id="listaPedido">
+
+                <p class="pedido-vacio">
+
+                    Todavía no has agregado productos
+                    a esta mesa.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- TOTAL -->
+
+            <div class="total">
+
+                <span>
+                    Total:
+                </span>
+
+                <span id="totalPedido">
+                    S/ 0.00
+                </span>
+
+            </div>
+
+
+
+            <!-- BOTONES -->
+
+            <div class="zona-botones">
+
+
+                <button
+                    type="button"
+                    id="btnGuardarPedido"
+                    class="btn-guardar-pedido"
+                    disabled
+                >
+
+                    💾 Guardar pedido
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnGenerarCuenta"
+                    class="btn-generar-cuenta"
+                    disabled
+                >
+
+                    🧾 Generar cuenta
+
+                </button>
+
+
+            </div>
+
+
+            <div id="estadoGuardado"></div>
+
+
+        </aside>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     MENSAJE
+===================================================== -->
+
+<div id="mensaje"></div>
+
+
+
+<!-- =====================================================
+     MODAL CUENTA
+===================================================== -->
+
+<div id="cuentaModal">
+
+
+    <div class="cuenta-contenido">
+
+
+        <div class="cuenta-cabecera">
+
+            <h2>
+                🧾 Cuenta
+            </h2>
+
+
+            <button
+                type="button"
+                class="btn-cerrar-cuenta"
+                id="btnCerrarCuenta"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <div class="cuenta-info">
+
+            <strong>
+                Crocant's
+            </strong>
+
+            <br>
+
+            Mesa {{ mesa.numero }}
+
+            <br>
+
+            <span id="fechaCuenta"></span>
+
+        </div>
+
+
+
+        <div id="detalleCuenta"></div>
+
+
+
+        <div class="cuenta-total">
+
+            <span>
+                TOTAL
+            </span>
+
+            <span id="totalCuenta">
+                S/ 0.00
+            </span>
+
+        </div>
+
+
+
+        <div class="cuenta-acciones">
+
+
+            <button
+                type="button"
+                class="btn-cuenta-accion btn-enviar-caja"
+                id="btnEnviarCaja"
+            >
+
+                🟢 Enviar a caja
+
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-cuenta-accion btn-cerrar"
+                id="btnCerrarCuenta2"
+            >
+
+                Cerrar
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     DATOS DE FLASK
+===================================================== -->
+
+<script id="pedido-data" type="application/json">
+
+{{ pedido_guardado | default([], true) | tojson }}
+
+</script>
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =====================================================
+       ELEMENTOS
+    ===================================================== */
+
+    const botonesAgregar =
+        document.querySelectorAll(".btn-agregar");
+
+    const botonesCategoria =
+        document.querySelectorAll(".btn-categoria");
+
+    const tarjetasProducto =
+        document.querySelectorAll(".producto");
+
+    const contenedorProductos =
+        document.querySelector(".productos");
+
+    const listaPedido =
+        document.getElementById("listaPedido");
+
+    const totalPedido =
+        document.getElementById("totalPedido");
+
+    const mensaje =
+        document.getElementById("mensaje");
+
+    const btnGuardarPedido =
+        document.getElementById("btnGuardarPedido");
+
+    const btnGenerarCuenta =
+        document.getElementById("btnGenerarCuenta");
+
+    const estadoGuardado =
+        document.getElementById("estadoGuardado");
+
+    const cuentaModal =
+        document.getElementById("cuentaModal");
+
+    const detalleCuenta =
+        document.getElementById("detalleCuenta");
+
+    const totalCuenta =
+        document.getElementById("totalCuenta");
+
+    const fechaCuenta =
+        document.getElementById("fechaCuenta");
+
+    const btnCerrarCuenta =
+        document.getElementById("btnCerrarCuenta");
+
+    const btnCerrarCuenta2 =
+        document.getElementById("btnCerrarCuenta2");
+
+    const btnEnviarCaja =
+        document.getElementById("btnEnviarCaja");
+
+
+
+    /* =====================================================
+       FILTRO DE LAS 2 CATEGORÍAS DE LA CARTA
+       Bebidas = bebidas + cócteles + postres
+       Comidas = pollos + complementos
+    ===================================================== */
+
+    /* =====================================================
+       ORDEN DE COMIDAS
+       Primero Pollos y después Complementos.
+    ===================================================== */
+
+    function ordenarComidas() {
+
+        if (!contenedorProductos) return;
+
+        const tarjetasComida = Array.from(
+            contenedorProductos.querySelectorAll('.producto[data-grupo="comidas"]')
+        );
+
+        tarjetasComida.sort(function (a, b) {
+
+            const categoriaA = String(
+                a.querySelector('.categoria')?.textContent || ''
+            ).toLowerCase().trim();
+
+            const categoriaB = String(
+                b.querySelector('.categoria')?.textContent || ''
+            ).toLowerCase().trim();
+
+            const prioridadA = categoriaA.includes('pollo') ? 1 : 2;
+            const prioridadB = categoriaB.includes('pollo') ? 1 : 2;
+
+            return prioridadA - prioridadB;
+        });
+
+        tarjetasComida.forEach(function (tarjeta) {
+            contenedorProductos.appendChild(tarjeta);
+        });
+    }
+
+
+    function filtrarCategoria(grupo) {
+
+        let visibles = 0;
+
+        tarjetasProducto.forEach(function (tarjeta) {
+
+            const pertenece =
+                tarjeta.dataset.grupo === grupo;
+
+            tarjeta.style.display =
+                pertenece ? "block" : "none";
+
+            if (pertenece) {
+                visibles++;
+            }
+        });
+
+        botonesCategoria.forEach(function (boton) {
+            boton.classList.toggle(
+                "activa",
+                boton.dataset.categoria === grupo
+            );
+        });
+
+        let mensajeVacio =
+            document.getElementById("categoriaVacia");
+
+        if (mensajeVacio) {
+            mensajeVacio.remove();
+        }
+
+        if (visibles === 0 && contenedorProductos) {
+            mensajeVacio =
+                document.createElement("div");
+
+            mensajeVacio.id = "categoriaVacia";
+            mensajeVacio.className = "categoria-vacia";
+            mensajeVacio.innerHTML =
+                grupo === "bebidas"
+                    ? "🥤 No hay bebidas, cócteles o postres disponibles."
+                    : "🍗 No hay pollos o complementos disponibles.";
+
+            contenedorProductos.appendChild(mensajeVacio);
+        }
+    }
+
+    botonesCategoria.forEach(function (boton) {
+
+        boton.addEventListener("click", function () {
+            filtrarCategoria(
+                boton.dataset.categoria
+            );
+        });
+    });
+
+    /* La carta inicia mostrando Bebidas. */
+    ordenarComidas();
+    filtrarCategoria("bebidas");
+
+
+    /* =====================================================
+       PEDIDO INICIAL
+    ===================================================== */
+
+    let pedido = [];
+
+    let pedidoModificado = false;
+
+    /*
+     * Cantidades que YA estaban guardadas en la mesa.
+     *
+     * Esto evita descontar dos veces el stock cuando el mozo
+     * vuelve a entrar a una mesa y guarda nuevamente el pedido.
+     *
+     * El backend recibe solamente lo NUEVO que se agrega.
+     */
+    let cantidadesGuardadas = {};
+
+
+    try {
+
+        const elementoPedido =
+            document.getElementById("pedido-data");
+
+        const pedidoGuardado =
+            JSON.parse(
+                elementoPedido?.textContent || "[]"
+            );
+
+
+        if (Array.isArray(pedidoGuardado)) {
+
+            pedido =
+                pedidoGuardado
+                    .map(function (item) {
+
+                        return {
+
+                            id:
+                                String(
+                                    item.id ?? ""
+                                ),
+
+                            nombre:
+                                String(
+                                    item.nombre ?? ""
+                                ),
+
+                            precio:
+                                Number(
+                                    item.precio ?? 0
+                                ),
+
+                            cantidad:
+                                parseInt(
+                                    item.cantidad ?? 1,
+                                    10
+                                ),
+
+                            categoria:
+                                String(
+                                    item.categoria ?? ""
+                                ).trim()
+
+                        };
+
+                    })
+                    .filter(function (item) {
+
+                        return (
+
+                            item.id !== "" &&
+
+                            item.nombre !== "" &&
+
+                            Number.isFinite(
+                                item.precio
+                            ) &&
+
+                            item.cantidad > 0
+
+                        );
+
+                    });
+
+            /*
+             * Guardamos una copia de las cantidades que ya existen
+             * en la base de datos al abrir la mesa.
+             */
+            pedido.forEach(function (item) {
+                cantidadesGuardadas[item.id] = item.cantidad;
+            });
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Error cargando pedido:",
+            error
+        );
+
+        pedido = [];
+
+    }
+
+
+
+    /* =====================================================
+       AGREGAR PRODUCTO
+    ===================================================== */
+
+    botonesAgregar.forEach(function (boton) {
+
+
+        boton.addEventListener(
+            "click",
+            function () {
+
+
+                const id =
+                    String(
+                        boton.dataset.productoId || ""
+                    );
+
+
+                const nombre =
+                    String(
+                        boton.dataset.productoNombre || ""
+                    );
+
+
+                const precio =
+                    Number(
+                        boton.dataset.productoPrecio || 0
+                    );
+
+
+                const categoria =
+                    String(
+                        boton.dataset.productoCategoria || ""
+                    ).trim();
+
+
+                if (
+                    id === "" ||
+                    nombre === "" ||
+                    !Number.isFinite(precio)
+                ) {
+
+                    mostrarMensaje(
+                        "❌ Datos del producto incorrectos."
+                    );
+
+                    return;
+
+                }
+
+
+                const existente =
+                    pedido.find(function (producto) {
+
+                        return producto.id === id;
+
+                    });
+
+
+                if (existente) {
+
+                    existente.cantidad =
+                        Number(
+                            existente.cantidad
+                        ) + 1;
+
+                } else {
+
+                    pedido.push({
+
+                        id:
+                            id,
+
+                        nombre:
+                            nombre,
+
+                        precio:
+                            precio,
+
+                        cantidad:
+                            1,
+
+                        categoria:
+                            categoria
+
+                    });
+
+                }
+
+
+                pedidoModificado =
+                    true;
+
+
+                actualizarTodo();
+
+
+                mostrarMensaje(
+                    "✅ " +
+                    nombre +
+                    " agregado al pedido."
+                );
+
+
+            }
+        );
+
+    });
+
+
+
+    /* =====================================================
+       MOSTRAR PEDIDO
+    ===================================================== */
+
+    function mostrarPedido() {
+
+
+        listaPedido.innerHTML = "";
+
+        let total = 0;
+
+
+        if (pedido.length === 0) {
+
+
+            listaPedido.innerHTML =
+                '<p class="pedido-vacio">' +
+                'Todavía no has agregado productos a esta mesa.' +
+                '</p>';
+
+
+            totalPedido.textContent =
+                "S/ 0.00";
+
+
+            btnGenerarCuenta.disabled =
+                true;
+
+
+            btnGuardarPedido.disabled =
+                true;
+
+
+            return;
+
+        }
+
+
+        pedido.forEach(
+            function (producto, indice) {
+
+
+                const precio =
+                    Number(producto.precio) || 0;
+
+
+                const cantidad =
+                    parseInt(
+                        producto.cantidad,
+                        10
+                    ) || 1;
+
+
+                const subtotal =
+                    precio * cantidad;
+
+
+                total += subtotal;
+
+
+                const item =
+                    document.createElement("div");
+
+
+                item.className =
+                    "pedido-item";
+
+
+                const categoria =
+                    String(
+                        producto.categoria || ""
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                let destinoHTML = "";
+
+
+                if (categoria === "pollos") {
+
+                    destinoHTML =
+                        '<span class="destino destino-pollero">' +
+                        '🔥 PARA POLLERO' +
+                        '</span>';
+
+                } else {
+
+                    destinoHTML =
+                        '<span class="destino destino-cuenta">' +
+                        '🧾 PARA CUENTA' +
+                        '</span>';
+
+                }
+
+
+                item.innerHTML =
+
+                    '<div>' +
+
+                        '<div class="pedido-nombre">' +
+                            escaparHTML(
+                                producto.nombre
+                            ) +
+                        '</div>' +
+
+                        destinoHTML +
+
+                        '<div class="cantidad-control">' +
+
+                            '<button ' +
+                                'type="button" ' +
+                                'class="btn-menos" ' +
+                                'data-indice="' +
+                                indice +
+                            '">' +
+                                '−' +
+                            '</button>' +
+
+                            '<span class="cantidad">' +
+                                cantidad +
+                            '</span>' +
+
+                            '<button ' +
+                                'type="button" ' +
+                                'class="btn-mas" ' +
+                                'data-indice="' +
+                                indice +
+                            '">' +
+                                '+' +
+                            '</button>' +
+
+                            '<button ' +
+                                'type="button" ' +
+                                'class="btn-eliminar" ' +
+                                'data-indice="' +
+                                indice +
+                            '">' +
+                                '🗑' +
+                            '</button>' +
+
+                        '</div>' +
+
+                        '<small>' +
+                            cantidad +
+                            ' x S/ ' +
+                            precio.toFixed(2) +
+                        '</small>' +
+
+                    '</div>' +
+
+                    '<div class="pedido-precio">' +
+                        'S/ ' +
+                        subtotal.toFixed(2) +
+                    '</div>';
+
+
+                listaPedido.appendChild(item);
+
+            }
+        );
+
+
+        totalPedido.textContent =
+            "S/ " +
+            total.toFixed(2);
+
+
+        btnGenerarCuenta.disabled =
+            false;
+
+
+        btnGuardarPedido.disabled =
+            false;
+
+
+        actualizarTextoGuardado();
+
+        agregarEventosPedido();
+
+    }
+
+
+
+    /* =====================================================
+       EVENTOS PEDIDO
+    ===================================================== */
+
+    function agregarEventosPedido() {
+
+
+        document
+            .querySelectorAll(".btn-mas")
+            .forEach(function (boton) {
+
+
+                boton.addEventListener(
+                    "click",
+                    function () {
+
+
+                        const indice =
+                            parseInt(
+                                boton.dataset.indice,
+                                10
+                            );
+
+
+                        if (
+                            !isNaN(indice) &&
+                            pedido[indice]
+                        ) {
+
+                            pedido[indice].cantidad++;
+
+                            pedidoModificado =
+                                true;
+
+                            actualizarTodo();
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+
+        document
+            .querySelectorAll(".btn-menos")
+            .forEach(function (boton) {
+
+
+                boton.addEventListener(
+                    "click",
+                    function () {
+
+
+                        const indice =
+                            parseInt(
+                                boton.dataset.indice,
+                                10
+                            );
+
+
+                        if (
+                            !isNaN(indice) &&
+                            pedido[indice]
+                        ) {
+
+                            const producto =
+                                pedido[indice];
+
+                            const cantidadGuardada =
+                                parseInt(
+                                    cantidadesGuardadas[producto.id] || 0,
+                                    10
+                                );
+
+                            /*
+                             * No permitimos bajar de la cantidad
+                             * que ya está guardada en la mesa.
+                             *
+                             * Así evitamos que la pantalla muestre
+                             * una cantidad distinta a la base de datos.
+                             */
+                            if (
+                                producto.cantidad <= cantidadGuardada
+                            ) {
+
+                                mostrarMensaje(
+                                    "ℹ️ Este producto ya está guardado. Para modificar un consumo ya guardado se necesita una operación de anulación."
+                                );
+
+                                return;
+
+                            }
+
+                            producto.cantidad--;
+
+                            if (
+                                producto.cantidad <= 0
+                            ) {
+
+                                pedido.splice(
+                                    indice,
+                                    1
+                                );
+
+                            }
+
+                            pedidoModificado =
+                                true;
+
+                            actualizarTodo();
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+
+        document
+            .querySelectorAll(".btn-eliminar")
+            .forEach(function (boton) {
+
+
+                boton.addEventListener(
+                    "click",
+                    function () {
+
+
+                        const indice =
+                            parseInt(
+                                boton.dataset.indice,
+                                10
+                            );
+
+
+                        if (
+                            isNaN(indice) ||
+                            !pedido[indice]
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        const producto =
+                            pedido[indice];
+
+                        const nombre =
+                            producto.nombre;
+
+                        const cantidadGuardada =
+                            parseInt(
+                                cantidadesGuardadas[producto.id] || 0,
+                                10
+                            );
+
+                        /*
+                         * Si el producto ya fue guardado, no permitimos
+                         * eliminarlo desde aquí porque el stock ya fue
+                         * descontado en la base de datos.
+                         */
+                        if (cantidadGuardada > 0) {
+
+                            mostrarMensaje(
+                                "ℹ️ " + nombre +
+                                " ya está guardado. Para eliminar un consumo ya guardado se necesita una operación de anulación."
+                            );
+
+                            return;
+
+                        }
+
+
+                        pedido.splice(
+                            indice,
+                            1
+                        );
+
+
+                        pedidoModificado =
+                            true;
+
+
+                        actualizarTodo();
+
+
+                        mostrarMensaje(
+                            "🗑 " +
+                            nombre +
+                            " eliminado. Guarda el pedido."
+                        );
+
+                    }
+                );
+
+            });
+
+    }
+
+
+
+    /* =====================================================
+       TARJETAS SELECCIONADAS
+    ===================================================== */
+
+    function actualizarTarjetas() {
+
+
+        document
+            .querySelectorAll(".producto")
+            .forEach(function (tarjeta) {
+
+
+                const id =
+                    tarjeta.id.replace(
+                        "producto-",
+                        ""
+                    );
+
+
+                const existe =
+                    pedido.some(
+                        function (producto) {
+
+                            return producto.id === id;
+
+                        }
+                    );
+
+
+                tarjeta.classList.toggle(
+                    "producto-seleccionado",
+                    existe
+                );
+
+            });
+
+    }
+
+
+
+    /* =====================================================
+       ESTADO GUARDADO
+    ===================================================== */
+
+    function actualizarTextoGuardado() {
+
+
+        if (pedidoModificado) {
+
+            estadoGuardado.textContent =
+                "⚠️ Hay cambios sin guardar.";
+
+            estadoGuardado.style.color =
+                "#f47b20";
+
+        } else {
+
+            if (pedido.length > 0) {
+
+                estadoGuardado.textContent =
+                    "✅ Pedido guardado.";
+
+                estadoGuardado.style.color =
+                    "#168545";
+
+            } else {
+
+                estadoGuardado.textContent =
+                    "";
+
+            }
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       ACTUALIZAR TODO
+    ===================================================== */
+
+    function actualizarTodo() {
+
+        mostrarPedido();
+
+        actualizarTarjetas();
+
+    }
+
+
+
+    /* =====================================================
+       CALCULAR SOLO LO NUEVO
+    ===================================================== */
+
+    function obtenerPedidoNuevo() {
+
+        return pedido
+            .map(function (producto) {
+
+                const cantidadActual =
+                    parseInt(producto.cantidad, 10) || 0;
+
+                const cantidadGuardada =
+                    parseInt(
+                        cantidadesGuardadas[producto.id] || 0,
+                        10
+                    );
+
+                const diferencia =
+                    cantidadActual - cantidadGuardada;
+
+                if (diferencia <= 0) {
+                    return null;
+                }
+
+                return {
+                    id: producto.id,
+                    cantidad: diferencia
+                };
+
+            })
+            .filter(function (item) {
+                return item !== null;
+            });
+
+    }
+
+
+    /* =====================================================
+       GUARDAR PEDIDO
+    ===================================================== */
+
+    btnGuardarPedido.addEventListener(
+        "click",
+        async function () {
+
+
+            if (pedido.length === 0) {
+
+                mostrarMensaje(
+                    "⚠️ No hay productos para guardar."
+                );
+
+                return;
+
+            }
+
+            const pedidoNuevo =
+                obtenerPedidoNuevo();
+
+            if (pedidoNuevo.length === 0) {
+
+                mostrarMensaje(
+                    "ℹ️ No hay productos nuevos para guardar."
+                );
+
+                pedidoModificado = false;
+                actualizarTextoGuardado();
+
+                return;
+
+            }
+
+
+            btnGuardarPedido.disabled =
+                true;
+
+
+            btnGuardarPedido.textContent =
+                "⏳ Guardando...";
+
+
+            estadoGuardado.textContent =
+                "Guardando pedido...";
+
+
+            try {
+
+
+                const respuesta =
+                    await fetch(
+                        "{{ url_for('guardar_pedido_mesa', mesa_id=mesa.id) }}",
+                        {
+
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    /*
+                                     * IMPORTANTE:
+                                     * enviamos únicamente las cantidades
+                                     * agregadas desde el último guardado.
+                                     * Así el stock no se descuenta otra vez.
+                                     */
+                                    pedido:
+                                        obtenerPedidoNuevo()
+
+                                })
+
+                        }
+                    );
+
+
+                const resultado =
+                    await respuesta.json();
+
+
+                if (
+                    !respuesta.ok ||
+                    !resultado.ok
+                ) {
+
+                    throw new Error(
+                        resultado.mensaje ||
+                        "No se pudo guardar el pedido."
+                    );
+
+                }
+
+
+                /*
+                 * El pedido actual ya quedó guardado.
+                 * Actualizamos la línea base para que el próximo
+                 * guardado solo envíe lo que se agregue después.
+                 */
+                pedido.forEach(function (item) {
+                    cantidadesGuardadas[item.id] =
+                        parseInt(item.cantidad, 10) || 0;
+                });
+
+                pedidoModificado =
+                    false;
+
+
+                btnGuardarPedido.textContent =
+                    "✅ Pedido guardado";
+
+
+                estadoGuardado.textContent =
+                    "✅ Pedido guardado correctamente.";
+
+
+                estadoGuardado.style.color =
+                    "#168545";
+
+
+                mostrarMensaje(
+                    "✅ Pedido de Mesa {{ mesa.numero }} guardado."
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        btnGuardarPedido.disabled =
+                            false;
+
+                        btnGuardarPedido.textContent =
+                            "💾 Guardar pedido";
+
+                    },
+                    1500
+                );
+
+
+            } catch (error) {
+
+
+                console.error(
+                    "Error guardando pedido:",
+                    error
+                );
+
+
+                btnGuardarPedido.disabled =
+                    false;
+
+
+                btnGuardarPedido.textContent =
+                    "💾 Guardar pedido";
+
+
+                estadoGuardado.textContent =
+                    "❌ No se pudo guardar.";
+
+
+                estadoGuardado.style.color =
+                    "#df5942";
+
+
+                mostrarMensaje(
+                    "❌ " +
+                    error.message
+                );
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       GENERAR CUENTA
+    ===================================================== */
+
+    btnGenerarCuenta.addEventListener(
+        "click",
+        function () {
+
+
+            if (pedido.length === 0) {
+
+                mostrarMensaje(
+                    "⚠️ No hay productos."
+                );
+
+                return;
+
+            }
+
+
+            if (pedidoModificado) {
+
+                mostrarMensaje(
+                    "⚠️ Primero guarda el pedido."
+                );
+
+                return;
+
+            }
+
+
+            mostrarCuenta();
+
+        }
+    );
+
+
+
+    /* =====================================================
+       MOSTRAR CUENTA
+    ===================================================== */
+
+    function mostrarCuenta() {
+
+
+        detalleCuenta.innerHTML = "";
+
+        let total = 0;
+
+
+        pedido.forEach(
+            function (producto) {
+
+
+                const precio =
+                    Number(producto.precio) || 0;
+
+
+                const cantidad =
+                    Number(producto.cantidad) || 1;
+
+
+                const subtotal =
+                    precio * cantidad;
+
+
+                total += subtotal;
+
+
+                const linea =
+                    document.createElement("div");
+
+
+                linea.className =
+                    "cuenta-linea";
+
+
+                linea.innerHTML =
+
+                    '<div class="cuenta-linea-nombre">' +
+
+                        '<strong>' +
+                            escaparHTML(
+                                producto.nombre
+                            ) +
+                        '</strong>' +
+
+                        '<br>' +
+
+                        '<small>' +
+                            cantidad +
+                            ' x S/ ' +
+                            precio.toFixed(2) +
+                        '</small>' +
+
+                    '</div>' +
+
+                    '<div class="cuenta-linea-precio">' +
+                        'S/ ' +
+                        subtotal.toFixed(2) +
+                    '</div>';
+
+
+                detalleCuenta.appendChild(
+                    linea
+                );
+
+            }
+        );
+
+
+        totalCuenta.textContent =
+            "S/ " +
+            total.toFixed(2);
+
+
+        const ahora =
+            new Date();
+
+
+        fechaCuenta.textContent =
+            ahora.toLocaleString(
+                "es-PE",
+                {
+                    dateStyle:
+                        "short",
+
+                    timeStyle:
+                        "short"
+                }
+            );
+
+
+        btnEnviarCaja.disabled =
+            false;
+
+
+        btnEnviarCaja.textContent =
+            "🟢 Enviar a caja";
+
+
+        btnCerrarCuenta.disabled =
+            false;
+
+
+        btnCerrarCuenta2.disabled =
+            false;
+
+
+        cuentaModal.style.display =
+            "flex";
+
+    }
+
+
+
+    /* =====================================================
+       ENVIAR CUENTA A CAJA
+    ===================================================== */
+
+    btnEnviarCaja.addEventListener(
+        "click",
+        async function () {
+
+
+            if (pedido.length === 0) {
+
+                mostrarMensaje(
+                    "⚠️ No hay productos."
+                );
+
+                return;
+
+            }
+
+
+            if (pedidoModificado) {
+
+                mostrarMensaje(
+                    "⚠️ Primero guarda el pedido."
+                );
+
+                return;
+
+            }
+
+
+            const confirmar =
+                confirm(
+                    "¿Enviar la cuenta de la Mesa {{ mesa.numero }} a Caja?\n\n" +
+                    "Total: " +
+                    totalCuenta.textContent
+                );
+
+
+            if (!confirmar) {
+
+                return;
+
+            }
+
+
+            btnEnviarCaja.disabled =
+                true;
+
+
+            btnCerrarCuenta.disabled =
+                true;
+
+
+            btnCerrarCuenta2.disabled =
+                true;
+
+
+            btnEnviarCaja.textContent =
+                "⏳ Enviando...";
+
+
+            try {
+
+
+                const respuesta =
+                    await fetch(
+                        "{{ url_for('enviar_cuenta_caja', mesa_id=mesa.id) }}",
+                        {
+
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    pedido:
+                                        pedido
+
+                                })
+
+                        }
+                    );
+
+
+                const resultado =
+                    await respuesta.json();
+
+
+                if (
+                    !respuesta.ok ||
+                    !resultado.ok
+                ) {
+
+                    throw new Error(
+                        resultado.mensaje ||
+                        "No se pudo enviar la cuenta."
+                    );
+
+                }
+
+
+                btnEnviarCaja.textContent =
+                    "✅ Enviada a caja";
+
+
+                mostrarMensaje(
+                    "✅ Cuenta enviada a Caja."
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "{{ url_for('mozo_mesas') }}";
+
+                    },
+                    1200
+                );
+
+
+            } catch (error) {
+
+
+                console.error(
+                    error
+                );
+
+
+                mostrarMensaje(
+                    "❌ " +
+                    error.message
+                );
+
+
+                btnEnviarCaja.disabled =
+                    false;
+
+
+                btnCerrarCuenta.disabled =
+                    false;
+
+
+                btnCerrarCuenta2.disabled =
+                    false;
+
+
+                btnEnviarCaja.textContent =
+                    "🟢 Enviar a caja";
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       CERRAR CUENTA
+    ===================================================== */
+
+    function cerrarCuenta() {
+
+        cuentaModal.style.display =
+            "none";
+
+    }
+
+
+    btnCerrarCuenta.addEventListener(
+        "click",
+        cerrarCuenta
+    );
+
+
+    btnCerrarCuenta2.addEventListener(
+        "click",
+        cerrarCuenta
+    );
+
+
+    cuentaModal.addEventListener(
+        "click",
+        function (evento) {
+
+            if (
+                evento.target === cuentaModal
+            ) {
+
+                cerrarCuenta();
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       MENSAJE
+    ===================================================== */
+
+    function mostrarMensaje(texto) {
+
+
+        mensaje.textContent =
+            String(texto);
+
+
+        mensaje.style.display =
+            "block";
+
+
+        clearTimeout(
+            mostrarMensaje.timer
+        );
+
+
+        mostrarMensaje.timer =
+            setTimeout(
+                function () {
+
+                    mensaje.style.display =
+                        "none";
+
+                },
+                2500
+            );
+
+    }
+
+
+
+    /* =====================================================
+       SEGURIDAD HTML
+    ===================================================== */
+
+    function escaparHTML(texto) {
+
+
+        const div =
+            document.createElement("div");
+
+
+        div.textContent =
+            String(texto ?? "");
+
+
+        return div.innerHTML;
+
+    }
+
+
+
+    /* =====================================================
+       INICIAR
+    ===================================================== */
+
+    actualizarTodo();
+
+
+    if (pedido.length > 0) {
+
+        pedidoModificado =
+            false;
+
+        btnGuardarPedido.disabled =
+            false;
+
+        actualizarTextoGuardado();
+
+    }
+
+
+});
+
+</script>
+
+<script 
+src="{{ url_for('static', filename='js/bloqueo_botones.js') }}">
+</script>
+
+
+</body>
+
+</html>
